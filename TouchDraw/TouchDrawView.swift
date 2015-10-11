@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TouchDrawView: UIView {
+public class TouchDrawView: UIView {
 
     private var lastPoint = CGPoint.zero
     
@@ -24,7 +24,7 @@ class TouchDrawView: UIView {
         initImageView()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initImageView()
     }
@@ -34,20 +34,20 @@ class TouchDrawView: UIView {
         addSubview(tempImageView)
     }
     
-    override func drawRect(rect: CGRect) {
+    override public func drawRect(rect: CGRect) {
         mainImageView.frame = self.frame
         tempImageView.frame = self.frame
     }
     
     // MARK: - Actions
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override public func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         touchesMoved = false
         if let touch = touches.first {
             lastPoint = touch.locationInView(self)
         }
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override public func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         touchesMoved = true
         if let touch = touches.first {
             let currentPoint = touch.locationInView(self)
@@ -57,7 +57,7 @@ class TouchDrawView: UIView {
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override public func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if !touchesMoved {
             // draw a single point
             drawLineFrom(lastPoint, toPoint: lastPoint)
@@ -93,7 +93,7 @@ class TouchDrawView: UIView {
         UIGraphicsEndImageContext()
     }
     
-    func exportDrawing() -> UIImage {
+    public func exportDrawing() -> UIImage {
         UIGraphicsBeginImageContext(mainImageView.bounds.size)
         mainImageView.image?.drawInRect(mainImageView.frame)
         let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -101,17 +101,19 @@ class TouchDrawView: UIView {
         return image
     }
     
-    func clearDrawing() {
+    public func clearDrawing() {
         mainImageView.image = nil
     }
     
-    func setColor(color: UIColor) {
+    public func setColor(color: UIColor) {
         brushColor = CIColor(color: color)
     }
     
-    func setWidth(width: CGFloat) {
+    public func setWidth(width: CGFloat) {
         brushWidth = width
     }
+    
+    // Implement redo and undo
     
     
 }
