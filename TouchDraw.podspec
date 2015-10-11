@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = "TouchDraw"
-  s.version               = "0.0.1"
+  s.version               = "0.1.0"
   s.summary               = "TouchDraw lets you can draw with your finger."
 
   s.description           = <<-DESC
