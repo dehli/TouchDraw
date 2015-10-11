@@ -5,8 +5,6 @@
 //  Created by Christian Paul Dehli on 10/4/15.
 //
 
-import UIKit
-
 public class TouchDrawView: UIView {
 
     private var lastPoint = CGPoint.zero

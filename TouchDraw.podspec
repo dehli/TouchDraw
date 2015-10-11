@@ -18,12 +18,8 @@ Pod::Spec.new do |s|
 
   s.platform              = :ios
   s.ios.deployment_target = "8.0"
-  s.requires_arc          = true
 
   s.source                = { :git => "https://github.com/dehli/TouchDraw.git", :tag => "#{s.version}"}
-  s.source_files          = "TouchDraw/**/*.{swift,h,m}"
-
-
-  s.framework             = "UIKit"
+  s.source_files          = "TouchDraw/**/*.{swift}"
 
 end
