@@ -1,0 +1,511 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0412705E43AAC0E13938CB606B30D1AD /* Pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FBF8AF77D22C5815ECC167BF44EDCFA /* Pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2F776A350AC130DDE039BE06651F7083 /* TouchDraw-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D3666EAFC1F0D59A2C4466A38A241EA /* TouchDraw-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		72DE4DD6D66562C274876BC4E0610EB5 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C855FFD7FA0732B370229B414C19E21 /* Pods-dummy.m */; };
+		932E32B0939F56AA7B41A6205AB50E84 /* TouchDraw-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 64DD04BD877E9BE160045C988C3AF80F /* TouchDraw-dummy.m */; };
+		C21639D1405C6041F13CA0EC95EDAEFD /* TouchDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413A71B93F75B33A73DE5DAD17FC1F7 /* TouchDrawView.swift */; };
+		D8493A974B03CD2DB33BF74005A6A8B4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2446A4B96209F6C17DFE48D90D2CC4C1 /* Foundation.framework */; };
+		D883C34CF5C47E367AC74EB7F9AE5FCA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2446A4B96209F6C17DFE48D90D2CC4C1 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		82DED85AB2C36278B477B31687A4EF8F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 31C2BC350E546A9204A338FCECE27149;
+			remoteInfo = TouchDraw;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1FBF8AF77D22C5815ECC167BF44EDCFA /* Pods-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-umbrella.h"; sourceTree = "<group>"; };
+		2446A4B96209F6C17DFE48D90D2CC4C1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		2C34B97D79FCF49B2A664A9F2B2FAC48 /* TouchDraw.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = TouchDraw.modulemap; sourceTree = "<group>"; };
+		2F3A14D7CD0CD5AB6E64D8A3B93B642A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4413A71B93F75B33A73DE5DAD17FC1F7 /* TouchDrawView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TouchDrawView.swift; sourceTree = "<group>"; };
+		4C855FFD7FA0732B370229B414C19E21 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
+		64DD04BD877E9BE160045C988C3AF80F /* TouchDraw-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TouchDraw-dummy.m"; sourceTree = "<group>"; };
+		79A9DEDC89FE8336BF5FEDAAF75BF7FC /* Pods.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Pods.modulemap; sourceTree = "<group>"; };
+		7D3666EAFC1F0D59A2C4466A38A241EA /* TouchDraw-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TouchDraw-umbrella.h"; sourceTree = "<group>"; };
+		84E3D2776FE8B1A914BEECEA6050F3D3 /* TouchDraw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TouchDraw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87B213035BAC5F75386F62D3C75D2342 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
+		943293D0F45BDEC725A6D0A263D27225 /* TouchDraw.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TouchDraw.xcconfig; sourceTree = "<group>"; };
+		ABFAD1F2C6A282FCCD21E33D0EF7D4CE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B3887D35D4CB5A08681E4DD6B7B7417E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
+		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		C215D4209D8198C7FCDE2F7963AAF8AE /* TouchDraw-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "TouchDraw-Private.xcconfig"; sourceTree = "<group>"; };
+		CBC0F7C552B739C909B650A0F42F7F38 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		D0405803033A2A777B8E4DFA0C1800ED /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
+		E4647BE9B29350462731A415F81F2CFC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
+		E7F21354943D9F42A70697D5A5EF72E9 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
+		E8446514FBAD26C0E18F24A5715AEF67 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8F700D9D15AAFF80C41C1C4F69BE87E /* TouchDraw-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TouchDraw-prefix.pch"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5078DD429416ADFCD47EDBE7627B9DCA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8493A974B03CD2DB33BF74005A6A8B4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C347365E12FC25BDD65263CAEEF459B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D883C34CF5C47E367AC74EB7F9AE5FCA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		41F447AD982F59786A10626782C69F84 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				ABFAD1F2C6A282FCCD21E33D0EF7D4CE /* Info.plist */,
+				2C34B97D79FCF49B2A664A9F2B2FAC48 /* TouchDraw.modulemap */,
+				943293D0F45BDEC725A6D0A263D27225 /* TouchDraw.xcconfig */,
+				C215D4209D8198C7FCDE2F7963AAF8AE /* TouchDraw-Private.xcconfig */,
+				64DD04BD877E9BE160045C988C3AF80F /* TouchDraw-dummy.m */,
+				E8F700D9D15AAFF80C41C1C4F69BE87E /* TouchDraw-prefix.pch */,
+				7D3666EAFC1F0D59A2C4466A38A241EA /* TouchDraw-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "Demo/Pods/Target Support Files/TouchDraw";
+			sourceTree = "<group>";
+		};
+		53F661C0CA7190D2CF05023FB33D61E4 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				2446A4B96209F6C17DFE48D90D2CC4C1 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		75D98FF52E597A11900E131B6C4E1ADA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E8446514FBAD26C0E18F24A5715AEF67 /* Info.plist */,
+				79A9DEDC89FE8336BF5FEDAAF75BF7FC /* Pods.modulemap */,
+				D0405803033A2A777B8E4DFA0C1800ED /* Pods-acknowledgements.markdown */,
+				87B213035BAC5F75386F62D3C75D2342 /* Pods-acknowledgements.plist */,
+				4C855FFD7FA0732B370229B414C19E21 /* Pods-dummy.m */,
+				E7F21354943D9F42A70697D5A5EF72E9 /* Pods-frameworks.sh */,
+				CBC0F7C552B739C909B650A0F42F7F38 /* Pods-resources.sh */,
+				1FBF8AF77D22C5815ECC167BF44EDCFA /* Pods-umbrella.h */,
+				E4647BE9B29350462731A415F81F2CFC /* Pods.debug.xcconfig */,
+				B3887D35D4CB5A08681E4DD6B7B7417E /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			path = "Target Support Files/Pods";
+			sourceTree = "<group>";
+		};
+		7ABBD696AC2A0962ADD7BD5339CC9B7D /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F6B4783C2943D21E8238C92D2ED2FA45 /* TouchDraw */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		7D850FA8AD46099C2448C3A3432E9DB0 /* TouchDraw */ = {
+			isa = PBXGroup;
+			children = (
+				4413A71B93F75B33A73DE5DAD17FC1F7 /* TouchDrawView.swift */,
+			);
+			path = TouchDraw;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				7ABBD696AC2A0962ADD7BD5339CC9B7D /* Development Pods */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				CCA510CFBEA2D207524CDA0D73C3B561 /* Products */,
+				B7B80995527643776607AFFA75B91E24 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		B7B80995527643776607AFFA75B91E24 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				75D98FF52E597A11900E131B6C4E1ADA /* Pods */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				53F661C0CA7190D2CF05023FB33D61E4 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CCA510CFBEA2D207524CDA0D73C3B561 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2F3A14D7CD0CD5AB6E64D8A3B93B642A /* Pods.framework */,
+				84E3D2776FE8B1A914BEECEA6050F3D3 /* TouchDraw.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F6B4783C2943D21E8238C92D2ED2FA45 /* TouchDraw */ = {
+			isa = PBXGroup;
+			children = (
+				41F447AD982F59786A10626782C69F84 /* Support Files */,
+				7D850FA8AD46099C2448C3A3432E9DB0 /* TouchDraw */,
+			);
+			name = TouchDraw;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		1F0ADABCA7B7C9FEACAB2F4A6A227CB4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F776A350AC130DDE039BE06651F7083 /* TouchDraw-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		910E3EC1B8BD04B9F27D8CFF3C88C1FF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0412705E43AAC0E13938CB606B30D1AD /* Pods-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		140CA07FD05F99D18DC997869DBB2B32 /* Pods */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9CB5E7D864155A7184D867987818C4A3 /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildPhases = (
+				C4638739A205026B300C867AAFBF6E40 /* Sources */,
+				C347365E12FC25BDD65263CAEEF459B6 /* Frameworks */,
+				910E3EC1B8BD04B9F27D8CFF3C88C1FF /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC6B7F6DD4FB57E38074CF6512572AB7 /* PBXTargetDependency */,
+			);
+			name = Pods;
+			productName = Pods;
+			productReference = 2F3A14D7CD0CD5AB6E64D8A3B93B642A /* Pods.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		31C2BC350E546A9204A338FCECE27149 /* TouchDraw */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 036A9B3DE27DE410EE64E11D45AB5174 /* Build configuration list for PBXNativeTarget "TouchDraw" */;
+			buildPhases = (
+				6601F2102674B5DD5CCB4F7F94CCBADE /* Sources */,
+				5078DD429416ADFCD47EDBE7627B9DCA /* Frameworks */,
+				1F0ADABCA7B7C9FEACAB2F4A6A227CB4 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TouchDraw;
+			productName = TouchDraw;
+			productReference = 84E3D2776FE8B1A914BEECEA6050F3D3 /* TouchDraw.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = CCA510CFBEA2D207524CDA0D73C3B561 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				140CA07FD05F99D18DC997869DBB2B32 /* Pods */,
+				31C2BC350E546A9204A338FCECE27149 /* TouchDraw */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6601F2102674B5DD5CCB4F7F94CCBADE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				932E32B0939F56AA7B41A6205AB50E84 /* TouchDraw-dummy.m in Sources */,
+				C21639D1405C6041F13CA0EC95EDAEFD /* TouchDrawView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C4638739A205026B300C867AAFBF6E40 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72DE4DD6D66562C274876BC4E0610EB5 /* Pods-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AC6B7F6DD4FB57E38074CF6512572AB7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TouchDraw;
+			target = 31C2BC350E546A9204A338FCECE27149 /* TouchDraw */;
+			targetProxy = 82DED85AB2C36278B477B31687A4EF8F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4F8761E8051F8249A3E8C15D4592F450 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C215D4209D8198C7FCDE2F7963AAF8AE /* TouchDraw-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/TouchDraw/TouchDraw-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TouchDraw/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/TouchDraw/TouchDraw.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = TouchDraw;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		57195652CD3CF0C39BAE50575A9FB109 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C215D4209D8198C7FCDE2F7963AAF8AE /* TouchDraw-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/TouchDraw/TouchDraw-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TouchDraw/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/TouchDraw/TouchDraw.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = TouchDraw;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9EB645C612834738B99727720210C23E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		B89E81EC5FD311613B700E0C7E1971E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4647BE9B29350462731A415F81F2CFC /* Pods.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods/Pods.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E39CD1E764776175CB82EEC82A6C9948 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FD7CFF562504CDBC7D1EA823790C082A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B3887D35D4CB5A08681E4DD6B7B7417E /* Pods.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods/Pods.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		036A9B3DE27DE410EE64E11D45AB5174 /* Build configuration list for PBXNativeTarget "TouchDraw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F8761E8051F8249A3E8C15D4592F450 /* Debug */,
+				57195652CD3CF0C39BAE50575A9FB109 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9EB645C612834738B99727720210C23E /* Debug */,
+				E39CD1E764776175CB82EEC82A6C9948 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9CB5E7D864155A7184D867987818C4A3 /* Build configuration list for PBXNativeTarget "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B89E81EC5FD311613B700E0C7E1971E9 /* Debug */,
+				FD7CFF562504CDBC7D1EA823790C082A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}
