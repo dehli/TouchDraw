@@ -8,13 +8,20 @@
 import UIKit
 import TouchDraw
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, TouchDrawViewDelegate {
     
     @IBOutlet var drawView: TouchDrawView!
+    @IBOutlet weak var undoButton: UIButton!
+    @IBOutlet weak var redoButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        drawView.delegate = self
         drawView.setWidth(5)
+        
+        undoButton.enabled = false
+        redoButton.enabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,11 +43,27 @@ class ViewController: UIViewController {
     }
     
     @IBAction func undo(sender: AnyObject) {
-        // To be implemented
+        drawView.undo()
     }
     
     @IBAction func redo(sender: AnyObject) {
-        // To be implemented
+        drawView.redo()
+    }
+    
+    func undoEnabled() {
+        self.undoButton.enabled = true
+    }
+    
+    func undoDisabled() {
+        self.undoButton.enabled = false
+    }
+    
+    func redoEnabled() {
+        self.redoButton.enabled = true
+    }
+    
+    func redoDisabled() {
+        self.redoButton.enabled = false
     }
 }
 

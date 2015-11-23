@@ -5,8 +5,21 @@
 //  Created by Christian Paul Dehli on 10/4/15.
 //
 
+public protocol TouchDrawViewDelegate {
+    func undoEnabled()
+    func undoDisabled()
+    func redoEnabled()
+    func redoDisabled()
+}
+
 public class TouchDrawView: UIView {
 
+    public var delegate: TouchDrawViewDelegate!
+    
+    // Used for undo/redo
+    private var stack: NSMutableArray!
+    private var pointsArray: NSMutableArray!
+    
     private var lastPoint = CGPoint.zero
     
     private var brushColor = CIColor(color: UIColor.blackColor())
@@ -17,19 +30,23 @@ public class TouchDrawView: UIView {
     private var mainImageView = UIImageView()
     private var tempImageView = UIImageView()
     
+    private var undoEnabled = false
+    private var redoEnabled = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initImageView()
+        initTouchDrawView()
     }
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        initImageView()
+        initTouchDrawView()
     }
 
-    private func initImageView() {
+    private func initTouchDrawView() {
         addSubview(mainImageView)
         addSubview(tempImageView)
+        stack = []
     }
     
     override public func drawRect(rect: CGRect) {
@@ -42,6 +59,8 @@ public class TouchDrawView: UIView {
         touchesMoved = false
         if let touch = touches.first {
             lastPoint = touch.locationInView(self)
+            pointsArray = []
+            pointsArray.addObject(NSStringFromCGPoint(lastPoint))
         }
     }
     
@@ -52,6 +71,7 @@ public class TouchDrawView: UIView {
             drawLineFrom(lastPoint, toPoint: currentPoint)
             
             lastPoint = currentPoint
+            pointsArray.addObject(NSStringFromCGPoint(lastPoint))
         }
     }
     
@@ -61,6 +81,23 @@ public class TouchDrawView: UIView {
             drawLineFrom(lastPoint, toPoint: lastPoint)
         }
         
+        mergeViews()
+        
+        stack.addObject(pointsArray)
+        undoManager?.registerUndoWithTarget(self, selector: "popDrawing", object: nil)
+        
+        if !undoEnabled {
+            delegate.undoEnabled()
+            undoEnabled = true
+        }
+        if redoEnabled {
+            delegate.redoDisabled()
+            redoEnabled = false
+        }
+        
+    }
+    
+    func mergeViews() {
         // Merge tempImageView into mainImageView
         UIGraphicsBeginImageContext(mainImageView.frame.size)
         mainImageView.image?.drawInRect(self.frame, blendMode: CGBlendMode.Normal, alpha: 1.0)
@@ -69,6 +106,46 @@ public class TouchDrawView: UIView {
         UIGraphicsEndImageContext()
         
         tempImageView.image = nil
+    }
+    
+    func popDrawing() {
+        let array = stack.lastObject as! NSArray
+        stack.removeLastObject()
+        redrawLinePathsInStack()
+        undoManager?.registerUndoWithTarget(self, selector: "pushDrawing:", object: array)
+    }
+    
+    func pushDrawing(array: NSArray) {
+        stack.addObject(array)
+        drawLine(array)
+        undoManager?.registerUndoWithTarget(self, selector: "popDrawing", object: nil)
+    }
+    
+    func redrawLinePathsInStack() {
+        clearDrawing()
+        for object in stack {
+            let array = object as! NSArray
+            drawLine(array)
+        }
+    }
+    
+    func drawLine(array: NSArray) {
+        if array.count == 1 {
+            // Draw the one point
+            let pointStr = array[0] as! String
+            let point = CGPointFromString(pointStr)
+            drawLineFrom(point, toPoint: point)
+        }
+        
+        for i in 0 ..< array.count-1 {
+            let pointStr0 = array[i] as! String
+            let pointStr1 = array[i+1] as! String
+            
+            let point0 = CGPointFromString(pointStr0)
+            let point1 = CGPointFromString(pointStr1)
+            drawLineFrom(point0, toPoint: point1)
+        }
+        mergeViews()
     }
     
     private func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint) {
@@ -111,7 +188,40 @@ public class TouchDrawView: UIView {
         brushWidth = width
     }
     
-    // Implement redo and undo
+    public func undo() {
+        if undoManager!.canUndo {
+            undoManager?.undo()
+            
+            if !redoEnabled {
+                delegate.redoEnabled()
+                redoEnabled = true
+            }
+            
+            if !undoManager!.canUndo {
+                if undoEnabled {
+                    delegate.undoDisabled()
+                    undoEnabled = false
+                }
+            }
+        }
+    }
     
+    public func redo() {
+        if undoManager!.canRedo {
+            undoManager?.redo()
+            
+            if !undoEnabled {
+                delegate.undoEnabled()
+                undoEnabled = true
+            }
+            
+            if !undoManager!.canRedo {
+                if redoEnabled {
+                    delegate.redoDisabled()
+                    redoEnabled = false
+                }
+            }
+        }
+    }
     
 }
