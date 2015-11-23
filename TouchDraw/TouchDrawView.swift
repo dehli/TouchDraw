@@ -97,7 +97,7 @@ public class TouchDrawView: UIView {
         
     }
     
-    func mergeViews() {
+    private func mergeViews() {
         // Merge tempImageView into mainImageView
         UIGraphicsBeginImageContext(mainImageView.frame.size)
         mainImageView.image?.drawInRect(self.frame, blendMode: CGBlendMode.Normal, alpha: 1.0)
@@ -121,15 +121,15 @@ public class TouchDrawView: UIView {
         undoManager?.registerUndoWithTarget(self, selector: "popDrawing", object: nil)
     }
     
-    func redrawLinePathsInStack() {
-        clearDrawing()
+    private func redrawLinePathsInStack() {
+        internalClear()
         for object in stack {
             let array = object as! NSArray
             drawLine(array)
         }
     }
     
-    func drawLine(array: NSArray) {
+    private func drawLine(array: NSArray) {
         if array.count == 1 {
             // Draw the one point
             let pointStr = array[0] as! String
@@ -176,8 +176,23 @@ public class TouchDrawView: UIView {
         return image
     }
     
-    public func clearDrawing() {
+    func internalClear() {
         mainImageView.image = nil
+    }
+    
+    public func clearDrawing() {
+        internalClear()
+        undoManager?.registerUndoWithTarget(self, selector: "pushAll:", object: stack)
+        stack = []
+    }
+    
+    func pushAll(array: NSArray) {
+        for mark in array {
+            let markArray = mark as! NSArray
+            drawLine(markArray)
+            stack.addObject(markArray)
+        }
+        undoManager?.registerUndoWithTarget(self, selector: "clearDrawing", object: nil)
     }
     
     public func setColor(color: UIColor) {
