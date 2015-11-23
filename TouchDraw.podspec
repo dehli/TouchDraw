@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = "TouchDraw"
-  s.version               = "1.0.0"
+  s.version               = "1.1.0"
   s.summary               = "TouchDraw is a UIView you can draw on."
 
   s.description           = <<-DESC
