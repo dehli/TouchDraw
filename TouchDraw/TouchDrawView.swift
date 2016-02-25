@@ -76,6 +76,7 @@ public class TouchDrawView: UIView {
     }
     
     override public func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print(lastPoint)
         if !touchesMoved {
             // draw a single point
             drawLineFrom(lastPoint, toPoint: lastPoint)
@@ -94,7 +95,6 @@ public class TouchDrawView: UIView {
             delegate.redoDisabled()
             redoEnabled = false
         }
-        
     }
     
     private func mergeViews() {
@@ -149,12 +149,19 @@ public class TouchDrawView: UIView {
     }
     
     private func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint) {
-        UIGraphicsBeginImageContext(self.frame.size)
-        let context = UIGraphicsGetCurrentContext()
-        tempImageView.image?.drawInRect(self.frame)
         
-        CGContextMoveToPoint(context, fromPoint.x, fromPoint.y)
-        CGContextAddLineToPoint(context, toPoint.x, toPoint.y)
+        let rootView = UIApplication.sharedApplication().keyWindow?.rootViewController!.view
+        
+        let globalFrom = self.convertPoint(fromPoint, toView: rootView)
+        let globalTo = self.convertPoint(toPoint, toView: rootView)
+        
+        UIGraphicsBeginImageContext(rootView!.frame.size)
+        
+        let context = UIGraphicsGetCurrentContext()
+        tempImageView.image?.drawInRect(rootView!.frame)
+        
+        CGContextMoveToPoint(context, globalFrom.x, globalFrom.y)
+        CGContextAddLineToPoint(context, globalTo.x, globalTo.y)
         
         CGContextSetLineCap(context, CGLineCap.Round)
         CGContextSetLineWidth(context, brushWidth)

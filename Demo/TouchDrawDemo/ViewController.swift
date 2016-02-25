@@ -50,6 +50,8 @@ class ViewController: UIViewController, TouchDrawViewDelegate {
         drawView.redo()
     }
     
+    // MARK: - TouchDrawViewDelegate
+    
     func undoEnabled() {
         self.undoButton.enabled = true
     }

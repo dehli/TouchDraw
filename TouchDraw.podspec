@@ -1,3 +1,6 @@
+# To deploy new version, call:
+# pod trunk push TouchDraw.podspec
+
 Pod::Spec.new do |s|
 
   s.name                  = "TouchDraw"
