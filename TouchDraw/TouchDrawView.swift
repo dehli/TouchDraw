@@ -50,8 +50,8 @@ public class TouchDrawView: UIView {
     }
     
     override public func drawRect(rect: CGRect) {
-        mainImageView.frame = self.frame
-        tempImageView.frame = self.frame
+        mainImageView.frame = rect
+        tempImageView.frame = rect
     }
     
     // MARK: - Actions
@@ -76,7 +76,6 @@ public class TouchDrawView: UIView {
     }
     
     override public func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print(lastPoint)
         if !touchesMoved {
             // draw a single point
             drawLineFrom(lastPoint, toPoint: lastPoint)
@@ -100,8 +99,8 @@ public class TouchDrawView: UIView {
     private func mergeViews() {
         // Merge tempImageView into mainImageView
         UIGraphicsBeginImageContext(mainImageView.frame.size)
-        mainImageView.image?.drawInRect(self.frame, blendMode: CGBlendMode.Normal, alpha: 1.0)
-        tempImageView.image?.drawInRect(self.frame, blendMode: CGBlendMode.Normal, alpha: brushColor.alpha)
+        mainImageView.image?.drawInRect(mainImageView.frame, blendMode: CGBlendMode.Normal, alpha: 1.0)
+        tempImageView.image?.drawInRect(tempImageView.frame, blendMode: CGBlendMode.Normal, alpha: brushColor.alpha)
         mainImageView.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
@@ -137,7 +136,7 @@ public class TouchDrawView: UIView {
             drawLineFrom(point, toPoint: point)
         }
         
-        for i in 0 ..< array.count-1 {
+        for i in 0 ..< array.count - 1 {
             let pointStr0 = array[i] as! String
             let pointStr1 = array[i+1] as! String
             
@@ -150,18 +149,11 @@ public class TouchDrawView: UIView {
     
     private func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint) {
         
-        let rootView = UIApplication.sharedApplication().keyWindow?.rootViewController!.view
-        
-        let globalFrom = self.convertPoint(fromPoint, toView: rootView)
-        let globalTo = self.convertPoint(toPoint, toView: rootView)
-        
-        UIGraphicsBeginImageContext(rootView!.frame.size)
-        
+        UIGraphicsBeginImageContext(self.frame.size)
         let context = UIGraphicsGetCurrentContext()
-        tempImageView.image?.drawInRect(rootView!.frame)
         
-        CGContextMoveToPoint(context, globalFrom.x, globalFrom.y)
-        CGContextAddLineToPoint(context, globalTo.x, globalTo.y)
+        CGContextMoveToPoint(context, fromPoint.x, fromPoint.y)
+        CGContextAddLineToPoint(context, toPoint.x, toPoint.y)
         
         CGContextSetLineCap(context, CGLineCap.Round)
         CGContextSetLineWidth(context, brushWidth)
@@ -170,6 +162,7 @@ public class TouchDrawView: UIView {
         
         CGContextStrokePath(context)
         
+        tempImageView.image?.drawInRect(tempImageView.frame)
         tempImageView.image = UIGraphicsGetImageFromCurrentImageContext()
         tempImageView.alpha = brushColor.alpha
         UIGraphicsEndImageContext()
@@ -183,8 +176,9 @@ public class TouchDrawView: UIView {
         return image
     }
     
-    func internalClear() {
+    private func internalClear() {
         mainImageView.image = nil
+        tempImageView.image = nil
     }
     
     public func clearDrawing() {
@@ -193,7 +187,7 @@ public class TouchDrawView: UIView {
         stack = []
     }
     
-    func pushAll(array: NSArray) {
+    private func pushAll(array: NSArray) {
         for mark in array {
             let markArray = mark as! NSArray
             drawLine(markArray)
