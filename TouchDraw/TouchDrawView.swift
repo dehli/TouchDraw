@@ -107,14 +107,16 @@ public class TouchDrawView: UIView {
         tempImageView.image = nil
     }
     
-    func popDrawing() {
+    // Needs to be public for undoManager
+    public func popDrawing() {
         let array = stack.lastObject as! NSArray
         stack.removeLastObject()
         redrawLinePathsInStack()
         undoManager?.registerUndoWithTarget(self, selector: "pushDrawing:", object: array)
     }
     
-    func pushDrawing(array: NSArray) {
+    // Needs to be public for undoManager
+    public func pushDrawing(array: NSArray) {
         stack.addObject(array)
         drawLine(array)
         undoManager?.registerUndoWithTarget(self, selector: "popDrawing", object: nil)
@@ -187,7 +189,8 @@ public class TouchDrawView: UIView {
         stack = []
     }
     
-    private func pushAll(array: NSArray) {
+    // Needs to be public for undoManager
+    public func pushAll(array: NSArray) {
         for mark in array {
             let markArray = mark as! NSArray
             drawLine(markArray)
