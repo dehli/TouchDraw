@@ -22,8 +22,7 @@ You must make whichever view contains `TouchDrawView` conform to `TouchDrawViewD
 - `undoDisabled()`
 - `redoEnabled()`
 - `redoDisabled()`
+- `clearEnabled()`
+- `clearDisabled()`
 
-These functions are triggered whenever the undo/redo functionality becomes enabled.
-
-**TODO:**
-- Make undo/redo work with various colors or widths (right now it uses the most recent values for all the strokes).
+These functions are triggered whenever the various functionalities become enabled or disabled.

@@ -13,6 +13,7 @@ class ViewController: UIViewController, TouchDrawViewDelegate {
     @IBOutlet var drawView: TouchDrawView!
     @IBOutlet weak var undoButton: UIButton!
     @IBOutlet weak var redoButton: UIButton!
+    @IBOutlet weak var clearButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,7 @@ class ViewController: UIViewController, TouchDrawViewDelegate {
         
         undoButton.enabled = false
         redoButton.enabled = false
+        clearButton.enabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,6 +68,14 @@ class ViewController: UIViewController, TouchDrawViewDelegate {
     
     func redoDisabled() {
         self.redoButton.enabled = false
+    }
+    
+    func clearEnabled() {
+        self.clearButton.enabled = true
+    }
+    
+    func clearDisabled() {
+        self.clearButton.enabled = false
     }
 }
 

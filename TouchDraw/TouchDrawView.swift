@@ -6,10 +6,18 @@
 //
 
 public protocol TouchDrawViewDelegate {
+    
+    // Undo button
     func undoEnabled()
     func undoDisabled()
+    
+    // Redo button
     func redoEnabled()
     func redoDisabled()
+    
+    // Clear button
+    func clearEnabled()
+    func clearDisabled()
 }
 
 public class BrushProperties {
@@ -55,6 +63,7 @@ public class TouchDrawView: UIView {
     
     private var undoEnabled = false
     private var redoEnabled = false
+    private var clearEnabled = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -122,6 +131,10 @@ public class TouchDrawView: UIView {
             delegate.redoDisabled()
             redoEnabled = false
         }
+        if !clearEnabled {
+            self.delegate.clearEnabled()
+            clearEnabled = true
+        }
     }
     
     private func mergeViews() {
@@ -153,6 +166,7 @@ public class TouchDrawView: UIView {
     
     private func redrawLinePathsInStack() {
         internalClear()
+        
         for stroke in stack {
             drawLine(stroke)
         }
@@ -218,6 +232,8 @@ public class TouchDrawView: UIView {
         internalClear()
         undoManager?.registerUndoWithTarget(self, selector: "pushAll:", object: stack)
         stack = []
+        
+        checkClearState()
     }
     
     // Needs to be public for undoManager
@@ -239,6 +255,17 @@ public class TouchDrawView: UIView {
         brushProperties.width = width
     }
     
+    private func checkClearState() {
+        if stack.count == 0 && clearEnabled {
+            self.delegate.clearDisabled()
+            clearEnabled = false
+        }
+        else if stack.count > 0 && !clearEnabled {
+            self.delegate.clearEnabled()
+            clearEnabled = true
+        }
+    }
+    
     public func undo() {
         if undoManager!.canUndo {
             undoManager?.undo()
@@ -254,6 +281,8 @@ public class TouchDrawView: UIView {
                     undoEnabled = false
                 }
             }
+            
+            checkClearState()
         }
     }
     
@@ -272,6 +301,8 @@ public class TouchDrawView: UIView {
                     redoEnabled = false
                 }
             }
+            
+            checkClearState()
         }
     }
     

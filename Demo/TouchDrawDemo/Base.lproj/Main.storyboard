@@ -82,6 +82,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="clearButton" destination="Rwo-UJ-Hpb" id="InB-Ts-DnJ"/>
                         <outlet property="drawView" destination="rLC-Uj-OO4" id="Yqc-1k-cFG"/>
                         <outlet property="redoButton" destination="Snm-Id-fce" id="N8o-Nc-gsW"/>
                         <outlet property="undoButton" destination="BiD-dq-6EQ" id="xeq-kK-X5f"/>
