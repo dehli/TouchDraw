@@ -12,6 +12,16 @@ public protocol TouchDrawViewDelegate {
     func redoDisabled()
 }
 
+public class BrushProperties {
+    public var color: CIColor!
+    public var width: CGFloat!
+    
+    init() {
+        color = CIColor(color: UIColor.blackColor())
+        width = CGFloat(10.0)
+    }
+}
+
 public class TouchDrawView: UIView {
 
     public var delegate: TouchDrawViewDelegate!
@@ -22,8 +32,7 @@ public class TouchDrawView: UIView {
     
     private var lastPoint = CGPoint.zero
     
-    private var brushColor = CIColor(color: UIColor.blackColor())
-    private var brushWidth = CGFloat(10.0)
+    private var brushProperties = BrushProperties()
     
     private var touchesMoved = false
     
@@ -100,7 +109,7 @@ public class TouchDrawView: UIView {
         // Merge tempImageView into mainImageView
         UIGraphicsBeginImageContext(mainImageView.frame.size)
         mainImageView.image?.drawInRect(mainImageView.frame, blendMode: CGBlendMode.Normal, alpha: 1.0)
-        tempImageView.image?.drawInRect(tempImageView.frame, blendMode: CGBlendMode.Normal, alpha: brushColor.alpha)
+        tempImageView.image?.drawInRect(tempImageView.frame, blendMode: CGBlendMode.Normal, alpha: brushProperties.color.alpha)
         mainImageView.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
@@ -158,15 +167,15 @@ public class TouchDrawView: UIView {
         CGContextAddLineToPoint(context, toPoint.x, toPoint.y)
         
         CGContextSetLineCap(context, CGLineCap.Round)
-        CGContextSetLineWidth(context, brushWidth)
-        CGContextSetRGBStrokeColor(context, brushColor.red, brushColor.green, brushColor.blue, 1.0)
+        CGContextSetLineWidth(context, brushProperties.width)
+        CGContextSetRGBStrokeColor(context, brushProperties.color.red, brushProperties.color.green, brushProperties.color.blue, 1.0)
         CGContextSetBlendMode(context, CGBlendMode.Normal)
         
         CGContextStrokePath(context)
         
         tempImageView.image?.drawInRect(tempImageView.frame)
         tempImageView.image = UIGraphicsGetImageFromCurrentImageContext()
-        tempImageView.alpha = brushColor.alpha
+        tempImageView.alpha = brushProperties.color.alpha
         UIGraphicsEndImageContext()
     }
     
@@ -200,11 +209,11 @@ public class TouchDrawView: UIView {
     }
     
     public func setColor(color: UIColor) {
-        brushColor = CIColor(color: color)
+        brushProperties.color = CIColor(color: color)
     }
     
     public func setWidth(width: CGFloat) {
-        brushWidth = width
+        brushProperties.width = width
     }
     
     public func undo() {
