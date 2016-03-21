@@ -15,11 +15,13 @@ class ViewController: UIViewController, TouchDrawViewDelegate {
     @IBOutlet weak var redoButton: UIButton!
     @IBOutlet weak var clearButton: UIBarButtonItem!
     
+    private var deltaWidth = 2.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         drawView.delegate = self
-        drawView.setWidth(5)
+        drawView.setWidth(CGFloat(deltaWidth))
         
         undoButton.enabled = false
         redoButton.enabled = false
@@ -33,6 +35,12 @@ class ViewController: UIViewController, TouchDrawViewDelegate {
     
     @IBAction func clear(sender: AnyObject) {
         drawView.clearDrawing()
+    }
+    
+    // Slider can vary from 1 to 10
+    @IBAction func sliderChanged(sender: UISlider) {
+        let newWidth = Double(sender.value) * deltaWidth
+        drawView.setWidth(CGFloat(newWidth))
     }
     
     @IBAction func randomColor(sender: AnyObject) {

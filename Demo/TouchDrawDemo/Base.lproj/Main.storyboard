@@ -67,17 +67,28 @@
                             </toolbar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rLC-Uj-OO4" customClass="TouchDrawView" customModule="TouchDraw">
                                 <rect key="frame" x="20" y="64" width="560" height="536"/>
+                                <subviews>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="JSe-sH-fRf">
+                                        <rect key="frame" x="-2" y="496" width="564" height="31"/>
+                                        <connections>
+                                            <action selector="sliderChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="tvJ-XD-7Dh"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="JSe-sH-fRf" secondAttribute="trailing" id="8md-te-JOI"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="rLC-Uj-OO4" secondAttribute="bottom" id="FBR-la-nRh"/>
                             <constraint firstAttribute="leadingMargin" secondItem="rLC-Uj-OO4" secondAttribute="leading" id="Fg6-6l-qEe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rLC-Uj-OO4" secondAttribute="trailing" id="J5M-2G-QzX"/>
                             <constraint firstItem="JCM-se-Ixi" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="QmR-Tr-XuW"/>
                             <constraint firstItem="rLC-Uj-OO4" firstAttribute="top" secondItem="JCM-se-Ixi" secondAttribute="bottom" id="TIO-10-pgZ"/>
                             <constraint firstItem="JCM-se-Ixi" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="ZSd-Fe-POf"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="JSe-sH-fRf" secondAttribute="leading" id="nA0-77-But"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="JSe-sH-fRf" secondAttribute="bottom" constant="10" id="rUJ-AH-ryY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JCM-se-Ixi" secondAttribute="trailing" id="vDI-tv-4uy"/>
                         </constraints>
                     </view>
