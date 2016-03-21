@@ -6,7 +6,7 @@ The easiest way to include `TouchDraw` is by using `CocoaPods`.
 
 ```
 use_frameworks!
-pod 'TouchDraw', '~> 1.1'
+pod 'TouchDraw', '~> 1.2'
 ```
 
 To use `TouchDrawView` you must first write `import TouchDraw` in whichever classes will use `TouchDrawView`. `TouchDrawView` exposes the following functions:
