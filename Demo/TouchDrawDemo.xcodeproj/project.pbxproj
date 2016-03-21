@@ -70,6 +70,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		89D911C21C25988500DB6DDE /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				EE43D4761A14A6F200311C06 /* Main.storyboard */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		B90ADA956422C12ACFECF533 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,9 +109,9 @@
 		EE43D46F1A14A6F200311C06 /* TouchDrawDemo */ = {
 			isa = PBXGroup;
 			children = (
+				89D911C21C25988500DB6DDE /* UI */,
 				EE43D4721A14A6F200311C06 /* AppDelegate.swift */,
 				EE43D4741A14A6F200311C06 /* ViewController.swift */,
-				EE43D4761A14A6F200311C06 /* Main.storyboard */,
 				EE43D4791A14A6F200311C06 /* Images.xcassets */,
 				EE43D47B1A14A6F200311C06 /* LaunchScreen.xib */,
 				EE43D4701A14A6F200311C06 /* Supporting Files */,

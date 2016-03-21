@@ -13,15 +13,19 @@ class ViewController: UIViewController, TouchDrawViewDelegate {
     @IBOutlet var drawView: TouchDrawView!
     @IBOutlet weak var undoButton: UIButton!
     @IBOutlet weak var redoButton: UIButton!
+    @IBOutlet weak var clearButton: UIBarButtonItem!
+    
+    private var deltaWidth = 2.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         drawView.delegate = self
-        drawView.setWidth(5)
+        drawView.setWidth(CGFloat(deltaWidth))
         
         undoButton.enabled = false
         redoButton.enabled = false
+        clearButton.enabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,6 +35,12 @@ class ViewController: UIViewController, TouchDrawViewDelegate {
     
     @IBAction func clear(sender: AnyObject) {
         drawView.clearDrawing()
+    }
+    
+    // Slider can vary from 1 to 10
+    @IBAction func sliderChanged(sender: UISlider) {
+        let newWidth = Double(sender.value) * deltaWidth
+        drawView.setWidth(CGFloat(newWidth))
     }
     
     @IBAction func randomColor(sender: AnyObject) {
@@ -50,6 +60,8 @@ class ViewController: UIViewController, TouchDrawViewDelegate {
         drawView.redo()
     }
     
+    // MARK: - TouchDrawViewDelegate
+    
     func undoEnabled() {
         self.undoButton.enabled = true
     }
@@ -64,6 +76,14 @@ class ViewController: UIViewController, TouchDrawViewDelegate {
     
     func redoDisabled() {
         self.redoButton.enabled = false
+    }
+    
+    func clearEnabled() {
+        self.clearButton.enabled = true
+    }
+    
+    func clearDisabled() {
+        self.clearButton.enabled = false
     }
 }
 

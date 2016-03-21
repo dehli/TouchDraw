@@ -22,8 +22,13 @@ You must make whichever view contains `TouchDrawView` conform to `TouchDrawViewD
 - `undoDisabled()`
 - `redoEnabled()`
 - `redoDisabled()`
+- `clearEnabled()`
+- `clearDisabled()`
 
-These functions are triggered whenever the undo/redo functionality becomes enabled.
+These functions are triggered whenever the various functionalities become enabled or disabled.
 
-**TODO:**
-- Make undo/redo work with various colors or widths (right now it uses the most recent values for all the strokes).
+## Demo
+
+If you'd like to see this library in action, you can download the entire repository and open [Demo/TouchDrawDemo.xcworkspace](Demo/TouchDrawDemo.xcworkspace).
+
+![Demo Screenshot](https://cloud.githubusercontent.com/assets/5856011/13918081/4b2fae7e-ef3b-11e5-96bd-978b62895aa7.png)

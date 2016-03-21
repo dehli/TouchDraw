@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -14,53 +14,87 @@
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS" customClass="TouchDrawView" customModule="TouchDraw">
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r4I-hQ-4A8">
-                                <rect key="frame" x="544" y="20" width="36" height="30"/>
-                                <state key="normal" title="Clear"/>
-                                <connections>
-                                    <action selector="clear:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="QLV-rD-HVF"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jeh-cE-jOO">
-                                <rect key="frame" x="251" y="20" width="98" height="30"/>
-                                <state key="normal" title="Random Color"/>
-                                <connections>
-                                    <action selector="randomColor:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="8un-zP-yyN"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BiD-dq-6EQ">
-                                <rect key="frame" x="24" y="20" width="38" height="30"/>
-                                <state key="normal" title="Undo"/>
-                                <connections>
-                                    <action selector="undo:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="aQB-ZE-0g7"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Snm-Id-fce">
-                                <rect key="frame" x="70" y="20" width="36" height="30"/>
-                                <state key="normal" title="Redo"/>
-                                <connections>
-                                    <action selector="redo:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Kgg-nI-Roz"/>
-                                </connections>
-                            </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JCM-se-Ixi">
+                                <rect key="frame" x="20" y="20" width="560" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" id="lxp-Kj-OzZ">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="BiD-dq-6EQ">
+                                            <rect key="frame" x="20" y="7" width="38" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Undo"/>
+                                            <connections>
+                                                <action selector="undo:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="aQB-ZE-0g7"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" id="hI9-Tk-pVY">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Snm-Id-fce">
+                                            <rect key="frame" x="68" y="7" width="36" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Redo"/>
+                                            <connections>
+                                                <action selector="redo:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Kgg-nI-Roz"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="hbp-Ni-ib0"/>
+                                    <barButtonItem style="plain" id="LNS-KT-k01">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Jeh-cE-jOO">
+                                            <rect key="frame" x="231" y="7" width="98" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Random Color"/>
+                                            <connections>
+                                                <action selector="randomColor:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="8un-zP-yyN"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="FYI-PE-hqt"/>
+                                    <barButtonItem style="plain" id="Rwo-UJ-Hpb">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="r4I-hQ-4A8">
+                                            <rect key="frame" x="504" y="7" width="36" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Clear"/>
+                                            <connections>
+                                                <action selector="clear:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="QLV-rD-HVF"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rLC-Uj-OO4" customClass="TouchDrawView" customModule="TouchDraw">
+                                <rect key="frame" x="20" y="64" width="560" height="536"/>
+                                <subviews>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="JSe-sH-fRf">
+                                        <rect key="frame" x="-2" y="496" width="564" height="31"/>
+                                        <connections>
+                                            <action selector="sliderChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="tvJ-XD-7Dh"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="BiD-dq-6EQ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="4" id="3lR-wY-L4V"/>
-                            <constraint firstItem="Snm-Id-fce" firstAttribute="baseline" secondItem="r4I-hQ-4A8" secondAttribute="baseline" id="CnA-qD-AB9"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="r4I-hQ-4A8" secondAttribute="trailing" id="QEK-La-sWK"/>
-                            <constraint firstItem="Jeh-cE-jOO" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="YF3-Y6-HX6"/>
-                            <constraint firstItem="Snm-Id-fce" firstAttribute="baseline" secondItem="Jeh-cE-jOO" secondAttribute="baseline" id="bpy-La-urr"/>
-                            <constraint firstItem="Snm-Id-fce" firstAttribute="leading" secondItem="BiD-dq-6EQ" secondAttribute="trailing" constant="8" id="gM3-8M-vhd"/>
-                            <constraint firstItem="Snm-Id-fce" firstAttribute="baseline" secondItem="BiD-dq-6EQ" secondAttribute="baseline" id="qhY-DM-QVc"/>
-                            <constraint firstItem="Snm-Id-fce" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="zOQ-MB-Aq8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JSe-sH-fRf" secondAttribute="trailing" id="8md-te-JOI"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="rLC-Uj-OO4" secondAttribute="bottom" id="FBR-la-nRh"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="rLC-Uj-OO4" secondAttribute="leading" id="Fg6-6l-qEe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rLC-Uj-OO4" secondAttribute="trailing" id="J5M-2G-QzX"/>
+                            <constraint firstItem="JCM-se-Ixi" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="QmR-Tr-XuW"/>
+                            <constraint firstItem="rLC-Uj-OO4" firstAttribute="top" secondItem="JCM-se-Ixi" secondAttribute="bottom" id="TIO-10-pgZ"/>
+                            <constraint firstItem="JCM-se-Ixi" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="ZSd-Fe-POf"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="JSe-sH-fRf" secondAttribute="leading" id="nA0-77-But"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="JSe-sH-fRf" secondAttribute="bottom" constant="10" id="rUJ-AH-ryY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JCM-se-Ixi" secondAttribute="trailing" id="vDI-tv-4uy"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="drawView" destination="kh9-bI-dsS" id="932-HX-GBe"/>
+                        <outlet property="clearButton" destination="Rwo-UJ-Hpb" id="InB-Ts-DnJ"/>
+                        <outlet property="drawView" destination="rLC-Uj-OO4" id="Yqc-1k-cFG"/>
                         <outlet property="redoButton" destination="Snm-Id-fce" id="N8o-Nc-gsW"/>
                         <outlet property="undoButton" destination="BiD-dq-6EQ" id="xeq-kK-X5f"/>
                     </connections>
