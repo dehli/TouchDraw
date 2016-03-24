@@ -13,6 +13,8 @@ To use `TouchDrawView` you must first write `import TouchDraw` in whichever clas
 
 - `exportDrawing() -> UIImage`
 - `clearDrawing()`
+- `undo()`
+- `redo()`
 - `setColor(color: UIColor)`
 - `setWidth(width: CGFloat)`
 
