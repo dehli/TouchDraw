@@ -118,14 +118,14 @@ public class TouchDrawView: UIView {
         let stroke = stack.last
         stack.popLast()
         redrawLinePathsInStack()
-        undoManager?.registerUndoWithTarget(self, selector: "pushDrawing:", object: stroke)
+        undoManager?.registerUndoWithTarget(self, selector: #selector(TouchDrawView.pushDrawing(_:)), object: stroke)
     }
     
     internal func pushDrawing(object: AnyObject) {
         let stroke = object as? Stroke
         stack.append(stroke!)
         drawLine(stroke!)
-        undoManager?.registerUndoWithTarget(self, selector: "popDrawing", object: nil)
+        undoManager?.registerUndoWithTarget(self, selector: #selector(TouchDrawView.popDrawing), object: nil)
     }
     
     private func redrawLinePathsInStack() {
@@ -208,7 +208,7 @@ public class TouchDrawView: UIView {
     /// - Returns: Void
     public func clearDrawing() -> Void {
         internalClear()
-        undoManager?.registerUndoWithTarget(self, selector: "pushAll:", object: stack)
+        undoManager?.registerUndoWithTarget(self, selector: #selector(TouchDrawView.pushAll(_:)), object: stack)
         stack = []
         
         checkClearState()
@@ -228,7 +228,7 @@ public class TouchDrawView: UIView {
             drawLine(stroke)
             stack.append(stroke)
         }
-        undoManager?.registerUndoWithTarget(self, selector: "clearDrawing", object: nil)
+        undoManager?.registerUndoWithTarget(self, selector: #selector(TouchDrawView.clearDrawing), object: nil)
     }
     
     /// setColor: Sets the brush's color
@@ -336,7 +336,7 @@ public class TouchDrawView: UIView {
         
         stack.append(stroke)
         
-        undoManager?.registerUndoWithTarget(self, selector: "popDrawing", object: nil)
+        undoManager?.registerUndoWithTarget(self, selector: #selector(TouchDrawView.popDrawing), object: nil)
         
         if !undoEnabled {
             delegate.undoEnabled()

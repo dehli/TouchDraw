@@ -19,12 +19,9 @@
 
 # 1.0.0
 
-- Added `TouchDrawView` which is a subclass of `UIView` that you can draw on
+- Initial release
+- Implemented `TouchDrawView` which is a subclass of `UIView` that you can draw on
 - Implemented `clear()`
 - Implemented `exportDrawing()`
 - Implemented `setColor(color: UIColor)`
 - Implemented `setWidth(width: CGFloat)`
-
-# 0.1.0
-
-- Initial release (non functioning release)
