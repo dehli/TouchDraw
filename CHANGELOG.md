@@ -1,20 +1,30 @@
+# 1.2.1
+
+- Fixed a bug where pressing clear wouldn't trigger `redoDisabled()`
+- Added documentation
+
 # 1.2.0
 
-- undo/redo now work with brush size and color
-- added `clearEnabled()` to the protocol
-- added `clearDisabled()` to the protocol
-- fixed a bug where `TouchDrawView` only worked when it took up the entire `ViewController`'s screen
+- Fixed `redo()` and `undo()` so they work with various brush sizes and colors
+- Implemented `clearEnabled()` to the protocol
+- Implemented `clearDisabled()` to the protocol
+- Fixed a bug where `TouchDrawView` only worked when it took up the entire `ViewController`'s screen
 
 # 1.1.0
 
-- undo functionality
-- redo functionality
+- Implemented `undo()` (using last selected brush settings)
+- Implemented `redo()` (using last selected brush settings)
+- Implemented `redoEnabled()` and `redoDisabled()` protocol methods
+- Implemented `undoEnabled()` and `undoDisabled()` protocol methods
 
 # 1.0.0
 
-- Basic functionality
-
+- Added `TouchDrawView` which is a subclass of `UIView` that you can draw on
+- Implemented `clear()`
+- Implemented `exportDrawing()`
+- Implemented `setColor(color: UIColor)`
+- Implemented `setWidth(width: CGFloat)`
 
 # 0.1.0
 
-This was the initial commit (non functioning release).
+- Initial release (non functioning release)
