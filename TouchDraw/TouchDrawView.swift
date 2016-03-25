@@ -2,21 +2,33 @@
 //  TouchDrawView.swift
 //  TouchDraw
 //
-//  Created by Christian Paul Dehli on 10/4/15.
+//  Created by Christian Paul Dehli
 //
 
 public protocol TouchDrawViewDelegate {
-    // Undo button
-    func undoEnabled()
-    func undoDisabled()
+    /// undoEnabled: triggered when undo is enabled (only if it was previously disabled)
+    /// - Returns: Void
+    func undoEnabled() -> Void
     
-    // Redo button
-    func redoEnabled()
-    func redoDisabled()
+    /// undoDisabled: triggered when undo is disabled (only if it previously enabled)
+    /// - Returns: Void
+    func undoDisabled() -> Void
     
-    // Clear button
-    func clearEnabled()
-    func clearDisabled()
+    /// redoEnabled: triggered when redo is enabled (only if it was previously disabled)
+    /// - Returns: Void
+    func redoEnabled() -> Void
+    
+    /// redoDisabled: triggered when redo is disabled (only if it previously enabled)
+    /// - Returns: Void
+    func redoDisabled() -> Void
+    
+    /// clearEnabled: triggered when clear is enabled (only if it was previously disabled)
+    /// - Returns: Void
+    func clearEnabled() -> Void
+    
+    /// clearDisabled: triggered when clear is disabled (only if it previously enabled)
+    /// - Returns: Void
+    func clearDisabled() -> Void
 }
 
 private class BrushProperties {
@@ -45,14 +57,16 @@ private class Stroke {
 
 public class TouchDrawView: UIView {
 
+    /// delegate: must be set in whichever class is using the TouchDrawView
     public var delegate: TouchDrawViewDelegate!
     
-    // Used for undo/redo
+    /// stack: used to keep track of all the strokes
     private var stack: [Stroke]!
     private var pointsArray: NSMutableArray!
     
     private var lastPoint = CGPoint.zero
     
+    /// brushProperties: current brush properties
     private var brushProperties = BrushProperties()
     
     private var touchesMoved = false
@@ -64,11 +78,15 @@ public class TouchDrawView: UIView {
     private var redoEnabled = false
     private var clearEnabled = false
     
+    /// init: initializes a TouchDrawView instance
+    /// - Parameter: frame: frame for the view to be initialized in
     override init(frame: CGRect) {
         super.init(frame: frame)
         initTouchDrawView()
     }
-
+    
+    /// init: initializes a TouchDrawView instance
+    /// - Parameter: coder aDecoder: NSCoder to initialize the view
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initTouchDrawView()
@@ -83,57 +101,6 @@ public class TouchDrawView: UIView {
     override public func drawRect(rect: CGRect) {
         mainImageView.frame = rect
         tempImageView.frame = rect
-    }
-    
-    // MARK: - Actions
-    override public func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        touchesMoved = false
-        if let touch = touches.first {
-            lastPoint = touch.locationInView(self)
-            pointsArray = []
-            pointsArray.addObject(NSStringFromCGPoint(lastPoint))
-        }
-    }
-    
-    override public func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        touchesMoved = true
-        if let touch = touches.first {
-            let currentPoint = touch.locationInView(self)
-            drawLineFrom(lastPoint, toPoint: currentPoint, properties: brushProperties)
-            
-            lastPoint = currentPoint
-            pointsArray.addObject(NSStringFromCGPoint(lastPoint))
-        }
-    }
-    
-    override public func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if !touchesMoved {
-            // draw a single point
-            drawLineFrom(lastPoint, toPoint: lastPoint, properties: brushProperties)
-        }
-        
-        mergeViews()
-        
-        let stroke = Stroke()
-        stroke.properties = BrushProperties(properties: brushProperties)
-        stroke.points = pointsArray
-        
-        stack.append(stroke)
-        
-        undoManager?.registerUndoWithTarget(self, selector: "popDrawing", object: nil)
-        
-        if !undoEnabled {
-            delegate.undoEnabled()
-            undoEnabled = true
-        }
-        if redoEnabled {
-            delegate.redoDisabled()
-            redoEnabled = false
-        }
-        if !clearEnabled {
-            self.delegate.clearEnabled()
-            clearEnabled = true
-        }
     }
     
     private func mergeViews() {
@@ -333,4 +300,55 @@ public class TouchDrawView: UIView {
         }
     }
     
+    // MARK: - Actions
+    
+    override public func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        touchesMoved = false
+        if let touch = touches.first {
+            lastPoint = touch.locationInView(self)
+            pointsArray = []
+            pointsArray.addObject(NSStringFromCGPoint(lastPoint))
+        }
+    }
+    
+    override public func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        touchesMoved = true
+        if let touch = touches.first {
+            let currentPoint = touch.locationInView(self)
+            drawLineFrom(lastPoint, toPoint: currentPoint, properties: brushProperties)
+            
+            lastPoint = currentPoint
+            pointsArray.addObject(NSStringFromCGPoint(lastPoint))
+        }
+    }
+    
+    override public func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if !touchesMoved {
+            // draw a single point
+            drawLineFrom(lastPoint, toPoint: lastPoint, properties: brushProperties)
+        }
+        
+        mergeViews()
+        
+        let stroke = Stroke()
+        stroke.properties = BrushProperties(properties: brushProperties)
+        stroke.points = pointsArray
+        
+        stack.append(stroke)
+        
+        undoManager?.registerUndoWithTarget(self, selector: "popDrawing", object: nil)
+        
+        if !undoEnabled {
+            delegate.undoEnabled()
+            undoEnabled = true
+        }
+        if redoEnabled {
+            delegate.redoDisabled()
+            redoEnabled = false
+        }
+        if !clearEnabled {
+            self.delegate.clearEnabled()
+            clearEnabled = true
+        }
+    }
 }
