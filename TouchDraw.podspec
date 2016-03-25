@@ -4,13 +4,15 @@
 Pod::Spec.new do |s|
 
   s.name                  = "TouchDraw"
-  s.version               = "1.2.0"
+  s.version               = "1.2.1"
   s.summary               = "TouchDraw is a UIView you can draw on."
 
   s.description           = <<-DESC
                             TouchDraw is a subclass of UIView that allows you to draw using touch. It exposes the following functions:
                             - `exportDrawing() -> UIImage`
                             - `clearDrawing()`
+                            - `undo()`
+                            - `redo()`
                             - `setColor(color: UIColor)`
                             - `setWidth(width: CGFloat)`
                             DESC
