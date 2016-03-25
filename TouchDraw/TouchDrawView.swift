@@ -6,7 +6,6 @@
 //
 
 public protocol TouchDrawViewDelegate {
-    
     // Undo button
     func undoEnabled()
     func undoDisabled()
@@ -20,9 +19,9 @@ public protocol TouchDrawViewDelegate {
     func clearDisabled()
 }
 
-public class BrushProperties {
-    public var color: CIColor!
-    public var width: CGFloat!
+private class BrushProperties {
+    private var color: CIColor!
+    private var width: CGFloat!
     
     init() {
         color = CIColor(color: UIColor.blackColor())
@@ -34,9 +33,9 @@ public class BrushProperties {
     }
 }
 
-public class Stroke {
-    public var points: NSMutableArray!
-    public var properties: BrushProperties!
+private class Stroke {
+    private var points: NSMutableArray!
+    private var properties: BrushProperties!
     
     init() {
         points = []
@@ -148,16 +147,14 @@ public class TouchDrawView: UIView {
         tempImageView.image = nil
     }
     
-    // Needs to be public for undoManager
-    public func popDrawing() {
+    internal func popDrawing() {
         let stroke = stack.last
         stack.popLast()
         redrawLinePathsInStack()
         undoManager?.registerUndoWithTarget(self, selector: "pushDrawing:", object: stroke)
     }
     
-    // Needs to be public for undoManager
-    public func pushDrawing(object: AnyObject) {
+    internal func pushDrawing(object: AnyObject) {
         let stroke = object as? Stroke
         stack.append(stroke!)
         drawLine(stroke!)
@@ -234,10 +231,16 @@ public class TouchDrawView: UIView {
         stack = []
         
         checkClearState()
+        
+        if !undoManager!.canRedo {
+            if redoEnabled {
+                delegate.redoDisabled()
+                redoEnabled = false
+            }
+        }
     }
     
-    // Needs to be public for undoManager
-    public func pushAll(object: AnyObject) {
+    internal func pushAll(object: AnyObject) {
         let array = object as? [Stroke]
         
         for stroke in array! {
