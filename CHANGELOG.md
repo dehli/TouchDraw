@@ -1,6 +1,7 @@
 # 1.2.1
 
 - Fixed a bug where pressing clear wouldn't trigger `redoDisabled()`
+- Updated deprecated code
 - Added documentation
 
 # 1.2.0
