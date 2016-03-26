@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		89DB172D1BC988E6005E947E /* TouchDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DB172C1BC988E6005E947E /* TouchDrawView.swift */; settings = {ASSET_TAGS = (); }; };
+		89DB172D1BC988E6005E947E /* TouchDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DB172C1BC988E6005E947E /* TouchDrawView.swift */; };
 		89F60F6F1BC9580000BCDD93 /* TouchDraw.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F60F6E1BC9580000BCDD93 /* TouchDraw.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		89F60F761BC9580000BCDD93 /* TouchDraw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F60F6B1BC9580000BCDD93 /* TouchDraw.framework */; settings = {ASSET_TAGS = (); }; };
+		89F60F761BC9580000BCDD93 /* TouchDraw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F60F6B1BC9580000BCDD93 /* TouchDraw.framework */; };
 		89F60F7B1BC9580000BCDD93 /* TouchDrawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F60F7A1BC9580000BCDD93 /* TouchDrawTests.swift */; };
 /* End PBXBuildFile section */
 

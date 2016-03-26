@@ -5,7 +5,7 @@
 //  Created by Christian Paul Dehli
 //
 
-/// the protocol that the container of TouchDrawView must conform to
+/// The protocol which the container of TouchDrawView must conform to
 public protocol TouchDrawViewDelegate {
     /// triggered when undo is enabled (only if it was previously disabled)
     func undoEnabled() -> Void
@@ -56,7 +56,7 @@ private class Stroke {
     }
 }
 
-/// a subclass of UIView which allows you to draw on the view using your fingers
+/// A subclass of UIView which allows you to draw on the view using your fingers
 public class TouchDrawView: UIView {
 
     /// must be set in whichever class is using the TouchDrawView

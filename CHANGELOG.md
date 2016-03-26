@@ -1,3 +1,8 @@
+# 1.2.2
+
+- Switched project settings to recommended settings
+- Added documentation
+
 # 1.2.1
 
 - Fixed a bug where pressing clear wouldn't trigger `redoDisabled()`
