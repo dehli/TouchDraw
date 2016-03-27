@@ -44,7 +44,7 @@ private class BrushProperties {
 }
 
 /// a drawing stroke
-private class Stroke {
+internal class Stroke {
     /// the points that make up the stroke
     private var points: NSMutableArray!
     /// the properties of the stroke
@@ -63,7 +63,7 @@ public class TouchDrawView: UIView {
     public var delegate: TouchDrawViewDelegate!
     
     /// used to keep track of all the strokes
-    private var stack: [Stroke]!
+    internal var stack: [Stroke]!
     private var pointsArray: NSMutableArray!
     
     private var lastPoint = CGPoint.zero
@@ -209,7 +209,7 @@ public class TouchDrawView: UIView {
         
         checkClearState()
         
-        if !undoManager!.canRedo {
+        if undoManager != nil && !undoManager!.canRedo {
             if redoEnabled {
                 delegate.redoDisabled()
                 redoEnabled = false
@@ -250,7 +250,7 @@ public class TouchDrawView: UIView {
     
     /// if possible, it will undo the last stroke
     public func undo() -> Void {
-        if undoManager!.canUndo {
+        if undoManager != nil && undoManager!.canUndo {
             undoManager?.undo()
             
             if !redoEnabled {
@@ -271,7 +271,7 @@ public class TouchDrawView: UIView {
     
     /// if possible, it will redo the last undone stroke
     public func redo() -> Void {
-        if undoManager!.canRedo {
+        if undoManager != nil && undoManager!.canRedo {
             undoManager?.redo()
             
             if !undoEnabled {
