@@ -209,7 +209,7 @@ public class TouchDrawView: UIView {
         
         checkClearState()
         
-        if undoManager != nil && !undoManager!.canRedo {
+        if !undoManager!.canRedo {
             if redoEnabled {
                 delegate.redoDisabled()
                 redoEnabled = false
@@ -250,7 +250,7 @@ public class TouchDrawView: UIView {
     
     /// if possible, it will undo the last stroke
     public func undo() -> Void {
-        if undoManager != nil && undoManager!.canUndo {
+        if undoManager!.canUndo {
             undoManager?.undo()
             
             if !redoEnabled {
@@ -271,7 +271,7 @@ public class TouchDrawView: UIView {
     
     /// if possible, it will redo the last undone stroke
     public func redo() -> Void {
-        if undoManager != nil && undoManager!.canRedo {
+        if undoManager!.canRedo {
             undoManager?.redo()
             
             if !undoEnabled {
