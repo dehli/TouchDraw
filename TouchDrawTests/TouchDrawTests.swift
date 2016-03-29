@@ -43,7 +43,6 @@ class TouchDrawTests: XCTestCase {
         XCTAssertTrue(viewController.undoIsEnabled, "Undo should be enabled")        
     }
     
-    /*
     /// Tests whether you clearing empties the strokes
     func testClearing() {
         var touches = Set<UITouch>()
@@ -68,6 +67,6 @@ class TouchDrawTests: XCTestCase {
         XCTAssert(viewController.touchDrawView.stack.count == 1, "Should have one stroke")
         viewController.touchDrawView.undo()
         XCTAssert(viewController.touchDrawView.stack.count == 0, "Should not have any strokes")
-    }*/
+    }
     
 }
