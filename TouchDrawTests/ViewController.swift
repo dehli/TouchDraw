@@ -1,5 +1,5 @@
 //
-//  TouchDrawViewController.swift
+//  ViewController.swift
 //  TouchDraw
 //
 //  Created by Christian Paul Dehli on 3/26/16.
@@ -8,7 +8,7 @@
 
 @testable import TouchDraw
 
-class TouchDrawViewController: UIViewController, TouchDrawViewDelegate {
+class ViewController: UIViewController, TouchDrawViewDelegate {
     
     internal var undoIsEnabled: Bool!
     internal var redoIsEnabled: Bool!
@@ -16,27 +16,15 @@ class TouchDrawViewController: UIViewController, TouchDrawViewDelegate {
     
     internal var touchDrawView: TouchDrawView!
     
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        self.addTouchDrawView()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.addTouchDrawView()
-    }
-    
-    private func addTouchDrawView() {
-        self.touchDrawView = TouchDrawView(frame: self.view.frame)
-        self.view.addSubview(touchDrawView)
-        touchDrawView.delegate = self
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         self.undoIsEnabled = false
         self.redoIsEnabled = false
         self.clearIsEnabled = false
         
-        print(self.touchDrawView.undoManager)
-        
+        touchDrawView = self.view as! TouchDrawView
+        touchDrawView.delegate = self        
     }
     
     // MARK: - TouchDrawViewDelegate

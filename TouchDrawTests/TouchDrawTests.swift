@@ -11,12 +11,20 @@ import XCTest
 
 class TouchDrawTests: XCTestCase {
     
-    var viewController: TouchDrawViewController!
+    var viewController: ViewController!
     
     override func setUp() {
         super.setUp()
+        
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        viewController = TouchDrawViewController()
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle(forClass: self.dynamicType))
+        
+        viewController = storyboard.instantiateInitialViewController() as! ViewController
+        viewController.viewDidLoad()
+        viewController.viewDidAppear(false)
+        
+        // Test and Load the View at the Same Time!
+        XCTAssertNotNil(viewController.view)
     }
     
     override func tearDown() {
@@ -35,6 +43,7 @@ class TouchDrawTests: XCTestCase {
         XCTAssertTrue(viewController.undoIsEnabled, "Undo should be enabled")        
     }
     
+    /*
     /// Tests whether you clearing empties the strokes
     func testClearing() {
         var touches = Set<UITouch>()
@@ -47,5 +56,18 @@ class TouchDrawTests: XCTestCase {
         viewController.touchDrawView.clearDrawing()
         XCTAssert(viewController.touchDrawView.stack.count == 0, "Should not have strokes on view")
     }
+    
+    /// Tests undoing functionality
+    func testUndo() {
+        var touches = Set<UITouch>()
+        touches.insert(UITouch())
+        
+        viewController.touchDrawView.touchesBegan(touches, withEvent: nil)
+        viewController.touchDrawView.touchesEnded(touches, withEvent: nil)
+        
+        XCTAssert(viewController.touchDrawView.stack.count == 1, "Should have one stroke")
+        viewController.touchDrawView.undo()
+        XCTAssert(viewController.touchDrawView.stack.count == 0, "Should not have any strokes")
+    }*/
     
 }
