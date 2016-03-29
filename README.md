@@ -1,5 +1,7 @@
 # TouchDraw
 
+[![Join the chat at https://gitter.im/dehli/TouchDraw](https://badges.gitter.im/dehli/TouchDraw.svg)](https://gitter.im/dehli/TouchDraw?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 The `TouchDraw` module allows you to use the `TouchDrawView` class. This is a subclass of `UIView` which allows you to draw pictures with your finger.
 
 ## Installation
