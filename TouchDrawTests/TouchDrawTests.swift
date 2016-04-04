@@ -15,13 +15,13 @@ class TouchDrawTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        
+                
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle(forClass: self.dynamicType))
         
         viewController = storyboard.instantiateInitialViewController() as! ViewController
-        viewController.viewDidLoad()
-        viewController.viewDidAppear(false)
+        
+        UIApplication.sharedApplication().keyWindow!.rootViewController = viewController
         
         // Test and Load the View at the Same Time!
         XCTAssertNotNil(viewController.view)
