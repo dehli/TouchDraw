@@ -24,7 +24,7 @@ class TouchDrawTests: XCTestCase, TouchDrawViewDelegate {
         redoIsEnabled = false
         clearIsEnabled = false
         
-        touchDrawView = TouchDrawView()
+        touchDrawView = TouchDrawView(frame: CGRectMake(0, 0, 256, 256))
         touchDrawView.delegate = self
     }
     
@@ -33,12 +33,12 @@ class TouchDrawTests: XCTestCase, TouchDrawViewDelegate {
         super.tearDown()
     }
     
-    /*/// Tests that exportDrawing does indeed return a UIImage
+    /// Tests that exportDrawing does indeed return a UIImage
     func testExportDrawing() {
         simulateTouch()
         let image = touchDrawView.exportDrawing()
         XCTAssertNotNil(image, "Image shouldn't be nil")
-    }*/
+    }
     
     /// Tests that changing the color works
     func testChangeColor() {

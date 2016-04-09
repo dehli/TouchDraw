@@ -85,17 +85,17 @@ public class TouchDrawView: UIView {
     /// initializes a TouchDrawView instance
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initTouchDrawView()
+        initTouchDrawView(frame)
     }
     
     /// initializes a TouchDrawView instance
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        initTouchDrawView()
+        initTouchDrawView(CGRect.zero)
     }
 
     /// adds the subviews and initializes stack
-    private func initTouchDrawView() {
+    private func initTouchDrawView(frame: CGRect) {
         addSubview(mainImageView)
         addSubview(tempImageView)
         stack = []
@@ -104,6 +104,9 @@ public class TouchDrawView: UIView {
         if touchDrawUndoManager == nil {
             touchDrawUndoManager = NSUndoManager()
         }
+        
+        // Initially sets the frames of the UIImageViews
+        drawRect(frame)
     }
     
     /// sets the frames of the subviews
@@ -117,7 +120,9 @@ public class TouchDrawView: UIView {
         UIGraphicsBeginImageContext(mainImageView.frame.size)
         mainImageView.image?.drawInRect(mainImageView.frame, blendMode: CGBlendMode.Normal, alpha: 1.0)
         tempImageView.image?.drawInRect(tempImageView.frame, blendMode: CGBlendMode.Normal, alpha: brushProperties.color.alpha)
-        mainImageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        mainImageView.image = image
         UIGraphicsEndImageContext()
         
         tempImageView.image = nil
@@ -188,7 +193,8 @@ public class TouchDrawView: UIView {
         CGContextStrokePath(context)
         
         tempImageView.image?.drawInRect(tempImageView.frame)
-        tempImageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        tempImageView.image = image
         tempImageView.alpha = properties.color.alpha
         UIGraphicsEndImageContext()
     }
