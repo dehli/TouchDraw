@@ -58,6 +58,8 @@ internal class Stroke {
 
 /// A subclass of UIView which allows you to draw on the view using your fingers
 public class TouchDrawView: UIView {
+    
+    private var touchDrawUndoManager: NSUndoManager!
 
     /// must be set in whichever class is using the TouchDrawView
     public var delegate: TouchDrawViewDelegate!
@@ -97,6 +99,11 @@ public class TouchDrawView: UIView {
         addSubview(mainImageView)
         addSubview(tempImageView)
         stack = []
+        
+        touchDrawUndoManager = undoManager
+        if touchDrawUndoManager == nil {
+            touchDrawUndoManager = NSUndoManager()
+        }
     }
     
     /// sets the frames of the subviews
@@ -121,7 +128,7 @@ public class TouchDrawView: UIView {
         let stroke = stack.last
         stack.popLast()
         redrawLinePathsInStack()
-        undoManager?.registerUndoWithTarget(self, selector: #selector(TouchDrawView.pushDrawing(_:)), object: stroke)
+        touchDrawUndoManager!.registerUndoWithTarget(self, selector: #selector(TouchDrawView.pushDrawing(_:)), object: stroke)
     }
     
     /// adds a new stroke to the stack
@@ -129,7 +136,7 @@ public class TouchDrawView: UIView {
         let stroke = object as? Stroke
         stack.append(stroke!)
         drawLine(stroke!)
-        undoManager?.registerUndoWithTarget(self, selector: #selector(TouchDrawView.popDrawing), object: nil)
+        touchDrawUndoManager!.registerUndoWithTarget(self, selector: #selector(TouchDrawView.popDrawing), object: nil)
     }
     
     /// draws all the lines in the stack
@@ -204,12 +211,12 @@ public class TouchDrawView: UIView {
     /// clears the drawing
     public func clearDrawing() -> Void {
         internalClear()
-        undoManager?.registerUndoWithTarget(self, selector: #selector(TouchDrawView.pushAll(_:)), object: stack)
+        touchDrawUndoManager!.registerUndoWithTarget(self, selector: #selector(TouchDrawView.pushAll(_:)), object: stack)
         stack = []
         
         checkClearState()
         
-        if !undoManager!.canRedo {
+        if !touchDrawUndoManager!.canRedo {
             if redoEnabled {
                 delegate.redoDisabled()
                 redoEnabled = false
@@ -224,7 +231,7 @@ public class TouchDrawView: UIView {
             drawLine(stroke)
             stack.append(stroke)
         }
-        undoManager?.registerUndoWithTarget(self, selector: #selector(TouchDrawView.clearDrawing), object: nil)
+        touchDrawUndoManager!.registerUndoWithTarget(self, selector: #selector(TouchDrawView.clearDrawing), object: nil)
     }
     
     /// sets the brush's color
@@ -250,15 +257,15 @@ public class TouchDrawView: UIView {
     
     /// if possible, it will undo the last stroke
     public func undo() -> Void {
-        if undoManager!.canUndo {
-            undoManager?.undo()
+        if touchDrawUndoManager!.canUndo {
+            touchDrawUndoManager!.undo()
             
             if !redoEnabled {
                 delegate.redoEnabled()
                 redoEnabled = true
             }
             
-            if !undoManager!.canUndo {
+            if !touchDrawUndoManager!.canUndo {
                 if undoEnabled {
                     delegate.undoDisabled()
                     undoEnabled = false
@@ -271,15 +278,15 @@ public class TouchDrawView: UIView {
     
     /// if possible, it will redo the last undone stroke
     public func redo() -> Void {
-        if undoManager!.canRedo {
-            undoManager?.redo()
+        if touchDrawUndoManager!.canRedo {
+            touchDrawUndoManager!.redo()
             
             if !undoEnabled {
                 delegate.undoEnabled()
                 undoEnabled = true
             }
             
-            if !undoManager!.canRedo {
+            if !touchDrawUndoManager!.canRedo {
                 if redoEnabled {
                     delegate.redoDisabled()
                     redoEnabled = false
@@ -329,7 +336,7 @@ public class TouchDrawView: UIView {
         
         stack.append(stroke)
         
-        undoManager?.registerUndoWithTarget(self, selector: #selector(TouchDrawView.popDrawing), object: nil)
+        touchDrawUndoManager!.registerUndoWithTarget(self, selector: #selector(TouchDrawView.popDrawing), object: nil)
         
         if !undoEnabled {
             delegate.undoEnabled()
