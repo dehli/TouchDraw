@@ -33,6 +33,33 @@ class TouchDrawTests: XCTestCase, TouchDrawViewDelegate {
         super.tearDown()
     }
     
+    /*/// Tests that exportDrawing does indeed return a UIImage
+    func testExportDrawing() {
+        simulateTouch()
+        let image = touchDrawView.exportDrawing()
+        XCTAssertNotNil(image, "Image shouldn't be nil")
+    }*/
+    
+    /// Tests that changing the color works
+    func testChangeColor() {
+        let color = UIColor.redColor()
+        touchDrawView.setColor(color)
+        simulateTouch()
+        
+        let stroke = touchDrawView.stack.first!
+        XCTAssert(stroke.properties.color == CIColor(color: color), "Expected stroke to be red")
+    }
+    
+    /// Tests that changing the width works
+    func testChangeWidth() {
+        let width = CGFloat(100.0)
+        touchDrawView.setWidth(width)
+        simulateTouch()
+        
+        let stroke = touchDrawView.stack.first!
+        XCTAssert(stroke.properties.width == width, "Expected stroke to have width of 100")
+    }
+    
     /// Tests whether clear empties the strokes
     func testClear() {
         simulateTouch()

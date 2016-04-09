@@ -27,11 +27,11 @@ public protocol TouchDrawViewDelegate {
 }
 
 /// properties to describe the brush
-private class BrushProperties {
+internal class BrushProperties {
     /// color of the brush
-    private var color: CIColor!
+    internal var color: CIColor!
     /// width of the brush
-    private var width: CGFloat!
+    internal var width: CGFloat!
     
     init() {
         color = CIColor(color: UIColor.blackColor())
@@ -46,9 +46,9 @@ private class BrushProperties {
 /// a drawing stroke
 internal class Stroke {
     /// the points that make up the stroke
-    private var points: NSMutableArray!
+    internal var points: NSMutableArray!
     /// the properties of the stroke
-    private var properties: BrushProperties!
+    internal var properties: BrushProperties!
     
     init() {
         points = []
