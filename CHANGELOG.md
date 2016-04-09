@@ -1,3 +1,8 @@
+# 1.2.3
+
+- Added a handful of tests
+- Updated `README.md`
+
 # 1.2.2
 
 - Switched project settings to recommended settings
