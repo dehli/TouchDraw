@@ -15,14 +15,12 @@ class TouchDrawTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-                
+        
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle(forClass: self.dynamicType))
         
         viewController = storyboard.instantiateInitialViewController() as! ViewController
-        
-        UIApplication.sharedApplication().keyWindow!.rootViewController = viewController
-        
+                
         // Test and Load the View at the Same Time!
         XCTAssertNotNil(viewController.view)
     }
@@ -40,14 +38,14 @@ class TouchDrawTests: XCTestCase {
         viewController.touchDrawView.touchesBegan(touches, withEvent: nil)
         viewController.touchDrawView.touchesEnded(touches, withEvent: nil)
         
-        XCTAssertTrue(viewController.undoIsEnabled, "Undo should be enabled")        
+        XCTAssertTrue(viewController.undoIsEnabled, "Undo should be enabled")
     }
     
     /// Tests whether you clearing empties the strokes
     func testClearing() {
         var touches = Set<UITouch>()
         touches.insert(UITouch())
-
+        
         viewController.touchDrawView.touchesBegan(touches, withEvent: nil)
         viewController.touchDrawView.touchesEnded(touches, withEvent: nil)
         
