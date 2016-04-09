@@ -31,7 +31,7 @@ If programmatically adding the view, you can use the `init(frame: CGRect)` metho
 
 #### Customizing
 
-The first step when customizing the `TouchDrawView` is setting its delegate. The container must conform to `TouchDrawViewDelegate`, which has the following functions:
+The first step when customizing the `TouchDrawView` is setting its `delegate`. The container must conform to `TouchDrawViewDelegate`, which has the following functions:
 
 ```
 func undoEnabled() -> Void {
@@ -88,4 +88,14 @@ The `TouchDrawView` exposes the following methods:
 
 If you'd like to see this library in action, you can download the entire repository and open [Demo/TouchDrawDemo.xcworkspace](Demo/TouchDrawDemo.xcworkspace).
 
+[Demo/TouchDrawDemo/ViewController.swift](Demo/TouchDrawDemo/ViewController.swift) is where most of its functionality is demonstrated.
+
 ![Demo Screenshot](https://cloud.githubusercontent.com/assets/5856011/13918081/4b2fae7e-ef3b-11e5-96bd-978b62895aa7.png)
+
+## Contributors
+
+If you'd like to see additional functionality, feel free to open up a new issue or submit a pull request if you'd like to author it yourself.
+
+## License
+
+This package has the MIT license, which can be found here: [LICENSE](LICENSE).

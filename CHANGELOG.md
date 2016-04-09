@@ -1,3 +1,8 @@
+# 1.2.4
+
+- Added a few more tests
+- Updated `README.md`
+
 # 1.2.3
 
 - Added a handful of tests
