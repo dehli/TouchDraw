@@ -1,14 +1,14 @@
 PODS:
-  - TouchDraw (1.0.0)
+  - TouchDraw (1.2.4)
 
 DEPENDENCIES:
   - TouchDraw (from `../`)
 
 EXTERNAL SOURCES:
   TouchDraw:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
-  TouchDraw: 3996e5f2ecea4012f946d20afe4a24332da85aa4
+  TouchDraw: 839a75f70ff042563080a747e9def7d664960acf
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0

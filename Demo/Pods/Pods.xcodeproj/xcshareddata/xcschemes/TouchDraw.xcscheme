@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "31C2BC350E546A9204A338FCECE27149"
+               BlueprintIdentifier = "ECCB707E3065994D079E4983E2CC7CEB"
                BuildableName = "TouchDraw.framework"
                BlueprintName = "TouchDraw"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "31C2BC350E546A9204A338FCECE27149"
+            BlueprintIdentifier = "ECCB707E3065994D079E4983E2CC7CEB"
             BuildableName = "TouchDraw.framework"
             BlueprintName = "TouchDraw"
             ReferencedContainer = "container:Pods.xcodeproj">
