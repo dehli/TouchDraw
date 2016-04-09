@@ -9,20 +9,23 @@
 import XCTest
 @testable import TouchDraw
 
-class TouchDrawTests: XCTestCase {
+class TouchDrawTests: XCTestCase, TouchDrawViewDelegate {
     
-    var viewController: ViewController!
+    var undoIsEnabled: Bool!
+    var redoIsEnabled: Bool!
+    var clearIsEnabled: Bool!
+    
+    var touchDrawView: TouchDrawView!
     
     override func setUp() {
         super.setUp()
         
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle(forClass: self.dynamicType))
+        undoIsEnabled = false
+        redoIsEnabled = false
+        clearIsEnabled = false
         
-        viewController = storyboard.instantiateInitialViewController() as! ViewController
-                
-        // Test and Load the View at the Same Time!
-        XCTAssertNotNil(viewController.view)
+        touchDrawView = TouchDrawView()
+        touchDrawView.delegate = self
     }
     
     override func tearDown() {
@@ -32,51 +35,78 @@ class TouchDrawTests: XCTestCase {
     
     /// Tests whether TouchDrawView enables undo after one point is drawn
     func testEnableUndo() {
-        var touches = Set<UITouch>()
-        touches.insert(UITouch())
-        
-        viewController.touchDrawView.touchesBegan(touches, withEvent: nil)
-        viewController.touchDrawView.touchesEnded(touches, withEvent: nil)
-        
-        XCTAssertTrue(viewController.undoIsEnabled, "Undo should be enabled")
+        simulateTouch()
+        XCTAssertTrue(undoIsEnabled, "Undo should be enabled")
     }
     
-    /// Tests whether you clearing empties the strokes
+    /// Tests whether clearing empties the strokes
     func testClearing() {
-        var touches = Set<UITouch>()
-        touches.insert(UITouch())
-        
-        viewController.touchDrawView.touchesBegan(touches, withEvent: nil)
-        viewController.touchDrawView.touchesEnded(touches, withEvent: nil)
-        
-        XCTAssert(viewController.touchDrawView.stack.count > 0, "Should have strokes on view")
-        viewController.touchDrawView.clearDrawing()
-        XCTAssert(viewController.touchDrawView.stack.count == 0, "Should not have strokes on view")
+        simulateTouch()
+        XCTAssert(touchDrawView.stack.count > 0, "Should have strokes on view")
+        touchDrawView.clearDrawing()
+        XCTAssert(touchDrawView.stack.count == 0, "Should not have strokes on view")
+    }
+    
+    /// Tests to make sure clear is enabled after you make a stroke
+    func testClearEnabled() {
+        simulateTouch()
+        XCTAssertTrue(clearIsEnabled, "Clear should be enabled after a stroke")
+    }
+    
+    /// Tests to make sure clear is diabled after calling clearDrawing()
+    func testClearDisabled() {
+        simulateTouch()
+        touchDrawView.clearDrawing()
+        XCTAssertFalse(clearIsEnabled, "Clear should not be enabled after calling clearDrawing()")
     }
     
     /// Tests undoing functionality
     func testUndo() {
-        var touches = Set<UITouch>()
-        touches.insert(UITouch())
-        
-        viewController.touchDrawView.touchesBegan(touches, withEvent: nil)
-        viewController.touchDrawView.touchesEnded(touches, withEvent: nil)
-        
-        XCTAssert(viewController.touchDrawView.stack.count == 1, "Should have one stroke")
-        viewController.touchDrawView.undo()
-        XCTAssert(viewController.touchDrawView.stack.count == 0, "Should not have any strokes")
+        simulateTouch()
+        XCTAssert(touchDrawView.stack.count == 1, "Should have one stroke")
+        touchDrawView.undo()
+        XCTAssert(touchDrawView.stack.count == 0, "Should not have any strokes")
     }
     
     /// Tests whether TouchDrawView enables redo after undoing a point
     func testEnableRedo() {
+        simulateTouch()
+        touchDrawView.undo()
+        XCTAssertTrue(redoIsEnabled, "Redo should be enabled")
+    }
+    
+    /// Internal function used to simulate a touch
+    private func simulateTouch() {
         var touches = Set<UITouch>()
         touches.insert(UITouch())
-        
-        viewController.touchDrawView.touchesBegan(touches, withEvent: nil)
-        viewController.touchDrawView.touchesEnded(touches, withEvent: nil)
-        
-        viewController.touchDrawView.undo()
-        XCTAssertTrue(viewController.redoIsEnabled, "Redo should be enabled")
+        touchDrawView.touchesBegan(touches, withEvent: nil)
+        touchDrawView.touchesEnded(touches, withEvent: nil)
+    }
+    
+    // MARK: - TouchDrawViewDelegate
+    
+    func undoEnabled() {
+        self.undoIsEnabled = true
+    }
+    
+    func undoDisabled() {
+        self.undoIsEnabled = false
+    }
+    
+    func redoEnabled() {
+        self.redoIsEnabled = true
+    }
+    
+    func redoDisabled() {
+        self.redoIsEnabled = false
+    }
+    
+    func clearEnabled() {
+        self.clearIsEnabled = true
+    }
+    
+    func clearDisabled() {
+        self.clearIsEnabled = false
     }
     
 }

@@ -10,8 +10,6 @@
 		89DB172D1BC988E6005E947E /* TouchDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DB172C1BC988E6005E947E /* TouchDrawView.swift */; };
 		89EADBB71CB87C23001130A8 /* TouchDrawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EADBB61CB87C23001130A8 /* TouchDrawTests.swift */; };
 		89EADBB91CB87C23001130A8 /* TouchDraw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F60F6B1BC9580000BCDD93 /* TouchDraw.framework */; };
-		89EADBC01CB87C3F001130A8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EADBBF1CB87C3F001130A8 /* ViewController.swift */; };
-		89EADBC21CB87CBA001130A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89EADBC11CB87CBA001130A8 /* Main.storyboard */; };
 		89F60F6F1BC9580000BCDD93 /* TouchDraw.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F60F6E1BC9580000BCDD93 /* TouchDraw.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -30,8 +28,6 @@
 		89EADBB41CB87C23001130A8 /* TouchDrawTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TouchDrawTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		89EADBB61CB87C23001130A8 /* TouchDrawTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchDrawTests.swift; sourceTree = "<group>"; };
 		89EADBB81CB87C23001130A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		89EADBBF1CB87C3F001130A8 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		89EADBC11CB87CBA001130A8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		89F60F6B1BC9580000BCDD93 /* TouchDraw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TouchDraw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89F60F6E1BC9580000BCDD93 /* TouchDraw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TouchDraw.h; sourceTree = "<group>"; };
 		89F60F701BC9580000BCDD93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -61,8 +57,6 @@
 			children = (
 				89EADBB61CB87C23001130A8 /* TouchDrawTests.swift */,
 				89EADBB81CB87C23001130A8 /* Info.plist */,
-				89EADBBF1CB87C3F001130A8 /* ViewController.swift */,
-				89EADBC11CB87CBA001130A8 /* Main.storyboard */,
 			);
 			path = TouchDrawTests;
 			sourceTree = "<group>";
@@ -186,7 +180,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89EADBC21CB87CBA001130A8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +197,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89EADBC01CB87C3F001130A8 /* ViewController.swift in Sources */,
 				89EADBB71CB87C23001130A8 /* TouchDrawTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,6 +378,7 @@
 				89EADBBE1CB87C23001130A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		89F60F651BC9580000BCDD93 /* Build configuration list for PBXProject "TouchDraw" */ = {
 			isa = XCConfigurationList;
