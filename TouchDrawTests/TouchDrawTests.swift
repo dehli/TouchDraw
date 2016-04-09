@@ -30,7 +30,7 @@ class TouchDrawTests: XCTestCase {
         super.tearDown()
     }
     
-    /// Tests whether the TouchDrawView enables undoing after one point is drawn
+    /// Tests whether TouchDrawView enables undo after one point is drawn
     func testEnableUndo() {
         var touches = Set<UITouch>()
         touches.insert(UITouch())
@@ -65,6 +65,18 @@ class TouchDrawTests: XCTestCase {
         XCTAssert(viewController.touchDrawView.stack.count == 1, "Should have one stroke")
         viewController.touchDrawView.undo()
         XCTAssert(viewController.touchDrawView.stack.count == 0, "Should not have any strokes")
+    }
+    
+    /// Tests whether TouchDrawView enables redo after undoing a point
+    func testEnableRedo() {
+        var touches = Set<UITouch>()
+        touches.insert(UITouch())
+        
+        viewController.touchDrawView.touchesBegan(touches, withEvent: nil)
+        viewController.touchDrawView.touchesEnded(touches, withEvent: nil)
+        
+        viewController.touchDrawView.undo()
+        XCTAssertTrue(viewController.redoIsEnabled, "Redo should be enabled")
     }
     
 }
