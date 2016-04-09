@@ -24,7 +24,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		895DEB781CB8ADF100498FB2 /* TouchDrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchDrawView.swift; path = ../Sources/TouchDrawView.swift; sourceTree = "<group>"; };
+		895DEB781CB8ADF100498FB2 /* TouchDrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchDrawView.swift; path = Sources/TouchDrawView.swift; sourceTree = "<group>"; };
 		89EADBB41CB87C23001130A8 /* TouchDrawTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TouchDrawTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		89EADBB61CB87C23001130A8 /* TouchDrawTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchDrawTests.swift; sourceTree = "<group>"; };
 		89EADBB81CB87C23001130A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,6 +52,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		895DEB7A1CB8AF9400498FB2 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				895DEB781CB8ADF100498FB2 /* TouchDrawView.swift */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
 		89EADBB51CB87C23001130A8 /* TouchDrawTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +72,7 @@
 		89F60F611BC9580000BCDD93 = {
 			isa = PBXGroup;
 			children = (
+				895DEB7A1CB8AF9400498FB2 /* Sources */,
 				89F60F6D1BC9580000BCDD93 /* TouchDraw */,
 				89EADBB51CB87C23001130A8 /* TouchDrawTests */,
 				89F60F6C1BC9580000BCDD93 /* Products */,
@@ -82,7 +91,6 @@
 		89F60F6D1BC9580000BCDD93 /* TouchDraw */ = {
 			isa = PBXGroup;
 			children = (
-				895DEB781CB8ADF100498FB2 /* TouchDrawView.swift */,
 				89F60F6E1BC9580000BCDD93 /* TouchDraw.h */,
 				89F60F701BC9580000BCDD93 /* Info.plist */,
 			);
