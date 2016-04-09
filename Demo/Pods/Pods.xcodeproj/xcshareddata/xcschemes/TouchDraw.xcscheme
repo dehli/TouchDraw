@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '6FFECE9AE75AB3899F756C6F'
+               BlueprintIdentifier = '4B26B5A6B8C89E1E9D921003'
                BlueprintName = 'TouchDraw'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'TouchDraw.framework'>
