@@ -13,18 +13,7 @@
 		EE43D4781A14A6F200311C06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE43D4761A14A6F200311C06 /* Main.storyboard */; };
 		EE43D47A1A14A6F200311C06 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE43D4791A14A6F200311C06 /* Images.xcassets */; };
 		EE43D47D1A14A6F200311C06 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE43D47B1A14A6F200311C06 /* LaunchScreen.xib */; };
-		EE43D4891A14A6F200311C06 /* TouchDrawDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE43D4881A14A6F200311C06 /* TouchDrawDemoTests.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		EE43D4831A14A6F200311C06 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EE43D4651A14A6F200311C06 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EE43D46C1A14A6F200311C06;
-			remoteInfo = TouchDrawDemo;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		A093867C58B2C460504D298A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,9 +26,6 @@
 		EE43D4771A14A6F200311C06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EE43D4791A14A6F200311C06 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EE43D47C1A14A6F200311C06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		EE43D4821A14A6F200311C06 /* TouchDrawDemo.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TouchDrawDemo.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE43D4871A14A6F200311C06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EE43D4881A14A6F200311C06 /* TouchDrawDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchDrawDemoTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,13 +34,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				96A40D17261CC9FE10C771B6 /* Pods.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EE43D47F1A14A6F200311C06 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +69,6 @@
 			isa = PBXGroup;
 			children = (
 				EE43D46F1A14A6F200311C06 /* TouchDrawDemo */,
-				EE43D4851A14A6F200311C06 /* TouchDrawDemoTests */,
 				EE43D46E1A14A6F200311C06 /* Products */,
 				5C43080F56C56385ECE95311 /* Pods */,
 				B90ADA956422C12ACFECF533 /* Frameworks */,
@@ -101,7 +79,6 @@
 			isa = PBXGroup;
 			children = (
 				EE43D46D1A14A6F200311C06 /* TouchDrawDemo.app */,
-				EE43D4821A14A6F200311C06 /* TouchDrawDemo.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,23 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				EE43D4711A14A6F200311C06 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		EE43D4851A14A6F200311C06 /* TouchDrawDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				EE43D4881A14A6F200311C06 /* TouchDrawDemoTests.swift */,
-				EE43D4861A14A6F200311C06 /* Supporting Files */,
-			);
-			path = TouchDrawDemoTests;
-			sourceTree = "<group>";
-		};
-		EE43D4861A14A6F200311C06 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				EE43D4871A14A6F200311C06 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -167,24 +127,6 @@
 			productReference = EE43D46D1A14A6F200311C06 /* TouchDrawDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		EE43D4811A14A6F200311C06 /* TouchDrawDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = EE43D48F1A14A6F200311C06 /* Build configuration list for PBXNativeTarget "TouchDrawDemoTests" */;
-			buildPhases = (
-				EE43D47E1A14A6F200311C06 /* Sources */,
-				EE43D47F1A14A6F200311C06 /* Frameworks */,
-				EE43D4801A14A6F200311C06 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				EE43D4841A14A6F200311C06 /* PBXTargetDependency */,
-			);
-			name = TouchDrawDemoTests;
-			productName = TouchDrawDemoTests;
-			productReference = EE43D4821A14A6F200311C06 /* TouchDrawDemo.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -197,10 +139,6 @@
 				TargetAttributes = {
 					EE43D46C1A14A6F200311C06 = {
 						CreatedOnToolsVersion = 6.1;
-					};
-					EE43D4811A14A6F200311C06 = {
-						CreatedOnToolsVersion = 6.1;
-						TestTargetID = EE43D46C1A14A6F200311C06;
 					};
 				};
 			};
@@ -218,7 +156,6 @@
 			projectRoot = "";
 			targets = (
 				EE43D46C1A14A6F200311C06 /* TouchDrawDemo */,
-				EE43D4811A14A6F200311C06 /* TouchDrawDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -231,13 +168,6 @@
 				EE43D4781A14A6F200311C06 /* Main.storyboard in Resources */,
 				EE43D47D1A14A6F200311C06 /* LaunchScreen.xib in Resources */,
 				EE43D47A1A14A6F200311C06 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EE43D4801A14A6F200311C06 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,23 +231,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EE43D47E1A14A6F200311C06 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EE43D4891A14A6F200311C06 /* TouchDrawDemoTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		EE43D4841A14A6F200311C06 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = EE43D46C1A14A6F200311C06 /* TouchDrawDemo */;
-			targetProxy = EE43D4831A14A6F200311C06 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		EE43D4761A14A6F200311C06 /* Main.storyboard */ = {
@@ -441,42 +355,6 @@
 			};
 			name = Release;
 		};
-		EE43D4901A14A6F200311C06 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = TouchDrawDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.razeware.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = TouchDrawDemo;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TouchDrawDemo.app/TouchDrawDemo";
-			};
-			name = Debug;
-		};
-		EE43D4911A14A6F200311C06 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = TouchDrawDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.razeware.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = TouchDrawDemo;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TouchDrawDemo.app/TouchDrawDemo";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -494,15 +372,6 @@
 			buildConfigurations = (
 				EE43D48D1A14A6F200311C06 /* Debug */,
 				EE43D48E1A14A6F200311C06 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		EE43D48F1A14A6F200311C06 /* Build configuration list for PBXNativeTarget "TouchDrawDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EE43D4901A14A6F200311C06 /* Debug */,
-				EE43D4911A14A6F200311C06 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
