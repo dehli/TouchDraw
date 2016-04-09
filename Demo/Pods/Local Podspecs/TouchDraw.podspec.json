@@ -19,5 +19,5 @@
     "git": "https://github.com/dehli/TouchDraw.git",
     "tag": "1.2.4"
   },
-  "source_files": "TouchDraw/**/*.{swift}"
+  "source_files": "Sources/**/*.{swift}"
 }

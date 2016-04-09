@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		89DB172D1BC988E6005E947E /* TouchDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DB172C1BC988E6005E947E /* TouchDrawView.swift */; };
+		895DEB791CB8ADF100498FB2 /* TouchDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895DEB781CB8ADF100498FB2 /* TouchDrawView.swift */; };
 		89EADBB71CB87C23001130A8 /* TouchDrawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EADBB61CB87C23001130A8 /* TouchDrawTests.swift */; };
 		89EADBB91CB87C23001130A8 /* TouchDraw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F60F6B1BC9580000BCDD93 /* TouchDraw.framework */; };
 		89F60F6F1BC9580000BCDD93 /* TouchDraw.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F60F6E1BC9580000BCDD93 /* TouchDraw.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -24,7 +24,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		89DB172C1BC988E6005E947E /* TouchDrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchDrawView.swift; sourceTree = "<group>"; };
+		895DEB781CB8ADF100498FB2 /* TouchDrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchDrawView.swift; path = ../Sources/TouchDrawView.swift; sourceTree = "<group>"; };
 		89EADBB41CB87C23001130A8 /* TouchDrawTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TouchDrawTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		89EADBB61CB87C23001130A8 /* TouchDrawTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchDrawTests.swift; sourceTree = "<group>"; };
 		89EADBB81CB87C23001130A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 		89F60F6D1BC9580000BCDD93 /* TouchDraw */ = {
 			isa = PBXGroup;
 			children = (
-				89DB172C1BC988E6005E947E /* TouchDrawView.swift */,
+				895DEB781CB8ADF100498FB2 /* TouchDrawView.swift */,
 				89F60F6E1BC9580000BCDD93 /* TouchDraw.h */,
 				89F60F701BC9580000BCDD93 /* Info.plist */,
 			);
@@ -205,7 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89DB172D1BC988E6005E947E /* TouchDrawView.swift in Sources */,
+				895DEB791CB8ADF100498FB2 /* TouchDrawView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

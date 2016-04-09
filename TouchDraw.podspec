@@ -29,6 +29,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "8.0"
 
   s.source                = { :git => "https://github.com/dehli/TouchDraw.git", :tag => "#{s.version}"}
-  s.source_files          = "TouchDraw/**/*.{swift}"
+  s.source_files          = "Sources/**/*.{swift}"
 
 end
