@@ -33,14 +33,8 @@ class TouchDrawTests: XCTestCase, TouchDrawViewDelegate {
         super.tearDown()
     }
     
-    /// Tests whether TouchDrawView enables undo after one point is drawn
-    func testEnableUndo() {
-        simulateTouch()
-        XCTAssertTrue(undoIsEnabled, "Undo should be enabled")
-    }
-    
-    /// Tests whether clearing empties the strokes
-    func testClearing() {
+    /// Tests whether clear empties the strokes
+    func testClear() {
         simulateTouch()
         XCTAssert(touchDrawView.stack.count > 0, "Should have strokes on view")
         touchDrawView.clearDrawing()
@@ -60,7 +54,7 @@ class TouchDrawTests: XCTestCase, TouchDrawViewDelegate {
         XCTAssertFalse(clearIsEnabled, "Clear should not be enabled after calling clearDrawing()")
     }
     
-    /// Tests undoing functionality
+    /// Tests undo functionality
     func testUndo() {
         simulateTouch()
         XCTAssert(touchDrawView.stack.count == 1, "Should have one stroke")
@@ -68,11 +62,42 @@ class TouchDrawTests: XCTestCase, TouchDrawViewDelegate {
         XCTAssert(touchDrawView.stack.count == 0, "Should not have any strokes")
     }
     
+    /// Tests whether TouchDrawView enables undo after one point is drawn
+    func testUndoEnabled() {
+        simulateTouch()
+        XCTAssertTrue(undoIsEnabled, "Undo should be enabled")
+    }
+    
+    /// Tests whether TouchDrawView enables undo after one point is drawn
+    func testUndoDisabled() {
+        simulateTouch()
+        touchDrawView.undo()
+        XCTAssertFalse(undoIsEnabled, "Undo should not be enabled")
+    }
+    
+    /// Tests redo functionality
+    func testRedo() {
+        simulateTouch()
+        XCTAssert(touchDrawView.stack.count == 1, "Should have one stroke")
+        touchDrawView.undo()
+        XCTAssert(touchDrawView.stack.count == 0, "Should not have any strokes")
+        touchDrawView.redo()
+        XCTAssert(touchDrawView.stack.count == 1, "Should have one stroke")
+    }
+    
     /// Tests whether TouchDrawView enables redo after undoing a point
-    func testEnableRedo() {
+    func testRedoEnabled() {
         simulateTouch()
         touchDrawView.undo()
         XCTAssertTrue(redoIsEnabled, "Redo should be enabled")
+    }
+    
+    /// Tests whether TouchDrawView disables redo when no more redos are available
+    func testRedoDisabled() {
+        simulateTouch()
+        touchDrawView.undo() // Redo is now enabled (covered in another test)
+        touchDrawView.redo()
+        XCTAssertFalse(redoIsEnabled, "Redo should not be enabled")
     }
     
     /// Internal function used to simulate a touch
