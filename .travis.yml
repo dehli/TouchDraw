@@ -1,3 +1,4 @@
+# Also works for Swift
 language: objective-c
 osx_image: xcode6.4
 xcode_workspace: TouchDraw.xcworkspace
