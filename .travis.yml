@@ -1,0 +1,5 @@
+language: objective-c
+osx_image: xcode6.4
+xcode_workspace: TouchDraw.xcworkspace
+xcode_scheme: TouchDraw
+xcode_sdk: iphonesimulator8.4
