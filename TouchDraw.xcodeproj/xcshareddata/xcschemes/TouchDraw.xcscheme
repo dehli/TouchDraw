@@ -38,16 +38,6 @@
                ReferencedContainer = "container:TouchDraw.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "89A027031CB327180089AAD0"
-               BuildableName = "TouchDrawTestsTests.xctest"
-               BlueprintName = "TouchDrawTestsTests"
-               ReferencedContainer = "container:TouchDraw.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
