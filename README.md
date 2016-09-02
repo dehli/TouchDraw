@@ -32,7 +32,7 @@ If programmatically adding the view, you can use the `init(frame: CGRect)` metho
 
 #### Customizing
 
-The first step when customizing the `TouchDrawView` is setting its `delegate`. The container must conform to `TouchDrawViewDelegate`, which has the following functions:
+When customizing the `TouchDrawView` you can setting its `delegate`. The container can conform to parts of `TouchDrawViewDelegate`, which has the following functions:
 
 ```
 func undoEnabled() -> Void {
@@ -84,6 +84,8 @@ The `TouchDrawView` exposes the following methods:
 - `redo()`
 - `setColor(color: UIColor)`
 - `setWidth(width: CGFloat)`
+- `importStack(stack: [Stroke])`
+- `exportStack() -> [Stroke]`
 
 ## Demo
 
