@@ -79,13 +79,21 @@ func clearDisabled() -> Void {
 The `TouchDrawView` exposes the following methods:
 
 - `exportDrawing() -> UIImage`
+  - Exports a UIImage version of the drawing.
 - `clearDrawing()`
+  - Clears the TouchDrawView.
 - `undo()`
+  - Undo the last stroke. 
 - `redo()`
+  - Redo what was undone. 
 - `setColor(color: UIColor)`
+  - Sets the color of future strokes.
 - `setWidth(width: CGFloat)`
+  - Sets the width of future strokes.
 - `importStack(stack: [Stroke])`
+  - Set the `TouchDrawView` to have certain strokes (usually will be used in conjunction with `exportStack()`.
 - `exportStack() -> [Stroke]`
+  - Exports the strokes from a `TouchDrawView` so they can be imported later.
 
 ## Demo
 
