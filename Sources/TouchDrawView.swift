@@ -27,32 +27,41 @@ public protocol TouchDrawViewDelegate {
 }
 
 /// properties to describe the brush
-internal class BrushProperties {
+public class BrushProperties {
     /// color of the brush
     internal var color: CIColor!
     /// width of the brush
     internal var width: CGFloat!
     
     init() {
-        color = CIColor(color: UIColor.blackColor())
-        width = CGFloat(10.0)
+        self.color = CIColor(color: UIColor.blackColor())
+        self.width = CGFloat(10.0)
     }
     init(properties: BrushProperties) {
-        color = properties.color
-        width = properties.width
+        self.color = properties.color
+        self.width = properties.width
+    }
+    init(color: CIColor, width: CGFloat) {
+        self.color = color
+        self.width = width
     }
 }
 
 /// a drawing stroke
-internal class Stroke {
+public class Stroke {
     /// the points that make up the stroke
-    internal var points: NSMutableArray!
+    internal var points: [String]!
     /// the properties of the stroke
     internal var properties: BrushProperties!
     
     init() {
-        points = []
-        properties = BrushProperties()
+        self.points = []
+        self.properties = BrushProperties()
+    }
+    
+    init(points: [String], properties: BrushProperties) {
+        self.points = points
+        self.properties = properties
     }
 }
 
@@ -66,7 +75,7 @@ public class TouchDrawView: UIView {
     
     /// used to keep track of all the strokes
     internal var stack: [Stroke]!
-    private var pointsArray: NSMutableArray!
+    private var pointsArray: [String]!
     
     private var lastPoint = CGPoint.zero
     
@@ -92,6 +101,16 @@ public class TouchDrawView: UIView {
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initTouchDrawView(CGRect.zero)
+    }
+    
+    /// imports the stack so that
+    public func importStack(stack: [Stroke]) {
+        self.stack = stack
+        self.redrawLinePathsInStack()
+    }
+    
+    public func exportStack() -> [Stroke] {
+        return self.stack
     }
 
     /// adds the subviews and initializes stack
@@ -160,14 +179,14 @@ public class TouchDrawView: UIView {
         
         if array.count == 1 {
             // Draw the one point
-            let pointStr = array[0] as! String
+            let pointStr = array[0] 
             let point = CGPointFromString(pointStr)
             drawLineFrom(point, toPoint: point, properties: properties)
         }
         
         for i in 0 ..< array.count - 1 {
-            let pointStr0 = array[i] as! String
-            let pointStr1 = array[i+1] as! String
+            let pointStr0 = array[i] 
+            let pointStr1 = array[i+1] 
             
             let point0 = CGPointFromString(pointStr0)
             let point1 = CGPointFromString(pointStr1)
@@ -311,7 +330,7 @@ public class TouchDrawView: UIView {
         if let touch = touches.first {
             lastPoint = touch.locationInView(self)
             pointsArray = []
-            pointsArray.addObject(NSStringFromCGPoint(lastPoint))
+            pointsArray.append(NSStringFromCGPoint(lastPoint))
         }
     }
     
@@ -323,7 +342,7 @@ public class TouchDrawView: UIView {
             drawLineFrom(lastPoint, toPoint: currentPoint, properties: brushProperties)
             
             lastPoint = currentPoint
-            pointsArray.addObject(NSStringFromCGPoint(lastPoint))
+            pointsArray.append(NSStringFromCGPoint(lastPoint))
         }
     }
     
