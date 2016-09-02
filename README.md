@@ -32,7 +32,7 @@ If programmatically adding the view, you can use the `init(frame: CGRect)` metho
 
 #### Customizing
 
-The first step when customizing the `TouchDrawView` is setting its `delegate`. The container must conform to `TouchDrawViewDelegate`, which has the following functions:
+When customizing the `TouchDrawView` you can setting its `delegate`. The container can conform to parts of `TouchDrawViewDelegate`, which has the following functions:
 
 ```
 func undoEnabled() -> Void {
@@ -79,11 +79,21 @@ func clearDisabled() -> Void {
 The `TouchDrawView` exposes the following methods:
 
 - `exportDrawing() -> UIImage`
+  - Exports a UIImage version of the drawing.
 - `clearDrawing()`
+  - Clears the TouchDrawView.
 - `undo()`
+  - Undo the last stroke. 
 - `redo()`
+  - Redo what was undone. 
 - `setColor(color: UIColor)`
+  - Sets the color of future strokes.
 - `setWidth(width: CGFloat)`
+  - Sets the width of future strokes.
+- `importStack(stack: [Stroke])`
+  - Set the `TouchDrawView` to have certain strokes (usually will be used in conjunction with `exportStack()`.
+- `exportStack() -> [Stroke]`
+  - Exports the strokes from a `TouchDrawView` so they can be imported later.
 
 ## Demo
 

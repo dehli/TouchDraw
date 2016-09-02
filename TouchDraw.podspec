@@ -4,7 +4,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = "TouchDraw"
-  s.version               = "1.2.4"
+  s.version               = "1.3.0"
   s.summary               = "TouchDraw is a UIView you can draw on."
 
   s.description           = <<-DESC
@@ -15,6 +15,8 @@ Pod::Spec.new do |s|
                             - `redo()`
                             - `setColor(color: UIColor)`
                             - `setWidth(width: CGFloat)`
+                            - `importStack(stack: [Stroke])`
+                            - `exportStack() -> [Stroke]`
                             DESC
 
   s.homepage              = "https://github.com/dehli/TouchDraw"
