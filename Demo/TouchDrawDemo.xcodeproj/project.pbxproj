@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		96A40D17261CC9FE10C771B6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A093867C58B2C460504D298A /* Pods.framework */; };
+		1499231ED199365D934A6218 /* Pods_TouchDrawDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9419262A54A2526BD1ECD17D /* Pods_TouchDrawDemo.framework */; };
 		EE43D4731A14A6F200311C06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE43D4721A14A6F200311C06 /* AppDelegate.swift */; };
 		EE43D4751A14A6F200311C06 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE43D4741A14A6F200311C06 /* ViewController.swift */; };
 		EE43D4781A14A6F200311C06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE43D4761A14A6F200311C06 /* Main.storyboard */; };
@@ -16,9 +16,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5484535A4A7D30269DA6B1DD /* Pods-TouchDrawDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouchDrawDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TouchDrawDemo/Pods-TouchDrawDemo.release.xcconfig"; sourceTree = "<group>"; };
+		9419262A54A2526BD1ECD17D /* Pods_TouchDrawDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TouchDrawDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A093867C58B2C460504D298A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0CED83AB5650AA7BC4770C2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		E0BDCC3E9CF5B81A013EEAE9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A361851B2B8E807E7EFAF51F /* Pods-TouchDrawDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouchDrawDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TouchDrawDemo/Pods-TouchDrawDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		EE43D46D1A14A6F200311C06 /* TouchDrawDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchDrawDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE43D4711A14A6F200311C06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE43D4721A14A6F200311C06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -33,18 +34,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96A40D17261CC9FE10C771B6 /* Pods.framework in Frameworks */,
+				1499231ED199365D934A6218 /* Pods_TouchDrawDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5C43080F56C56385ECE95311 /* Pods */ = {
+		5DDE89E35A71717243AE9141 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D0CED83AB5650AA7BC4770C2 /* Pods.debug.xcconfig */,
-				E0BDCC3E9CF5B81A013EEAE9 /* Pods.release.xcconfig */,
+				A361851B2B8E807E7EFAF51F /* Pods-TouchDrawDemo.debug.xcconfig */,
+				5484535A4A7D30269DA6B1DD /* Pods-TouchDrawDemo.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -61,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				A093867C58B2C460504D298A /* Pods.framework */,
+				9419262A54A2526BD1ECD17D /* Pods_TouchDrawDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -70,8 +72,8 @@
 			children = (
 				EE43D46F1A14A6F200311C06 /* TouchDrawDemo */,
 				EE43D46E1A14A6F200311C06 /* Products */,
-				5C43080F56C56385ECE95311 /* Pods */,
 				B90ADA956422C12ACFECF533 /* Frameworks */,
+				5DDE89E35A71717243AE9141 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,12 +113,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EE43D48C1A14A6F200311C06 /* Build configuration list for PBXNativeTarget "TouchDrawDemo" */;
 			buildPhases = (
-				340E9D123744023CD4F18830 /* Check Pods Manifest.lock */,
+				387D09E087E530047B635643 /* [CP] Check Pods Manifest.lock */,
 				EE43D4691A14A6F200311C06 /* Sources */,
 				EE43D46A1A14A6F200311C06 /* Frameworks */,
 				EE43D46B1A14A6F200311C06 /* Resources */,
-				A728C247C0DC8F67789C2520 /* Copy Pods Resources */,
-				0A2F5E793AE45D1B31B32085 /* Embed Pods Frameworks */,
+				92727888AFAFBE90DB06A190 /* [CP] Embed Pods Frameworks */,
+				E02A90476D5F5748EAB40ACC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -174,29 +176,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0A2F5E793AE45D1B31B32085 /* Embed Pods Frameworks */ = {
+		387D09E087E530047B635643 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		340E9D123744023CD4F18830 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,19 +191,34 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		A728C247C0DC8F67789C2520 /* Copy Pods Resources */ = {
+		92727888AFAFBE90DB06A190 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TouchDrawDemo/Pods-TouchDrawDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E02A90476D5F5748EAB40ACC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TouchDrawDemo/Pods-TouchDrawDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -333,7 +335,7 @@
 		};
 		EE43D48D1A14A6F200311C06 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0CED83AB5650AA7BC4770C2 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = A361851B2B8E807E7EFAF51F /* Pods-TouchDrawDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TouchDrawDemo/Info.plist;
@@ -345,7 +347,7 @@
 		};
 		EE43D48E1A14A6F200311C06 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E0BDCC3E9CF5B81A013EEAE9 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 5484535A4A7D30269DA6B1DD /* Pods-TouchDrawDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TouchDrawDemo/Info.plist;

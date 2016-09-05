@@ -47,7 +47,7 @@ class TouchDrawTests: XCTestCase, TouchDrawViewDelegate {
         simulateTouch()
         
         let stroke = touchDrawView.stack.first!
-        XCTAssert(stroke.properties.color == CIColor(color: color), "Expected stroke to be red")
+        XCTAssert(stroke.settings.color == CIColor(color: color), "Expected stroke to be red")
     }
     
     /// Tests that changing the width works
@@ -57,7 +57,7 @@ class TouchDrawTests: XCTestCase, TouchDrawViewDelegate {
         simulateTouch()
         
         let stroke = touchDrawView.stack.first!
-        XCTAssert(stroke.properties.width == width, "Expected stroke to have width of 100")
+        XCTAssert(stroke.settings.width == width, "Expected stroke to have width of 100")
     }
     
     /// Tests whether clear empties the strokes

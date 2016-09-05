@@ -5,7 +5,7 @@
 //  Created by Christian Paul Dehli
 //
 
-/// The protocol which the container of TouchDrawView must conform to
+/// The protocol which the container of TouchDrawView can conform to
 @objc public protocol TouchDrawViewDelegate {
     /// triggered when undo is enabled (only if it was previously disabled)
     optional func undoEnabled() -> Void
@@ -26,45 +26,6 @@
     optional func clearDisabled() -> Void
 }
 
-/// properties to describe the brush
-public class BrushProperties {
-    /// color of the brush
-    internal var color: CIColor!
-    /// width of the brush
-    internal var width: CGFloat!
-    
-    init() {
-        self.color = CIColor(color: UIColor.blackColor())
-        self.width = CGFloat(10.0)
-    }
-    init(properties: BrushProperties) {
-        self.color = properties.color
-        self.width = properties.width
-    }
-    init(color: CIColor, width: CGFloat) {
-        self.color = color
-        self.width = width
-    }
-}
-
-/// a drawing stroke
-public class Stroke {
-    /// the points that make up the stroke
-    internal var points: [String]!
-    /// the properties of the stroke
-    internal var properties: BrushProperties!
-    
-    init() {
-        self.points = []
-        self.properties = BrushProperties()
-    }
-    
-    init(points: [String], properties: BrushProperties) {
-        self.points = points
-        self.properties = properties
-    }
-}
-
 /// A subclass of UIView which allows you to draw on the view using your fingers
 public class TouchDrawView: UIView {
     
@@ -79,8 +40,8 @@ public class TouchDrawView: UIView {
     
     private var lastPoint = CGPoint.zero
     
-    /// brushProperties: current brush properties
-    private var brushProperties = BrushProperties()
+    /// brushProperties: current brush settings
+    private var brushProperties = StrokeSettings()
     
     private var touchesMoved = false
     
@@ -174,7 +135,7 @@ public class TouchDrawView: UIView {
     
     /// draws a stroke
     private func drawLine(stroke: Stroke) -> Void {
-        let properties = stroke.properties
+        let properties = stroke.settings
         let array = stroke.points
         
         if array.count == 1 {
@@ -196,7 +157,7 @@ public class TouchDrawView: UIView {
     }
     
     /// draws a line from one point to another with certain properties
-    private func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint, properties: BrushProperties) -> Void {
+    private func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint, properties: StrokeSettings) -> Void {
         
         UIGraphicsBeginImageContext(self.frame.size)
         let context = UIGraphicsGetCurrentContext()
@@ -357,7 +318,7 @@ public class TouchDrawView: UIView {
         self.mergeViews()
         
         let stroke = Stroke()
-        stroke.properties = BrushProperties(properties: self.brushProperties)
+        stroke.settings = StrokeSettings(settings: self.brushProperties)
         stroke.points = self.pointsArray
         
         self.stack.append(stroke)
