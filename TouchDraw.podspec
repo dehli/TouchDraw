@@ -1,10 +1,16 @@
 # To deploy new version, call:
 # pod trunk push TouchDraw.podspec
 
+# Make sure to:
+#     Bump version in TouchDraw.podspec
+#     Bump version in TouchDraw/Info.plist
+#     Run pod install in Demo
+#     Add release on GitHub
+
 Pod::Spec.new do |s|
 
   s.name                  = "TouchDraw"
-  s.version               = "1.3.0"
+  s.version               = "1.3.1"
   s.summary               = "TouchDraw is a UIView you can draw on."
 
   s.description           = <<-DESC
