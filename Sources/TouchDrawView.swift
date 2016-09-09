@@ -68,6 +68,24 @@ public class TouchDrawView: UIView {
     public func importStack(stack: [Stroke]) {
         self.stack = stack
         self.redrawLinePathsInStack()
+        
+        // Make sure undo is disabled
+        if self.undoEnabled {
+            self.delegate?.undoDisabled?()
+            self.undoEnabled = false
+        }
+        
+        // Make sure that redo is disabled
+        if self.redoEnabled {
+            self.delegate?.redoDisabled?()
+            self.redoEnabled = false
+        }
+        
+        // Make sure that clear is enabled
+        if !self.clearEnabled {
+            self.delegate?.clearEnabled?()
+            self.clearEnabled = true
+        }
     }
     
     public func exportStack() -> [Stroke] {
