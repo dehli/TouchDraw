@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		895DEB791CB8ADF100498FB2 /* TouchDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895DEB781CB8ADF100498FB2 /* TouchDrawView.swift */; };
+		89DF760D1D7D177700D789A8 /* Stroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DF760B1D7D177700D789A8 /* Stroke.swift */; };
+		89DF760E1D7D177700D789A8 /* StrokeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DF760C1D7D177700D789A8 /* StrokeSettings.swift */; };
 		89EADBB71CB87C23001130A8 /* TouchDrawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EADBB61CB87C23001130A8 /* TouchDrawTests.swift */; };
 		89EADBB91CB87C23001130A8 /* TouchDraw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F60F6B1BC9580000BCDD93 /* TouchDraw.framework */; };
 		89F60F6F1BC9580000BCDD93 /* TouchDraw.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F60F6E1BC9580000BCDD93 /* TouchDraw.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -25,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		895DEB781CB8ADF100498FB2 /* TouchDrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchDrawView.swift; path = Sources/TouchDrawView.swift; sourceTree = "<group>"; };
+		89DF760B1D7D177700D789A8 /* Stroke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stroke.swift; path = Sources/Stroke.swift; sourceTree = "<group>"; };
+		89DF760C1D7D177700D789A8 /* StrokeSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StrokeSettings.swift; path = Sources/StrokeSettings.swift; sourceTree = "<group>"; };
 		89EADBB41CB87C23001130A8 /* TouchDrawTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TouchDrawTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		89EADBB61CB87C23001130A8 /* TouchDrawTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchDrawTests.swift; sourceTree = "<group>"; };
 		89EADBB81CB87C23001130A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,6 +60,8 @@
 			isa = PBXGroup;
 			children = (
 				895DEB781CB8ADF100498FB2 /* TouchDrawView.swift */,
+				89DF760B1D7D177700D789A8 /* Stroke.swift */,
+				89DF760C1D7D177700D789A8 /* StrokeSettings.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -213,7 +219,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89DF760E1D7D177700D789A8 /* StrokeSettings.swift in Sources */,
 				895DEB791CB8ADF100498FB2 /* TouchDrawView.swift in Sources */,
+				89DF760D1D7D177700D789A8 /* Stroke.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
