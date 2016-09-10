@@ -180,15 +180,15 @@ public class TouchDrawView: UIView {
         UIGraphicsBeginImageContext(self.frame.size)
         let context = UIGraphicsGetCurrentContext()
         
-        CGContextMoveToPoint(context, fromPoint.x, fromPoint.y)
-        CGContextAddLineToPoint(context, toPoint.x, toPoint.y)
+        CGContextMoveToPoint(context!, fromPoint.x, fromPoint.y)
+        CGContextAddLineToPoint(context!, toPoint.x, toPoint.y)
         
-        CGContextSetLineCap(context, CGLineCap.Round)
-        CGContextSetLineWidth(context, properties.width)
-        CGContextSetRGBStrokeColor(context, properties.color.red, properties.color.green, properties.color.blue, 1.0)
-        CGContextSetBlendMode(context, CGBlendMode.Normal)
+        CGContextSetLineCap(context!, CGLineCap.Round)
+        CGContextSetLineWidth(context!, properties.width)
+        CGContextSetRGBStrokeColor(context!, properties.color.red, properties.color.green, properties.color.blue, 1.0)
+        CGContextSetBlendMode(context!, CGBlendMode.Normal)
         
-        CGContextStrokePath(context)
+        CGContextStrokePath(context!)
         
         self.tempImageView.image?.drawInRect(self.tempImageView.frame)
         let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -203,7 +203,7 @@ public class TouchDrawView: UIView {
         self.mainImageView.image?.drawInRect(self.mainImageView.frame)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return image
+        return image!
     }
     
     /// clears the UIImageViews
