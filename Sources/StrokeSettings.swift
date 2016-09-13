@@ -20,12 +20,14 @@ public class StrokeSettings: NSObject, NSCoding {
         self.width = CGFloat(10.0)
     }
 
+    /// initializes a StrokeSettings with another StrokeSettings object
     init(settings: StrokeSettings) {
         super.init()
         self.color = settings.color
         self.width = settings.width
     }
 
+    /// initializes a StrokeSettings with a color and width
     init(color: CIColor, width: CGFloat) {
         super.init()
         self.color = color
@@ -34,6 +36,7 @@ public class StrokeSettings: NSObject, NSCoding {
 
     // MARK: NSCoding
 
+    /// Used to decode a StrokeSettings with a decoder
     required public convenience init?(coder aDecoder: NSCoder) {
         self.init()
         
@@ -41,6 +44,7 @@ public class StrokeSettings: NSObject, NSCoding {
         self.width = aDecoder.decodeObjectForKey("width") as! CGFloat!
     }
 
+    /// Used to encode a StrokeSettings with a coder
     public func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.color, forKey: "color")
         aCoder.encodeObject(self.width, forKey: "width")

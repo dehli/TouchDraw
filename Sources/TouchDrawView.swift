@@ -29,6 +29,7 @@
 /// A subclass of UIView which allows you to draw on the view using your fingers
 public class TouchDrawView: UIView {
     
+    /// Used to register undo and redo actions
     private var touchDrawUndoManager: NSUndoManager!
 
     /// must be set in whichever class is using the TouchDrawView
@@ -64,7 +65,7 @@ public class TouchDrawView: UIView {
         self.initTouchDrawView(CGRect.zero)
     }
     
-    /// imports the stack so that
+    /// imports the stack so that previously exported stack can be used
     public func importStack(stack: [Stroke]) {
         
         // Reset the stack and TouchDrawView
@@ -106,6 +107,7 @@ public class TouchDrawView: UIView {
         }
     }
     
+    /// Used to export the current stack (each individual stroke)
     public func exportStack() -> [Stroke] {
         return self.stack
     }
