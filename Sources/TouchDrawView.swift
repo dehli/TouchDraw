@@ -66,25 +66,43 @@ public class TouchDrawView: UIView {
     
     /// imports the stack so that
     public func importStack(stack: [Stroke]) {
-        self.stack = stack
-        self.redrawLinePathsInStack()
         
-        // Make sure undo is disabled
-        if self.undoEnabled {
+        // Reset the stack and TouchDrawView
+        self.stack = []
+        self.internalClear()
+        self.touchDrawUndoManager.removeAllActions()
+        
+        // Add the strokes to UndoManager
+        for stroke in stack {
+            self.pushDrawing(stroke)
+        }
+        
+        // Undo is enabled but should be disabled
+        if self.undoEnabled && self.stack.count == 0 {
             self.delegate?.undoDisabled?()
             self.undoEnabled = false
         }
+        // Undo is disabled but should be enabled
+        else if !self.undoEnabled && self.stack.count > 0 {
+            self.delegate?.undoEnabled?()
+            self.undoEnabled = true
+        }
         
-        // Make sure that redo is disabled
+        // Redo is enabled but should be disabled
         if self.redoEnabled {
             self.delegate?.redoDisabled?()
             self.redoEnabled = false
         }
         
-        // Make sure that clear is enabled
-        if !self.clearEnabled {
+        // Clear is disabled but should be enabled
+        if !self.clearEnabled && self.stack.count > 0 {
             self.delegate?.clearEnabled?()
             self.clearEnabled = true
+        }
+        // Clear is enabled but should be disabled
+        else if self.clearEnabled && self.stack.count == 0 {
+            self.delegate?.clearDisabled?()
+            self.clearEnabled = false
         }
     }
     
