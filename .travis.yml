@@ -2,7 +2,7 @@
 language: objective-c
 
 # Xcode version
-osx_image: xcode7.3
+osx_image: xcode8
 
 # Specify the opening file for the project
 xcode_workspace: TouchDraw.xcworkspace
@@ -11,4 +11,4 @@ xcode_workspace: TouchDraw.xcworkspace
 xcode_scheme: TouchDraw
 
 # Specify the iOS version used for testing
-xcode_sdk: iphonesimulator9.3
+xcode_sdk: iphonesimulator10.0
