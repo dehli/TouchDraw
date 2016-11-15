@@ -1,11 +1,12 @@
-# To deploy new version, call:
-# pod trunk push TouchDraw.podspec
-
-# Make sure to:
+# New version checklist:
 #     Bump version in TouchDraw.podspec
 #     Bump version in TouchDraw/Info.plist
 #     Run pod install in Demo
+#     Update README.md
+#     Update CHANGELOG.md
+#     Make sure each function and variable is documented
 #     Add release on GitHub
+#     pod trunk push TouchDraw.podspec (after pulling latest from master)
 
 Pod::Spec.new do |s|
 

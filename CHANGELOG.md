@@ -1,3 +1,15 @@
+# 1.3.1
+
+- Refactored project into 3 separate files (for each class)
+- Fixed `exportStack` so it follows `NSCoding`
+- Added deployment target `8.0`
+
+# 1.3.0
+
+- Added the ability to import and export the stack.
+- Made the protocol methods optional.
+- Made the code more Swifty.
+
 # 1.2.4
 
 - Added a few more tests
