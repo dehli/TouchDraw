@@ -24,7 +24,7 @@ class TouchDrawTests: XCTestCase, TouchDrawViewDelegate {
         redoIsEnabled = false
         clearIsEnabled = false
         
-        touchDrawView = TouchDrawView(frame: CGRectMake(0, 0, 256, 256))
+        touchDrawView = TouchDrawView(frame: CGRect(x: 0, y: 0, width: 256, height: 256))
         touchDrawView.delegate = self
     }
     
@@ -42,7 +42,7 @@ class TouchDrawTests: XCTestCase, TouchDrawViewDelegate {
     
     /// Tests that changing the color works
     func testChangeColor() {
-        let color = UIColor.redColor()
+        let color = UIColor.red
         touchDrawView.setColor(color)
         simulateTouch()
         
@@ -128,11 +128,11 @@ class TouchDrawTests: XCTestCase, TouchDrawViewDelegate {
     }
     
     /// Internal function used to simulate a touch
-    private func simulateTouch() {
+    fileprivate func simulateTouch() {
         var touches = Set<UITouch>()
         touches.insert(UITouch())
-        touchDrawView.touchesBegan(touches, withEvent: nil)
-        touchDrawView.touchesEnded(touches, withEvent: nil)
+        touchDrawView.touchesBegan(touches, with: nil)
+        touchDrawView.touchesEnded(touches, with: nil)
     }
     
     // MARK: - TouchDrawViewDelegate
