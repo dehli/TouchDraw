@@ -117,7 +117,7 @@ open class TouchDrawView: UIView {
 
     /// merges tempImageView into mainImageView
     fileprivate func mergeViews() {
-        UIGraphicsBeginImageContext(self.mainImageView.frame.size)
+        UIGraphicsBeginImageContextWithOptions(self.mainImageView.frame.size, false, UIScreen.main.scale)
         self.mainImageView.image?.draw(in: self.mainImageView.frame, blendMode: CGBlendMode.normal, alpha: 1.0)
         self.tempImageView.image?.draw(in: self.tempImageView.frame, blendMode: CGBlendMode.normal, alpha: self.brushProperties.color.alpha)
 
@@ -179,7 +179,7 @@ open class TouchDrawView: UIView {
     /// draws a line from one point to another with certain properties
     fileprivate func drawLineFrom(_ fromPoint: CGPoint, toPoint: CGPoint, properties: StrokeSettings) -> Void {
 
-        UIGraphicsBeginImageContext(self.frame.size)
+        UIGraphicsBeginImageContextWithOptions(self.frame.size, false, UIScreen.main.scale)
         let context = UIGraphicsGetCurrentContext()
 
         context!.move(to: CGPoint(x: fromPoint.x, y: fromPoint.y))
@@ -201,7 +201,7 @@ open class TouchDrawView: UIView {
 
     /// exports the current drawing
     open func exportDrawing() -> UIImage {
-        UIGraphicsBeginImageContext(self.mainImageView.bounds.size)
+        UIGraphicsBeginImageContextWithOptions(self.mainImageView.bounds.size, false, UIScreen.main.scale)
         self.mainImageView.image?.draw(in: self.mainImageView.frame)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
