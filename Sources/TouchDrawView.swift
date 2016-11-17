@@ -130,8 +130,7 @@ open class TouchDrawView: UIView {
 
     /// removes the last stroke from stack
     internal func popDrawing() {
-        let stroke = stack.last
-        self.stack.popLast()
+        let stroke = self.stack.popLast()
         self.redrawLinePathsInStack()
         self.touchDrawUndoManager!.registerUndo(withTarget: self, selector: #selector(TouchDrawView.pushDrawing(_:)), object: stroke)
     }
