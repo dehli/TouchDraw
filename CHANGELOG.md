@@ -1,3 +1,9 @@
+# 2.0.0
+
+- Upgraded project to Swift 3.0.1 (thanks to @sirnacnud!)
+- Set correct content scale on image contexts (also thanks to @sirnacnud!)
+- Added some comments
+
 # 1.3.1
 
 - Refactored project into 3 separate files (for each class)
