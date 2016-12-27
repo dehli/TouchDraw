@@ -2,7 +2,7 @@
 language: objective-c
 
 # Xcode version
-osx_image: xcode8.1sneakpeek
+osx_image: xcode8.2
 
 # Specify the opening file for the project
 xcode_workspace: TouchDraw.xcworkspace
