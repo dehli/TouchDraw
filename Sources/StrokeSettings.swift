@@ -21,14 +21,14 @@ open class StrokeSettings: NSObject, NSCoding {
     }
 
     /// initializes a StrokeSettings with another StrokeSettings object
-    init(settings: StrokeSettings) {
+    public init(settings: StrokeSettings) {
         super.init()
         self.color = settings.color
         self.width = settings.width
     }
 
     /// initializes a StrokeSettings with a color and width
-    init(color: CIColor, width: CGFloat) {
+    public init(color: CIColor, width: CGFloat) {
         super.init()
         self.color = color
         self.width = width

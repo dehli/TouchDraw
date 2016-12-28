@@ -54,7 +54,7 @@ open class TouchDrawView: UIView {
     fileprivate var clearEnabled = false
 
     /// initializes a TouchDrawView instance
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         self.initTouchDrawView(frame)
     }

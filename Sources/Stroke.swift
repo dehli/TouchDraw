@@ -16,14 +16,14 @@ open class Stroke: NSObject, NSCoding {
     internal var settings: StrokeSettings!
 
     /// default initialization
-    override init() {
+    override public init() {
         super.init()
         self.points = [];
         self.settings = StrokeSettings()
     }
 
     /// initialize a stroke with ceertain points and stroke settings
-    init(points: [String], settings: StrokeSettings) {
+    public init(points: [String], settings: StrokeSettings) {
         super.init()
         self.points = points
         self.settings = settings
