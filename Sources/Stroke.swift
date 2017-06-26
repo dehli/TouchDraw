@@ -5,43 +5,47 @@
 //  Created by Christian Paul Dehli on 9/4/16.
 //
 
+/// A drawing stroke
+open class Stroke: NSObject {
 
-/// a drawing stroke
-open class Stroke: NSObject, NSCoding {
+    /// The points that make up the stroke
+    internal var points: [String]
 
-    /// the points that make up the stroke
-    internal var points: [String]!
+    /// The properties of the stroke
+    internal var settings: StrokeSettings
 
-    /// the properties of the stroke
-    internal var settings: StrokeSettings!
-
-    /// default initialization
+    /// Default initializer
     override public init() {
-        super.init()
         self.points = [];
         self.settings = StrokeSettings()
+        super.init()
     }
 
-    /// initialize a stroke with ceertain points and stroke settings
-    public init(points: [String], settings: StrokeSettings) {
-        super.init()
+    /// Initialize a stroke with certain points and settings
+    public convenience init(points: [String], settings: StrokeSettings) {
+        self.init()
         self.points = points
         self.settings = settings
     }
 
-    // MARK: NSCoding
-
     /// Used to decode a Stroke with a decoder
-    required public convenience init?(coder aDecoder: NSCoder) {
-        self.init()
-
-        self.points = aDecoder.decodeObject(forKey: "points") as! [String]!
-        self.settings = aDecoder.decodeObject(forKey: "settings") as! StrokeSettings!
+    required public convenience init?(coder aDecoder: NSCoder) {        
+        let points = aDecoder.decodeObject(forKey: Stroke.pointsKey) as! [String]
+        let settings = aDecoder.decodeObject(forKey: Stroke.settingsKey) as! StrokeSettings
+        
+        self.init(points: points, settings: settings)
     }
+}
+
+// MARK: - NSCoding
+
+extension Stroke: NSCoding {
+    internal static let pointsKey = "points"
+    internal static let settingsKey = "settings"
 
     /// Used to encode a Stroke with a coder
     open func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.points, forKey: "points")
-        aCoder.encode(self.settings, forKey: "settings")
+        aCoder.encode(self.points, forKey: Stroke.pointsKey)
+        aCoder.encode(self.settings, forKey: Stroke.settingsKey)
     }
 }

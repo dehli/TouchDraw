@@ -1,52 +1,58 @@
 //
-//  StrokeSettings
+//  StrokeSettings.swift
 //  TouchDraw
 //
 //  Created by Christian Paul Dehli on 9/4/16.
 //
 
-/// properties to describe the brush
-open class StrokeSettings: NSObject, NSCoding {
+/// Properties to describe a stroke (color, width)
+open class StrokeSettings: NSObject {
+    
+    /// Color of the brush
+    internal var color: CIColor
 
-    /// color of the brush
-    internal var color: CIColor!
+    /// Width of the brush
+    internal var width: CGFloat
 
-    /// width of the brush
-    internal var width: CGFloat!
-
+    /// Default initializer
     override init() {
-        super.init()
         self.color = CIColor(color: UIColor.black)
         self.width = CGFloat(10.0)
+        super.init()
     }
 
-    /// initializes a StrokeSettings with another StrokeSettings object
+    /// Initializes a StrokeSettings with another StrokeSettings object
     public init(settings: StrokeSettings) {
-        super.init()
         self.color = settings.color
         self.width = settings.width
+        super.init()
     }
 
-    /// initializes a StrokeSettings with a color and width
-    public init(color: CIColor, width: CGFloat) {
-        super.init()
+    /// Initializes a StrokeSettings with a color and width
+    public convenience init(color: CIColor, width: CGFloat) {
+        self.init()
         self.color = color
         self.width = width
     }
-
-    // MARK: NSCoding
-
+    
     /// Used to decode a StrokeSettings with a decoder
-    required public convenience init?(coder aDecoder: NSCoder) {
-        self.init()
-
-        self.color = aDecoder.decodeObject(forKey: "color") as! CIColor!
-        self.width = aDecoder.decodeObject(forKey: "width") as! CGFloat!
+    public convenience required init?(coder aDecoder: NSCoder) {
+        let color = aDecoder.decodeObject(forKey: StrokeSettings.colorKey) as! CIColor
+        let width = aDecoder.decodeObject(forKey: StrokeSettings.widthKey) as! CGFloat
+        
+        self.init(color: color, width: width)
     }
+}
 
+// MARK: - NSCoding
+
+extension StrokeSettings: NSCoding {
+    internal static let colorKey = "color"
+    internal static let widthKey = "width"
+    
     /// Used to encode a StrokeSettings with a coder
     open func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.color, forKey: "color")
-        aCoder.encode(self.width, forKey: "width")
+        aCoder.encode(self.color, forKey: StrokeSettings.colorKey)
+        aCoder.encode(self.width, forKey: StrokeSettings.widthKey)
     }
 }
