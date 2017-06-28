@@ -2,4 +2,5 @@ use_frameworks!
 
 target "TouchDrawDemo" do
     pod 'TouchDraw', path: '../'
+    platform :ios, '8.1'
 end
