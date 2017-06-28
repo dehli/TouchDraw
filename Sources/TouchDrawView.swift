@@ -37,10 +37,9 @@ open class TouchDrawView: UIView {
 
     /// Used to keep track of all the strokes
     internal var stack: [Stroke]!
-    internal var pointsArray: [CGPoint]!
 
-    /// brushProperties: current brush settings
-    internal var brushProperties = StrokeSettings()
+    /// Used to keep track of the current Stroke
+    internal var stroke: Stroke!
 
     private let imageView = UIImageView()
 
@@ -90,8 +89,10 @@ open class TouchDrawView: UIView {
 
     /// adds the subviews and initializes stack
     private func initTouchDrawView(_ frame: CGRect) {
-        addSubview(imageView)
         stack = []
+        stroke = Stroke()
+
+        addSubview(imageView)
 
         touchDrawUndoManager = undoManager
         if touchDrawUndoManager == nil {
@@ -207,12 +208,12 @@ open class TouchDrawView: UIView {
 
     /// Sets the brush's color
     open func setColor(_ color: UIColor) -> Void {
-        brushProperties.color = CIColor(color: color)
+        stroke.settings.color = CIColor(color: color)
     }
 
     /// Sets the brush's width
     open func setWidth(_ width: CGFloat) -> Void {
-        brushProperties.width = width
+        stroke.settings.width = width
     }
 
     /// if possible, it will undo the last stroke
@@ -270,31 +271,27 @@ extension TouchDrawView {
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let point = touch.location(in: self)
-            pointsArray = [point]
+            stroke.points = [point]
         }
     }
     
     /// Triggered when touches move
     override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {        
         if let touch = touches.first {
-            let lastPoint = pointsArray.last
+            let lastPoint = stroke.points.last
             let currentPoint = touch.location(in: self)
-            drawLineFrom(lastPoint!, toPoint: currentPoint, properties: brushProperties)
-            pointsArray.append(currentPoint)
+            drawLineFrom(lastPoint!, toPoint: currentPoint, properties: stroke.settings)
+            stroke.points.append(currentPoint)
         }
     }
     
     /// Triggered whenever touches end, resulting in a newly created Stroke
     override open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if pointsArray.count == 1 {
-            let lastPoint = pointsArray.last!
-            drawLineFrom(lastPoint, toPoint: lastPoint, properties: brushProperties)
+        if stroke.points.count == 1 {
+            let lastPoint = stroke.points.last!
+            drawLineFrom(lastPoint, toPoint: lastPoint, properties: stroke.settings)
         }
-        
-        let stroke = Stroke()
-        stroke.settings = StrokeSettings(settings: brushProperties)
-        stroke.points = pointsArray
-        
+
         if !touchDrawUndoManager.canUndo {
             delegate?.undoEnabled?()
         }
@@ -307,7 +304,9 @@ extension TouchDrawView {
             delegate?.clearEnabled?()
         }
         
-        stack.append(stroke)
+        stack.append(Stroke(stroke))
+        stroke.points = []
+        
         touchDrawUndoManager.registerUndo(withTarget: self, selector: #selector(popDrawing), object: nil)
     }
 }

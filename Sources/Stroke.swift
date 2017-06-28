@@ -28,6 +28,13 @@ open class Stroke: NSObject {
         self.settings = settings
     }
 
+    /// Initializes a stroke from another Stroke
+    public convenience init(_ stroke: Stroke) {
+        self.init()
+        points = stroke.points
+        settings = StrokeSettings(settings: stroke.settings)
+    }
+
     /// Used to decode a Stroke with a decoder
     required public convenience init?(coder aDecoder: NSCoder) {        
         let points = aDecoder.decodeObject(forKey: Stroke.pointsKey) as! [CGPoint]
