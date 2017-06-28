@@ -8,30 +8,30 @@
 /// The protocol which the container of TouchDrawView can conform to
 @objc public protocol TouchDrawViewDelegate {
     /// triggered when undo is enabled (only if it was previously disabled)
-    @objc optional func undoEnabled() -> Void
+    @objc optional func undoEnabled()
 
     /// triggered when undo is disabled (only if it previously enabled)
-    @objc optional func undoDisabled() -> Void
+    @objc optional func undoDisabled()
 
     /// triggered when redo is enabled (only if it was previously disabled)
-    @objc optional func redoEnabled() -> Void
+    @objc optional func redoEnabled()
 
     /// triggered when redo is disabled (only if it previously enabled)
-    @objc optional func redoDisabled() -> Void
+    @objc optional func redoDisabled()
 
     /// triggered when clear is enabled (only if it was previously disabled)
-    @objc optional func clearEnabled() -> Void
+    @objc optional func clearEnabled()
 
     /// triggered when clear is disabled (only if it previously enabled)
-    @objc optional func clearDisabled() -> Void
+    @objc optional func clearDisabled()
 }
 
 /// A subclass of UIView which allows you to draw on the view using your fingers
 open class TouchDrawView: UIView {
 
     /// Must be set in whichever class is using the TouchDrawView
-    open var delegate: TouchDrawViewDelegate?
-    
+    open weak var delegate: TouchDrawViewDelegate?
+
     /// Used to register undo and redo actions
     internal var touchDrawUndoManager: UndoManager!
 
@@ -59,7 +59,7 @@ open class TouchDrawView: UIView {
     override open func draw(_ rect: CGRect) {
         imageView.frame = rect
     }
-    
+
     /// Imports the stack so that previously exported stack can be used
     open func importStack(_ stack: [Stroke]) {
         // Make sure undo is disabled
@@ -76,7 +76,7 @@ open class TouchDrawView: UIView {
         if stack.count == 0 && stack.count > 0 {
             delegate?.clearEnabled?()
         }
-        
+
         self.stack = stack
         redrawStack()
         touchDrawUndoManager.removeAllActions()
@@ -105,7 +105,9 @@ open class TouchDrawView: UIView {
 
     /// Removes the last Stroke from stack
     internal func popDrawing() {
-        touchDrawUndoManager.registerUndo(withTarget: self, selector: #selector(pushDrawing(_:)), object: stack.popLast())
+        touchDrawUndoManager.registerUndo(withTarget: self,
+                                          selector: #selector(pushDrawing(_:)),
+                                          object: stack.popLast())
         redrawStack()
     }
 
@@ -117,7 +119,7 @@ open class TouchDrawView: UIView {
     }
 
     /// Clears view, then draws stack
-    private func redrawStack() -> Void {
+    private func redrawStack() {
         imageView.image = nil
         for stroke in stack {
             drawLine(stroke)
@@ -125,7 +127,7 @@ open class TouchDrawView: UIView {
     }
 
     /// Draws a single Stroke
-    private func drawLine(_ stroke: Stroke) -> Void {
+    private func drawLine(_ stroke: Stroke) {
         let properties = stroke.settings
         let points = stroke.points
 
@@ -142,10 +144,10 @@ open class TouchDrawView: UIView {
     }
 
     /// Draws a line from one point to another with certain properties
-    fileprivate func drawLineFrom(_ fromPoint: CGPoint, toPoint: CGPoint, properties: StrokeSettings) -> Void {
+    fileprivate func drawLineFrom(_ fromPoint: CGPoint, toPoint: CGPoint, properties: StrokeSettings) {
         UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
         imageView.image?.draw(in: imageView.frame)
-        
+
         let context = UIGraphicsGetCurrentContext()
         context!.move(to: CGPoint(x: fromPoint.x, y: fromPoint.y))
         context!.addLine(to: CGPoint(x: toPoint.x, y: toPoint.y))
@@ -174,24 +176,24 @@ open class TouchDrawView: UIView {
     }
 
     /// Clears the drawing
-    open func clearDrawing() -> Void {
+    open func clearDrawing() {
         if !touchDrawUndoManager.canUndo {
             delegate?.undoEnabled?()
         }
-        
+
         if touchDrawUndoManager.canRedo {
             delegate?.redoDisabled?()
         }
-        
+
         if stack.count > 0 {
             delegate?.clearDisabled?()
         }
-        
+
         touchDrawUndoManager.registerUndo(withTarget: self, selector: #selector(pushAll(_:)), object: stack)
         stack = []
         redrawStack()
     }
-    
+
     internal func pushAll(_ strokes: [Stroke]) {
         for stroke in strokes {
             drawLine(stroke)
@@ -201,30 +203,30 @@ open class TouchDrawView: UIView {
     }
 
     /// Sets the brush's color
-    open func setColor(_ color: UIColor) -> Void {
+    open func setColor(_ color: UIColor) {
         settings.color = CIColor(color: color)
     }
 
     /// Sets the brush's width
-    open func setWidth(_ width: CGFloat) -> Void {
+    open func setWidth(_ width: CGFloat) {
         settings.width = width
     }
 
     /// If possible, it will undo the last stroke
-    open func undo() -> Void {
+    open func undo() {
         if touchDrawUndoManager.canUndo {
             let stackCount = stack.count
-            
+
             if !touchDrawUndoManager.canRedo {
                 delegate?.redoEnabled?()
             }
 
             touchDrawUndoManager.undo()
-            
+
             if !touchDrawUndoManager.canUndo {
                 delegate?.undoDisabled?()
             }
-            
+
             if stackCount > 0 && stack.count == 0 {
                 delegate?.clearDisabled?()
             } else if stackCount == 0 && stack.count > 0 {
@@ -234,16 +236,16 @@ open class TouchDrawView: UIView {
     }
 
     /// If possible, it will redo the last undone stroke
-    open func redo() -> Void {
+    open func redo() {
         if touchDrawUndoManager.canRedo {
             let stackCount = stack.count
-            
+
             if !touchDrawUndoManager.canUndo {
                 delegate?.undoEnabled?()
             }
-            
+
             touchDrawUndoManager.redo()
-            
+
             if !touchDrawUndoManager.canRedo {
                 self.delegate?.redoDisabled?()
             }
@@ -260,7 +262,7 @@ open class TouchDrawView: UIView {
 // MARK: - Touch Actions
 
 extension TouchDrawView {
-    
+
     /// Triggered when touches begin
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
@@ -269,9 +271,9 @@ extension TouchDrawView {
             stack.append(stroke)
         }
     }
-    
+
     /// Triggered when touches move
-    override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {        
+    override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let stroke = stack.last!
             let lastPoint = stroke.points.last
@@ -280,7 +282,7 @@ extension TouchDrawView {
             stroke.points.append(currentPoint)
         }
     }
-    
+
     /// Triggered whenever touches end, resulting in a newly created Stroke
     override open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let stroke = stack.last!
@@ -292,11 +294,11 @@ extension TouchDrawView {
         if !touchDrawUndoManager.canUndo {
             delegate?.undoEnabled?()
         }
-        
+
         if touchDrawUndoManager.canRedo {
             delegate?.redoDisabled?()
         }
-        
+
         if stack.count == 0 {
             delegate?.clearEnabled?()
         }

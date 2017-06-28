@@ -29,11 +29,18 @@ open class Stroke: NSObject {
     }
 
     /// Used to decode a Stroke with a decoder
-    required public convenience init?(coder aDecoder: NSCoder) {        
-        let points = aDecoder.decodeObject(forKey: Stroke.pointsKey) as! [CGPoint]
-        let settings = aDecoder.decodeObject(forKey: Stroke.settingsKey) as! StrokeSettings
-        
-        self.init(points: points, settings: settings)
+    required public convenience init?(coder aDecoder: NSCoder) {
+        var points = aDecoder.decodeObject(forKey: Stroke.pointsKey) as? [CGPoint]
+        if points == nil {
+            points = []
+        }
+
+        var settings = aDecoder.decodeObject(forKey: Stroke.settingsKey) as? StrokeSettings
+        if settings == nil {
+            settings = StrokeSettings()
+        }
+
+        self.init(points: points!, settings: settings!)
     }
 }
 
