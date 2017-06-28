@@ -15,17 +15,17 @@ open class StrokeSettings: NSObject {
     internal var width: CGFloat
 
     /// Default initializer
-    override init() {
+    override public init() {
         self.color = CIColor(color: UIColor.black)
         self.width = CGFloat(10.0)
         super.init()
     }
 
     /// Initializes a StrokeSettings with another StrokeSettings object
-    public init(settings: StrokeSettings) {
+    public convenience init(_ settings: StrokeSettings) {
+        self.init()
         self.color = settings.color
         self.width = settings.width
-        super.init()
     }
 
     /// Initializes a StrokeSettings with a color and width
@@ -36,7 +36,7 @@ open class StrokeSettings: NSObject {
     }
     
     /// Used to decode a StrokeSettings with a decoder
-    public convenience required init?(coder aDecoder: NSCoder) {
+    required public convenience init?(coder aDecoder: NSCoder) {
         let color = aDecoder.decodeObject(forKey: StrokeSettings.colorKey) as! CIColor
         let width = aDecoder.decodeObject(forKey: StrokeSettings.widthKey) as! CGFloat
         

@@ -16,7 +16,7 @@ open class Stroke: NSObject {
 
     /// Default initializer
     override public init() {
-        self.points = [];
+        self.points = []
         self.settings = StrokeSettings()
         super.init()
     }
@@ -25,14 +25,7 @@ open class Stroke: NSObject {
     public convenience init(points: [CGPoint], settings: StrokeSettings) {
         self.init()
         self.points = points
-        self.settings = settings
-    }
-
-    /// Initializes a stroke from another Stroke
-    public convenience init(_ stroke: Stroke) {
-        self.init()
-        points = stroke.points
-        settings = StrokeSettings(settings: stroke.settings)
+        self.settings = StrokeSettings(settings)
     }
 
     /// Used to decode a Stroke with a decoder
