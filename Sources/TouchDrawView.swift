@@ -29,7 +29,7 @@
 /// A subclass of UIView which allows you to draw on the view using your fingers
 open class TouchDrawView: UIView {
 
-    /// Must be set in whichever class is using the TouchDrawView
+    /// Should be set in whichever class is using the TouchDrawView
     open weak var delegate: TouchDrawViewDelegate?
 
     /// Used to register undo and redo actions
@@ -132,8 +132,12 @@ open class TouchDrawView: UIView {
     }
 
     /// Sets the brush's color
-    open func setColor(_ color: UIColor) {
-        settings.color = CIColor(color: color)
+    open func setColor(_ color: UIColor?) {
+        if color == nil {
+            settings.color = nil
+        } else {
+            settings.color = CIColor(color: color!)
+        }
     }
 
     /// Sets the brush's width
@@ -300,11 +304,18 @@ fileprivate extension TouchDrawView {
 
         context!.setLineCap(CGLineCap.round)
         context!.setLineWidth(properties.width)
-        context!.setStrokeColor(red: properties.color.red,
-                                green: properties.color.green,
-                                blue: properties.color.blue,
-                                alpha: properties.color.alpha)
-        context!.setBlendMode(CGBlendMode.normal)
+
+        let color = properties.color
+        if color != nil {
+            context!.setStrokeColor(red: properties.color!.red,
+                                    green: properties.color!.green,
+                                    blue: properties.color!.blue,
+                                    alpha: properties.color!.alpha)
+            context!.setBlendMode(CGBlendMode.normal)
+        } else {
+            context!.setBlendMode(CGBlendMode.clear)
+        }
+
         context!.strokePath()
 
         let image = UIGraphicsGetImageFromCurrentImageContext()

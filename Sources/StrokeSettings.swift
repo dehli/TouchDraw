@@ -10,7 +10,7 @@ open class StrokeSettings: NSObject {
 
     /// Color of the brush
     private static let defaultColor = CIColor(color: UIColor.black)
-    internal var color: CIColor
+    internal var color: CIColor?
 
     /// Width of the brush
     private static let defaultWidth = CGFloat(10.0)
@@ -31,7 +31,7 @@ open class StrokeSettings: NSObject {
     }
 
     /// Initializes a StrokeSettings with a color and width
-    public convenience init(color: CIColor, width: CGFloat) {
+    public convenience init(color: CIColor?, width: CGFloat) {
         self.init()
         self.color = color
         self.width = width
@@ -39,17 +39,13 @@ open class StrokeSettings: NSObject {
 
     /// Used to decode a StrokeSettings with a decoder
     required public convenience init?(coder aDecoder: NSCoder) {
-        var color = aDecoder.decodeObject(forKey: StrokeSettings.colorKey) as? CIColor
-        if color == nil {
-            color = StrokeSettings.defaultColor
-        }
-
+        let color = aDecoder.decodeObject(forKey: StrokeSettings.colorKey) as? CIColor
         var width = aDecoder.decodeObject(forKey: StrokeSettings.widthKey) as? CGFloat
         if width == nil {
             width = StrokeSettings.defaultWidth
         }
 
-        self.init(color: color!, width: width!)
+        self.init(color: color, width: width!)
     }
 }
 
