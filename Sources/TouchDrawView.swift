@@ -210,7 +210,7 @@ open class TouchDrawView: UIView {
         settings.width = width
     }
 
-    /// if possible, it will undo the last stroke
+    /// If possible, it will undo the last stroke
     open func undo() -> Void {
         if touchDrawUndoManager.canUndo {
             let stackCount = stack.count
@@ -233,7 +233,7 @@ open class TouchDrawView: UIView {
         }
     }
 
-    /// if possible, it will redo the last undone stroke
+    /// If possible, it will redo the last undone stroke
     open func redo() -> Void {
         if touchDrawUndoManager.canRedo {
             let stackCount = stack.count
