@@ -11,7 +11,7 @@ The easiest way to include `TouchDraw` is by using `CocoaPods` and adding the fo
 
 ```
 use_frameworks!
-pod 'TouchDraw', '~> 2.0'
+pod 'TouchDraw', '~> 2.1'
 ```
 
 If you're not using CocoaPods, you can add the `TouchDrawView.swift` file to your project.
@@ -86,8 +86,8 @@ The `TouchDrawView` exposes the following methods:
   - Undo the last stroke.
 - `redo()`
   - Redo what was undone.
-- `setColor(color: UIColor)`
-  - Sets the color of future strokes.
+- `setColor(color: UIColor?)`
+  - Sets the color of future strokes, if you pass `nil` you will be erasing.
 - `setWidth(width: CGFloat)`
   - Sets the width of future strokes.
 - `importStack(stack: [Stroke])`

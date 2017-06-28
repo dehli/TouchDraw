@@ -36,7 +36,7 @@ open class TouchDrawView: UIView {
     fileprivate var touchDrawUndoManager: UndoManager!
 
     /// Used to keep track of all the strokes
-    fileprivate var stack: [Stroke]!
+    internal var stack: [Stroke]!
 
     /// Used to keep track of the current StrokeSettings
     fileprivate var settings: StrokeSettings!
@@ -256,7 +256,7 @@ extension TouchDrawView {
             delegate?.redoDisabled?()
         }
 
-        if stack.count == 0 {
+        if stack.count == 1 {
             delegate?.clearEnabled?()
         }
 

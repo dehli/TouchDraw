@@ -1,3 +1,8 @@
+# 2.1.0
+
+- Cleaned up a lot of the library's logic
+- Added eraser functionality (`touchDrawView.setColor(nil)`)
+
 # 2.0.0
 
 - Upgraded project to Swift 3.0.1 (thanks to @sirnacnud!)
