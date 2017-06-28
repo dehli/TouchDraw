@@ -46,22 +46,26 @@ open class TouchDrawView: UIView {
 
     internal var touchesMoved = false
 
-    private var mainImageView = UIImageView()
-    private var tempImageView = UIImageView()
+    private let imageView = UIImageView()
 
-    /// initializes a TouchDrawView instance
+    /// Initializes a TouchDrawView instance
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        self.initTouchDrawView(frame)
+        initTouchDrawView(frame)
     }
 
-    /// initializes a TouchDrawView instance
+    /// Initializes a TouchDrawView instance
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.initTouchDrawView(CGRect.zero)
+        initTouchDrawView(CGRect.zero)
     }
 
-    /// imports the stack so that previously exported stack can be used
+    /// Sets the frames of the subviews
+    override open func draw(_ rect: CGRect) {
+        imageView.frame = rect
+    }
+    
+    /// Imports the stack so that previously exported stack can be used
     open func importStack(_ stack: [Stroke]) {
         // Make sure undo is disabled
         if touchDrawUndoManager.canUndo {
@@ -90,8 +94,7 @@ open class TouchDrawView: UIView {
 
     /// adds the subviews and initializes stack
     private func initTouchDrawView(_ frame: CGRect) {
-        addSubview(mainImageView)
-        addSubview(tempImageView)
+        addSubview(imageView)
         stack = []
 
         touchDrawUndoManager = undoManager
@@ -99,27 +102,8 @@ open class TouchDrawView: UIView {
             touchDrawUndoManager = UndoManager()
         }
 
-        // Initially sets the frames of the UIImageViews
+        // Initially sets the frames of the UIImageView
         draw(frame)
-    }
-
-    /// sets the frames of the subviews
-    override open func draw(_ rect: CGRect) {
-        mainImageView.frame = rect
-        tempImageView.frame = rect
-    }
-
-    /// merges tempImageView into mainImageView
-    fileprivate func mergeViews() {
-        UIGraphicsBeginImageContextWithOptions(mainImageView.frame.size, false, UIScreen.main.scale)
-        mainImageView.image?.draw(in: mainImageView.frame, blendMode: CGBlendMode.normal, alpha: 1.0)
-        tempImageView.image?.draw(in: tempImageView.frame, blendMode: CGBlendMode.normal, alpha: brushProperties.color.alpha)
-
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        mainImageView.image = image
-        UIGraphicsEndImageContext()
-
-        tempImageView.image = nil
     }
 
     /// Removes the last Stroke from stack
@@ -138,7 +122,6 @@ open class TouchDrawView: UIView {
     /// Clears view, then draws stack
     private func redrawStack() -> Void {
         internalClear()
-
         for stroke in stack {
             drawLine(stroke)
         }
@@ -159,14 +142,12 @@ open class TouchDrawView: UIView {
             let point1 = CGPointFromString(points[i])
             drawLineFrom(point0, toPoint: point1, properties: properties)
         }
-        
-        mergeViews()
     }
 
     /// Draws a line from one point to another with certain properties
     fileprivate func drawLineFrom(_ fromPoint: CGPoint, toPoint: CGPoint, properties: StrokeSettings) -> Void {
 
-        UIGraphicsBeginImageContextWithOptions(self.frame.size, false, UIScreen.main.scale)
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
         let context = UIGraphicsGetCurrentContext()
 
         context!.move(to: CGPoint(x: fromPoint.x, y: fromPoint.y))
@@ -174,22 +155,21 @@ open class TouchDrawView: UIView {
 
         context!.setLineCap(CGLineCap.round)
         context!.setLineWidth(properties.width)
-        context!.setStrokeColor(red: properties.color.red, green: properties.color.green, blue: properties.color.blue, alpha: 1.0)
+        context!.setStrokeColor(red: properties.color.red, green: properties.color.green, blue: properties.color.blue, alpha: properties.color.alpha)
         context!.setBlendMode(CGBlendMode.normal)
 
         context!.strokePath()
 
-        tempImageView.image?.draw(in: tempImageView.frame)
+        imageView.image?.draw(in: imageView.frame)
         let image = UIGraphicsGetImageFromCurrentImageContext()
-        tempImageView.image = image
-        tempImageView.alpha = properties.color.alpha
+        imageView.image = image
         UIGraphicsEndImageContext()
     }
 
     /// Exports the current drawing
     open func exportDrawing() -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(mainImageView.bounds.size, false, UIScreen.main.scale)
-        mainImageView.image?.draw(in: mainImageView.frame)
+        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, UIScreen.main.scale)
+        imageView.image?.draw(in: imageView.frame)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image!
@@ -197,8 +177,7 @@ open class TouchDrawView: UIView {
 
     /// Clears the UIImageViews
     private func internalClear() -> Void {
-        mainImageView.image = nil
-        tempImageView.image = nil
+        imageView.image = nil
     }
 
     /// Clears the drawing
@@ -320,7 +299,7 @@ extension TouchDrawView {
             drawLineFrom(lastPoint, toPoint: lastPoint, properties: brushProperties)
         }
         
-        mergeViews()
+        //mergeViews()
         
         let stroke = Stroke()
         stroke.settings = StrokeSettings(settings: brushProperties)
