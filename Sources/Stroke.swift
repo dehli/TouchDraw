@@ -9,7 +9,7 @@
 open class Stroke: NSObject {
 
     /// The points that make up the stroke
-    internal var points: [String]
+    internal var points: [CGPoint]
 
     /// The properties of the stroke
     internal var settings: StrokeSettings
@@ -22,7 +22,7 @@ open class Stroke: NSObject {
     }
 
     /// Initialize a stroke with certain points and settings
-    public convenience init(points: [String], settings: StrokeSettings) {
+    public convenience init(points: [CGPoint], settings: StrokeSettings) {
         self.init()
         self.points = points
         self.settings = settings
@@ -30,7 +30,7 @@ open class Stroke: NSObject {
 
     /// Used to decode a Stroke with a decoder
     required public convenience init?(coder aDecoder: NSCoder) {        
-        let points = aDecoder.decodeObject(forKey: Stroke.pointsKey) as! [String]
+        let points = aDecoder.decodeObject(forKey: Stroke.pointsKey) as! [CGPoint]
         let settings = aDecoder.decodeObject(forKey: Stroke.settingsKey) as! StrokeSettings
         
         self.init(points: points, settings: settings)

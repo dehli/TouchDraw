@@ -37,14 +37,10 @@ open class TouchDrawView: UIView {
 
     /// Used to keep track of all the strokes
     internal var stack: [Stroke]!
-    internal var pointsArray: [String]!
-
-    internal var lastPoint = CGPoint.zero
+    internal var pointsArray: [CGPoint]!
 
     /// brushProperties: current brush settings
     internal var brushProperties = StrokeSettings()
-
-    internal var touchesMoved = false
 
     private let imageView = UIImageView()
 
@@ -133,34 +129,35 @@ open class TouchDrawView: UIView {
         let points = stroke.points
 
         if points.count == 1 {
-            let point = CGPointFromString(points[0])
+            let point = points[0]
             drawLineFrom(point, toPoint: point, properties: properties)
         }
 
         for i in 1 ..< points.count {
-            let point0 = CGPointFromString(points[i - 1])
-            let point1 = CGPointFromString(points[i])
+            let point0 = points[i - 1]
+            let point1 = points[i]
             drawLineFrom(point0, toPoint: point1, properties: properties)
         }
     }
 
     /// Draws a line from one point to another with certain properties
     fileprivate func drawLineFrom(_ fromPoint: CGPoint, toPoint: CGPoint, properties: StrokeSettings) -> Void {
-
         UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
+        imageView.image?.draw(in: imageView.frame)
+        
         let context = UIGraphicsGetCurrentContext()
-
         context!.move(to: CGPoint(x: fromPoint.x, y: fromPoint.y))
         context!.addLine(to: CGPoint(x: toPoint.x, y: toPoint.y))
 
         context!.setLineCap(CGLineCap.round)
         context!.setLineWidth(properties.width)
-        context!.setStrokeColor(red: properties.color.red, green: properties.color.green, blue: properties.color.blue, alpha: properties.color.alpha)
+        context!.setStrokeColor(red: properties.color.red,
+                                green: properties.color.green,
+                                blue: properties.color.blue,
+                                alpha: properties.color.alpha)
         context!.setBlendMode(CGBlendMode.normal)
-
         context!.strokePath()
 
-        imageView.image?.draw(in: imageView.frame)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         imageView.image = image
         UIGraphicsEndImageContext()
@@ -271,35 +268,28 @@ extension TouchDrawView {
     
     /// Triggered when touches begin
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        touchesMoved = false
         if let touch = touches.first {
-            lastPoint = touch.location(in: self)
-            pointsArray = []
-            pointsArray.append(NSStringFromCGPoint(lastPoint))
+            let point = touch.location(in: self)
+            pointsArray = [point]
         }
     }
     
     /// Triggered when touches move
-    override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        touchesMoved = true
-        
+    override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {        
         if let touch = touches.first {
+            let lastPoint = pointsArray.last
             let currentPoint = touch.location(in: self)
-            drawLineFrom(lastPoint, toPoint: currentPoint, properties: brushProperties)
-            
-            lastPoint = currentPoint
-            pointsArray.append(NSStringFromCGPoint(lastPoint))
+            drawLineFrom(lastPoint!, toPoint: currentPoint, properties: brushProperties)
+            pointsArray.append(currentPoint)
         }
     }
     
     /// Triggered whenever touches end, resulting in a newly created Stroke
     override open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !touchesMoved {
-            // draw a single point
+        if pointsArray.count == 1 {
+            let lastPoint = pointsArray.last!
             drawLineFrom(lastPoint, toPoint: lastPoint, properties: brushProperties)
         }
-        
-        //mergeViews()
         
         let stroke = Stroke()
         stroke.settings = StrokeSettings(settings: brushProperties)
