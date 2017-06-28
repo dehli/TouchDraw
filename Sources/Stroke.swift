@@ -16,8 +16,8 @@ open class Stroke: NSObject {
 
     /// Default initializer
     override public init() {
-        self.points = []
-        self.settings = StrokeSettings()
+        points = []
+        settings = StrokeSettings()
         super.init()
     }
 

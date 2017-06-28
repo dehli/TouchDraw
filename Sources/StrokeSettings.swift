@@ -16,8 +16,8 @@ open class StrokeSettings: NSObject {
 
     /// Default initializer
     override public init() {
-        self.color = CIColor(color: UIColor.black)
-        self.width = CGFloat(10.0)
+        color = CIColor(color: UIColor.black)
+        width = CGFloat(10.0)
         super.init()
     }
 

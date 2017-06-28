@@ -118,7 +118,7 @@ open class TouchDrawView: UIView {
 
     /// Clears view, then draws stack
     private func redrawStack() -> Void {
-        internalClear()
+        imageView.image = nil
         for stroke in stack {
             drawLine(stroke)
         }
@@ -173,15 +173,8 @@ open class TouchDrawView: UIView {
         return image!
     }
 
-    /// Clears the UIImageViews
-    private func internalClear() -> Void {
-        imageView.image = nil
-    }
-
     /// Clears the drawing
     open func clearDrawing() -> Void {
-        internalClear()
-
         if !touchDrawUndoManager.canUndo {
             delegate?.undoEnabled?()
         }
@@ -196,6 +189,7 @@ open class TouchDrawView: UIView {
         
         touchDrawUndoManager.registerUndo(withTarget: self, selector: #selector(pushAll(_:)), object: stack)
         stack = []
+        redrawStack()
     }
     
     internal func pushAll(_ strokes: [Stroke]) {
@@ -263,7 +257,7 @@ open class TouchDrawView: UIView {
     }
 }
 
-// MARK: - Actions
+// MARK: - Touch Actions
 
 extension TouchDrawView {
     
