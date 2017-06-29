@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
                             - `clearDrawing()`
                             - `undo()`
                             - `redo()`
-                            - `setColor(color: UIColor)`
+                            - `setColor(color: UIColor?)`
                             - `setWidth(width: CGFloat)`
                             - `importStack(stack: [Stroke])`
                             - `exportStack() -> [Stroke]`

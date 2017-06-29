@@ -35,42 +35,42 @@ If programmatically adding the view, you can use the `init(frame: CGRect)` metho
 When customizing the `TouchDrawView` you can setting its `delegate`. The container can conform to parts of `TouchDrawViewDelegate`, which has the following functions:
 
 ```
-func undoEnabled() -> Void {
+func undoEnabled() {
     // triggered when undo is enabled
     // (only if it was previously disabled)
 }
 ```
 
 ```
-func undoDisabled() -> Void {
+func undoDisabled() {
     // triggered when undo is disabled
     // (only if it previously enabled)
 }
 ```
 
 ```
-func redoEnabled() -> Void {
+func redoEnabled() {
     // triggered when redo is enabled
     // (only if it was previously disabled)
 }
 ```
 
 ```
-func redoDisabled() -> Void {
+func redoDisabled() {
     // triggered when redo is disabled
     // (only if it previously enabled)
 }
 ```
 
 ```
-func clearEnabled() -> Void {
+func clearEnabled() {
     // triggered when clear is enabled
     // (only if it was previously disabled)
 }
 ```
 
 ```
-func clearDisabled() -> Void {
+func clearDisabled() {
     // triggered when clear is disabled
     // (only if it previously enabled)
 }
@@ -103,10 +103,10 @@ If you'd like to see this library in action, you can download the entire reposit
 
 ![Demo Screenshot](https://cloud.githubusercontent.com/assets/5856011/13918081/4b2fae7e-ef3b-11e5-96bd-978b62895aa7.png)
 
-## Contributors
-
-If you'd like to see additional functionality, feel free to open up a new issue or submit a pull request if you'd like to author it yourself.
-
 ## License
 
-This package has the MIT license, which can be found here: [LICENSE](LICENSE).
+This package has the MIT license, which can be found here: [LICENSE](/LICENSE).
+
+## Code of Conduct
+
+Please make sure to follow the [Code of Conduct](/CODE_OF_CONDUCT.md) when you interact with this project. Thanks!
