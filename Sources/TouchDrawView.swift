@@ -8,353 +8,343 @@
 /// The protocol which the container of TouchDrawView can conform to
 @objc public protocol TouchDrawViewDelegate {
     /// triggered when undo is enabled (only if it was previously disabled)
-    @objc optional func undoEnabled() -> Void
+    @objc optional func undoEnabled()
 
     /// triggered when undo is disabled (only if it previously enabled)
-    @objc optional func undoDisabled() -> Void
+    @objc optional func undoDisabled()
 
     /// triggered when redo is enabled (only if it was previously disabled)
-    @objc optional func redoEnabled() -> Void
+    @objc optional func redoEnabled()
 
     /// triggered when redo is disabled (only if it previously enabled)
-    @objc optional func redoDisabled() -> Void
+    @objc optional func redoDisabled()
 
     /// triggered when clear is enabled (only if it was previously disabled)
-    @objc optional func clearEnabled() -> Void
+    @objc optional func clearEnabled()
 
     /// triggered when clear is disabled (only if it previously enabled)
-    @objc optional func clearDisabled() -> Void
+    @objc optional func clearDisabled()
 }
 
 /// A subclass of UIView which allows you to draw on the view using your fingers
 open class TouchDrawView: UIView {
 
+    /// Should be set in whichever class is using the TouchDrawView
+    open weak var delegate: TouchDrawViewDelegate?
+
     /// Used to register undo and redo actions
     fileprivate var touchDrawUndoManager: UndoManager!
 
-    /// must be set in whichever class is using the TouchDrawView
-    open var delegate: TouchDrawViewDelegate?
-
-    /// used to keep track of all the strokes
+    /// Used to keep track of all the strokes
     internal var stack: [Stroke]!
-    fileprivate var pointsArray: [String]!
 
-    fileprivate var lastPoint = CGPoint.zero
+    /// Used to keep track of the current StrokeSettings
+    fileprivate var settings: StrokeSettings!
 
-    /// brushProperties: current brush settings
-    fileprivate var brushProperties = StrokeSettings()
+    fileprivate let imageView = UIImageView()
 
-    fileprivate var touchesMoved = false
-
-    fileprivate var mainImageView = UIImageView()
-    fileprivate var tempImageView = UIImageView()
-
-    fileprivate var undoEnabled = false
-    fileprivate var redoEnabled = false
-    fileprivate var clearEnabled = false
-
-    /// initializes a TouchDrawView instance
+    /// Initializes a TouchDrawView instance
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        self.initTouchDrawView(frame)
+        initialize(frame)
     }
 
-    /// initializes a TouchDrawView instance
+    /// Initializes a TouchDrawView instance
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.initTouchDrawView(CGRect.zero)
+        initialize(CGRect.zero)
     }
 
-    /// imports the stack so that previously exported stack can be used
-    open func importStack(_ stack: [Stroke]) {
-        self.stack = stack
-        self.redrawLinePathsInStack()
+    /// Adds the subviews and initializes stack
+    private func initialize(_ frame: CGRect) {
+        stack = []
+        settings = StrokeSettings()
 
+        addSubview(imageView)
+
+        touchDrawUndoManager = undoManager
+        if touchDrawUndoManager == nil {
+            touchDrawUndoManager = UndoManager()
+        }
+
+        // Initially sets the frames of the UIImageView
+        draw(frame)
+    }
+
+    /// Sets the frames of the subviews
+    override open func draw(_ rect: CGRect) {
+        imageView.frame = rect
+    }
+
+    /// Imports the stack so that previously exported stack can be used
+    open func importStack(_ stack: [Stroke]) {
         // Make sure undo is disabled
-        if self.undoEnabled {
-            self.delegate?.undoDisabled?()
-            self.undoEnabled = false
+        if touchDrawUndoManager.canUndo {
+            delegate?.undoDisabled?()
         }
 
         // Make sure that redo is disabled
-        if self.redoEnabled {
-            self.delegate?.redoDisabled?()
-            self.redoEnabled = false
+        if touchDrawUndoManager.canRedo {
+            delegate?.redoDisabled?()
         }
 
         // Make sure that clear is enabled
-        if !self.clearEnabled {
-            self.delegate?.clearEnabled?()
-            self.clearEnabled = true
+        if self.stack.count == 0 && stack.count > 0 {
+            delegate?.clearEnabled?()
         }
+
+        self.stack = stack
+        redrawStack()
+        touchDrawUndoManager.removeAllActions()
     }
 
     /// Used to export the current stack (each individual stroke)
     open func exportStack() -> [Stroke] {
-        return self.stack
+        return stack
     }
 
-    /// adds the subviews and initializes stack
-    fileprivate func initTouchDrawView(_ frame: CGRect) {
-        self.addSubview(self.mainImageView)
-        self.addSubview(self.tempImageView)
-        self.stack = []
-
-        self.touchDrawUndoManager = undoManager
-        if self.touchDrawUndoManager == nil {
-            self.touchDrawUndoManager = UndoManager()
-        }
-
-        // Initially sets the frames of the UIImageViews
-        self.draw(frame)
-    }
-
-    /// sets the frames of the subviews
-    override open func draw(_ rect: CGRect) {
-        self.mainImageView.frame = rect
-        self.tempImageView.frame = rect
-    }
-
-    /// merges tempImageView into mainImageView
-    fileprivate func mergeViews() {
-        UIGraphicsBeginImageContextWithOptions(self.mainImageView.frame.size, false, UIScreen.main.scale)
-        self.mainImageView.image?.draw(in: self.mainImageView.frame, blendMode: CGBlendMode.normal, alpha: 1.0)
-        self.tempImageView.image?.draw(in: self.tempImageView.frame, blendMode: CGBlendMode.normal, alpha: self.brushProperties.color.alpha)
-
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        self.mainImageView.image = image
-        UIGraphicsEndImageContext()
-
-        self.tempImageView.image = nil
-    }
-
-    /// removes the last stroke from stack
-    internal func popDrawing() {
-        let stroke = self.stack.popLast()
-        self.redrawLinePathsInStack()
-        self.touchDrawUndoManager!.registerUndo(withTarget: self, selector: #selector(TouchDrawView.pushDrawing(_:)), object: stroke)
-    }
-
-    /// adds a new stroke to the stack
-    internal func pushDrawing(_ object: AnyObject) {
-        let stroke = object as? Stroke
-        self.stack.append(stroke!)
-        self.drawLine(stroke!)
-        self.touchDrawUndoManager!.registerUndo(withTarget: self, selector: #selector(TouchDrawView.popDrawing), object: nil)
-    }
-
-    /// draws all the lines in the stack
-    fileprivate func redrawLinePathsInStack() {
-        self.internalClear()
-
-        for stroke in self.stack {
-            self.drawLine(stroke)
-        }
-    }
-
-    /// draws a stroke
-    fileprivate func drawLine(_ stroke: Stroke) -> Void {
-        let properties = stroke.settings
-        let array = stroke.points
-
-        if array?.count == 1 {
-            // Draw the one point
-            let pointStr = array?[0]
-            let point = CGPointFromString(pointStr!)
-            self.drawLineFrom(point, toPoint: point, properties: properties!)
-        }
-
-        for i in 0 ..< (array?.count)! - 1 {
-            let pointStr0 = array?[i]
-            let pointStr1 = array?[i+1]
-
-            let point0 = CGPointFromString(pointStr0!)
-            let point1 = CGPointFromString(pointStr1!)
-            self.drawLineFrom(point0, toPoint: point1, properties: properties!)
-        }
-        self.mergeViews()
-    }
-
-    /// draws a line from one point to another with certain properties
-    fileprivate func drawLineFrom(_ fromPoint: CGPoint, toPoint: CGPoint, properties: StrokeSettings) -> Void {
-
-        UIGraphicsBeginImageContextWithOptions(self.frame.size, false, UIScreen.main.scale)
-        let context = UIGraphicsGetCurrentContext()
-
-        context!.move(to: CGPoint(x: fromPoint.x, y: fromPoint.y))
-        context!.addLine(to: CGPoint(x: toPoint.x, y: toPoint.y))
-
-        context!.setLineCap(CGLineCap.round)
-        context!.setLineWidth(properties.width)
-        context!.setStrokeColor(red: properties.color.red, green: properties.color.green, blue: properties.color.blue, alpha: 1.0)
-        context!.setBlendMode(CGBlendMode.normal)
-
-        context!.strokePath()
-
-        self.tempImageView.image?.draw(in: self.tempImageView.frame)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        self.tempImageView.image = image
-        self.tempImageView.alpha = properties.color.alpha
-        UIGraphicsEndImageContext()
-    }
-
-    /// exports the current drawing
+    /// Exports the current drawing
     open func exportDrawing() -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(self.mainImageView.bounds.size, false, UIScreen.main.scale)
-        self.mainImageView.image?.draw(in: self.mainImageView.frame)
+        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, UIScreen.main.scale)
+        imageView.image?.draw(in: imageView.frame)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image!
     }
 
-    /// clears the UIImageViews
-    fileprivate func internalClear() -> Void {
-        self.mainImageView.image = nil
-        self.tempImageView.image = nil
+    /// Clears the drawing
+    open func clearDrawing() {
+        if !touchDrawUndoManager.canUndo {
+            delegate?.undoEnabled?()
+        }
+
+        if touchDrawUndoManager.canRedo {
+            delegate?.redoDisabled?()
+        }
+
+        if stack.count > 0 {
+            delegate?.clearDisabled?()
+        }
+
+        touchDrawUndoManager.registerUndo(withTarget: self, selector: #selector(pushAll(_:)), object: stack)
+        stack = []
+        redrawStack()
     }
 
-    /// clears the drawing
-    open func clearDrawing() -> Void {
-        self.internalClear()
-        self.touchDrawUndoManager!.registerUndo(withTarget: self, selector: #selector(TouchDrawView.pushAll(_:)), object: stack)
-        self.stack = []
+    /// Sets the brush's color
+    open func setColor(_ color: UIColor?) {
+        if color == nil {
+            settings.color = nil
+        } else {
+            settings.color = CIColor(color: color!)
+        }
+    }
 
-        self.checkClearState()
+    /// Sets the brush's width
+    open func setWidth(_ width: CGFloat) {
+        settings.width = width
+    }
 
-        if !self.touchDrawUndoManager!.canRedo {
-            if self.redoEnabled {
+    /// If possible, it will redo the last undone stroke
+    open func redo() {
+        if touchDrawUndoManager.canRedo {
+            let stackCount = stack.count
+
+            if !touchDrawUndoManager.canUndo {
+                delegate?.undoEnabled?()
+            }
+
+            touchDrawUndoManager.redo()
+
+            if !touchDrawUndoManager.canRedo {
                 self.delegate?.redoDisabled?()
-                self.redoEnabled = false
-            }
-        }
-    }
-
-    internal func pushAll(_ object: AnyObject) {
-        let array = object as? [Stroke]
-
-        for stroke in array! {
-            self.drawLine(stroke)
-            self.stack.append(stroke)
-        }
-        self.touchDrawUndoManager!.registerUndo(withTarget: self, selector: #selector(TouchDrawView.clearDrawing), object: nil)
-    }
-
-    /// sets the brush's color
-    open func setColor(_ color: UIColor) -> Void {
-        self.brushProperties.color = CIColor(color: color)
-    }
-
-    /// sets the brush's width
-    open func setWidth(_ width: CGFloat) -> Void {
-        self.brushProperties.width = width
-    }
-
-    fileprivate func checkClearState() {
-        if self.stack.count == 0 && self.clearEnabled {
-            self.delegate?.clearDisabled?()
-            self.clearEnabled = false
-        }
-        else if self.stack.count > 0 && !self.clearEnabled {
-            self.delegate?.clearEnabled?()
-            self.clearEnabled = true
-        }
-    }
-
-    /// if possible, it will undo the last stroke
-    open func undo() -> Void {
-        if self.touchDrawUndoManager!.canUndo {
-            self.touchDrawUndoManager!.undo()
-
-            if !self.redoEnabled {
-                self.delegate?.redoEnabled?()
-                self.redoEnabled = true
             }
 
-            if !self.touchDrawUndoManager!.canUndo {
-                if self.undoEnabled {
-                    self.delegate?.undoDisabled?()
-                    self.undoEnabled = false
-                }
-            }
-
-            self.checkClearState()
+            updateClear(oldStackCount: stackCount)
         }
     }
 
-    /// if possible, it will redo the last undone stroke
-    open func redo() -> Void {
-        if self.touchDrawUndoManager!.canRedo {
-            self.touchDrawUndoManager!.redo()
+    /// If possible, it will undo the last stroke
+    open func undo() {
+        if touchDrawUndoManager.canUndo {
+            let stackCount = stack.count
 
-            if !self.undoEnabled {
-                self.delegate?.undoEnabled?()
-                self.undoEnabled = true
+            if !touchDrawUndoManager.canRedo {
+                delegate?.redoEnabled?()
             }
 
-            if !self.touchDrawUndoManager!.canRedo {
-                if self.redoEnabled {
-                    self.delegate?.redoDisabled?()
-                    self.redoEnabled = false
-                }
+            touchDrawUndoManager.undo()
+
+            if !touchDrawUndoManager.canUndo {
+                delegate?.undoDisabled?()
             }
 
-            self.checkClearState()
+            updateClear(oldStackCount: stackCount)
         }
     }
 
-    // MARK: - Actions
+    /// Update clear after either undo or redo
+    internal func updateClear(oldStackCount: Int) {
+        if oldStackCount > 0 && stack.count == 0 {
+            delegate?.clearDisabled?()
+        } else if oldStackCount == 0 && stack.count > 0 {
+            delegate?.clearEnabled?()
+        }
+    }
 
-    /// triggered when touches begin
+    /// Removes the last Stroke from stack
+    internal func popDrawing() {
+        touchDrawUndoManager.registerUndo(withTarget: self,
+                                          selector: #selector(pushDrawing(_:)),
+                                          object: stack.popLast())
+        redrawStack()
+    }
+
+    /// Adds a new stroke to the stack
+    internal func pushDrawing(_ stroke: Stroke) {
+        stack.append(stroke)
+        drawStrokeWithContext(stroke)
+        touchDrawUndoManager.registerUndo(withTarget: self, selector: #selector(popDrawing), object: nil)
+    }
+
+    /// Draws all of the strokes
+    internal func pushAll(_ strokes: [Stroke]) {
+        stack = strokes
+        redrawStack()
+        touchDrawUndoManager.registerUndo(withTarget: self, selector: #selector(clearDrawing), object: nil)
+    }
+}
+
+// MARK: - Touch Actions
+
+extension TouchDrawView {
+
+    /// Triggered when touches begin
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.touchesMoved = false
         if let touch = touches.first {
-            self.lastPoint = touch.location(in: self)
-            self.pointsArray = []
-            self.pointsArray.append(NSStringFromCGPoint(self.lastPoint))
+            let stroke = Stroke(points: [touch.location(in: self)],
+                                settings: settings)
+            stack.append(stroke)
         }
     }
 
-    /// triggered when touches move
+    /// Triggered when touches move
     override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.touchesMoved = true
-
         if let touch = touches.first {
+            let stroke = stack.last!
+            let lastPoint = stroke.points.last
             let currentPoint = touch.location(in: self)
-            self.drawLineFrom(self.lastPoint, toPoint: currentPoint, properties: self.brushProperties)
-
-            self.lastPoint = currentPoint
-            self.pointsArray.append(NSStringFromCGPoint(self.lastPoint))
+            drawLineWithContext(fromPoint: lastPoint!, toPoint: currentPoint, properties: stroke.settings)
+            stroke.points.append(currentPoint)
         }
     }
 
-    /// triggered whenever touches end, resulting in a newly created Stroke
+    /// Triggered whenever touches end, resulting in a newly created Stroke
     override open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !self.touchesMoved {
-            // draw a single point
-            self.drawLineFrom(self.lastPoint, toPoint: self.lastPoint, properties: self.brushProperties)
+        let stroke = stack.last!
+        if stroke.points.count == 1 {
+            let lastPoint = stroke.points.last!
+            drawLineWithContext(fromPoint: lastPoint, toPoint: lastPoint, properties: stroke.settings)
         }
 
-        self.mergeViews()
-
-        let stroke = Stroke()
-        stroke.settings = StrokeSettings(settings: self.brushProperties)
-        stroke.points = self.pointsArray
-
-        self.stack.append(stroke)
-
-        self.touchDrawUndoManager!.registerUndo(withTarget: self, selector: #selector(TouchDrawView.popDrawing), object: nil)
-
-        if !self.undoEnabled {
-            self.delegate?.undoEnabled?()
-            self.undoEnabled = true
+        if !touchDrawUndoManager.canUndo {
+            delegate?.undoEnabled?()
         }
-        if self.redoEnabled {
-            self.delegate?.redoDisabled?()
-            self.redoEnabled = false
+
+        if touchDrawUndoManager.canRedo {
+            delegate?.redoDisabled?()
         }
-        if !self.clearEnabled {
-            self.delegate?.clearEnabled?()
-            self.clearEnabled = true
+
+        if stack.count == 1 {
+            delegate?.clearEnabled?()
         }
+
+        touchDrawUndoManager.registerUndo(withTarget: self, selector: #selector(popDrawing), object: nil)
+    }
+}
+
+// MARK: - Drawing
+
+fileprivate extension TouchDrawView {
+
+    /// Begins the image context
+    func beginImageContext() {
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
+    }
+
+    /// Ends image context and sets UIImage to what was on the context
+    func endImageContext() {
+        imageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+    }
+
+    /// Draws the current image for context
+    func drawCurrentImage() {
+        imageView.image?.draw(in: imageView.frame)
+    }
+
+    /// Clears view, then draws stack
+    func redrawStack() {
+        beginImageContext()
+        for stroke in stack {
+            drawStroke(stroke)
+        }
+        endImageContext()
+    }
+
+    /// Draws a single Stroke
+    func drawStroke(_ stroke: Stroke) {
+        let properties = stroke.settings
+        let points = stroke.points
+
+        if points.count == 1 {
+            let point = points[0]
+            drawLine(fromPoint: point, toPoint: point, properties: properties)
+        }
+
+        for i in stride(from: 1, to: points.count, by: 1) {
+            let point0 = points[i - 1]
+            let point1 = points[i]
+            drawLine(fromPoint: point0, toPoint: point1, properties: properties)
+        }
+    }
+
+    /// Draws a single Stroke (begins/ends context
+    func drawStrokeWithContext(_ stroke: Stroke) {
+        beginImageContext()
+        drawCurrentImage()
+        drawStroke(stroke)
+        endImageContext()
+    }
+
+    /// Draws a line between two points
+    func drawLine(fromPoint: CGPoint, toPoint: CGPoint, properties: StrokeSettings) {
+        let context = UIGraphicsGetCurrentContext()
+        context!.move(to: CGPoint(x: fromPoint.x, y: fromPoint.y))
+        context!.addLine(to: CGPoint(x: toPoint.x, y: toPoint.y))
+
+        context!.setLineCap(CGLineCap.round)
+        context!.setLineWidth(properties.width)
+
+        let color = properties.color
+        if color != nil {
+            context!.setStrokeColor(red: properties.color!.red,
+                                    green: properties.color!.green,
+                                    blue: properties.color!.blue,
+                                    alpha: properties.color!.alpha)
+            context!.setBlendMode(CGBlendMode.normal)
+        } else {
+            context!.setBlendMode(CGBlendMode.clear)
+        }
+
+        context!.strokePath()
+    }
+
+    /// Draws a line between two points (begins/ends context)
+    func drawLineWithContext(fromPoint: CGPoint, toPoint: CGPoint, properties: StrokeSettings) {
+        beginImageContext()
+        drawCurrentImage()
+        drawLine(fromPoint: fromPoint, toPoint: toPoint, properties: properties)
+        endImageContext()
     }
 }

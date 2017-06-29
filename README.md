@@ -11,7 +11,7 @@ The easiest way to include `TouchDraw` is by using `CocoaPods` and adding the fo
 
 ```
 use_frameworks!
-pod 'TouchDraw', '~> 2.0'
+pod 'TouchDraw', '~> 2.1'
 ```
 
 If you're not using CocoaPods, you can add the `TouchDrawView.swift` file to your project.
@@ -35,42 +35,42 @@ If programmatically adding the view, you can use the `init(frame: CGRect)` metho
 When customizing the `TouchDrawView` you can setting its `delegate`. The container can conform to parts of `TouchDrawViewDelegate`, which has the following functions:
 
 ```
-func undoEnabled() -> Void {
+func undoEnabled() {
     // triggered when undo is enabled
     // (only if it was previously disabled)
 }
 ```
 
 ```
-func undoDisabled() -> Void {
+func undoDisabled() {
     // triggered when undo is disabled
     // (only if it previously enabled)
 }
 ```
 
 ```
-func redoEnabled() -> Void {
+func redoEnabled() {
     // triggered when redo is enabled
     // (only if it was previously disabled)
 }
 ```
 
 ```
-func redoDisabled() -> Void {
+func redoDisabled() {
     // triggered when redo is disabled
     // (only if it previously enabled)
 }
 ```
 
 ```
-func clearEnabled() -> Void {
+func clearEnabled() {
     // triggered when clear is enabled
     // (only if it was previously disabled)
 }
 ```
 
 ```
-func clearDisabled() -> Void {
+func clearDisabled() {
     // triggered when clear is disabled
     // (only if it previously enabled)
 }
@@ -86,8 +86,8 @@ The `TouchDrawView` exposes the following methods:
   - Undo the last stroke.
 - `redo()`
   - Redo what was undone.
-- `setColor(color: UIColor)`
-  - Sets the color of future strokes.
+- `setColor(color: UIColor?)`
+  - Sets the color of future strokes, if you pass `nil` you will be erasing.
 - `setWidth(width: CGFloat)`
   - Sets the width of future strokes.
 - `importStack(stack: [Stroke])`
@@ -101,12 +101,12 @@ If you'd like to see this library in action, you can download the entire reposit
 
 [Demo/TouchDrawDemo/ViewController.swift](Demo/TouchDrawDemo/ViewController.swift) is where most of its functionality is demonstrated.
 
-![Demo Screenshot](https://cloud.githubusercontent.com/assets/5856011/13918081/4b2fae7e-ef3b-11e5-96bd-978b62895aa7.png)
-
-## Contributors
-
-If you'd like to see additional functionality, feel free to open up a new issue or submit a pull request if you'd like to author it yourself.
+![Demo Screenshot](https://user-images.githubusercontent.com/5856011/27687865-877fc650-5ca6-11e7-9621-48e2051ff25f.png)
 
 ## License
 
-This package has the MIT license, which can be found here: [LICENSE](LICENSE).
+This package has the MIT license, which can be found here: [LICENSE](/LICENSE).
+
+## Code of Conduct
+
+Please make sure to follow the [Code of Conduct](/CODE_OF_CONDUCT.md) when you interact with this project. Thanks!

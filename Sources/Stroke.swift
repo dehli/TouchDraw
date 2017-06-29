@@ -5,43 +5,54 @@
 //  Created by Christian Paul Dehli on 9/4/16.
 //
 
+/// A drawing stroke
+open class Stroke: NSObject {
 
-/// a drawing stroke
-open class Stroke: NSObject, NSCoding {
+    /// The points that make up the stroke
+    internal var points: [CGPoint]
 
-    /// the points that make up the stroke
-    internal var points: [String]!
+    /// The properties of the stroke
+    internal var settings: StrokeSettings
 
-    /// the properties of the stroke
-    internal var settings: StrokeSettings!
-
-    /// default initialization
+    /// Default initializer
     override public init() {
+        points = []
+        settings = StrokeSettings()
         super.init()
-        self.points = [];
-        self.settings = StrokeSettings()
     }
 
-    /// initialize a stroke with ceertain points and stroke settings
-    public init(points: [String], settings: StrokeSettings) {
-        super.init()
+    /// Initialize a stroke with certain points and settings
+    public convenience init(points: [CGPoint], settings: StrokeSettings) {
+        self.init()
         self.points = points
-        self.settings = settings
+        self.settings = StrokeSettings(settings)
     }
-
-    // MARK: NSCoding
 
     /// Used to decode a Stroke with a decoder
     required public convenience init?(coder aDecoder: NSCoder) {
-        self.init()
+        var points = aDecoder.decodeObject(forKey: Stroke.pointsKey) as? [CGPoint]
+        if points == nil {
+            points = []
+        }
 
-        self.points = aDecoder.decodeObject(forKey: "points") as! [String]!
-        self.settings = aDecoder.decodeObject(forKey: "settings") as! StrokeSettings!
+        var settings = aDecoder.decodeObject(forKey: Stroke.settingsKey) as? StrokeSettings
+        if settings == nil {
+            settings = StrokeSettings()
+        }
+
+        self.init(points: points!, settings: settings!)
     }
+}
+
+// MARK: - NSCoding
+
+extension Stroke: NSCoding {
+    internal static let pointsKey = "points"
+    internal static let settingsKey = "settings"
 
     /// Used to encode a Stroke with a coder
     open func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.points, forKey: "points")
-        aCoder.encode(self.settings, forKey: "settings")
+        aCoder.encode(self.points, forKey: Stroke.pointsKey)
+        aCoder.encode(self.settings, forKey: Stroke.settingsKey)
     }
 }
