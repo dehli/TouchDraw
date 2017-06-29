@@ -101,7 +101,7 @@ If you'd like to see this library in action, you can download the entire reposit
 
 [Demo/TouchDrawDemo/ViewController.swift](Demo/TouchDrawDemo/ViewController.swift) is where most of its functionality is demonstrated.
 
-![Demo Screenshot](https://cloud.githubusercontent.com/assets/5856011/13918081/4b2fae7e-ef3b-11e5-96bd-978b62895aa7.png)
+![Demo Screenshot](https://user-images.githubusercontent.com/5856011/27687865-877fc650-5ca6-11e7-9621-48e2051ff25f.png)
 
 ## License
 
