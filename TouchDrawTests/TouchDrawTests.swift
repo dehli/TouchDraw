@@ -148,6 +148,44 @@ class TouchDrawTests: XCTestCase, TouchDrawViewDelegate {
         XCTAssert(touchDrawView.stack.count == 1)
     }
 
+    /// Tests that you can properly encode/decode a Stroke array
+    func testEncoder() {
+        let path = NSTemporaryDirectory() as NSString
+        let locToSave = path.appendingPathComponent("testEncoder")
+
+        let points0 = [CGPoint(x: 1, y: 2)]
+        let settings0 = StrokeSettings()
+        settings0.color = CIColor(color: .blue)
+        settings0.width = 10.0
+        let stroke0 = Stroke(points: points0, settings: settings0)
+
+        let points1 = [CGPoint(x: 1, y: 2), CGPoint(x: 3, y: 4)]
+        let settings1 = StrokeSettings()
+        settings1.color = nil
+        settings1.width = 2.5
+        let stroke1 = Stroke(points: points1, settings: settings1)
+
+        // save Strokes
+        NSKeyedArchiver.archiveRootObject([stroke0, stroke1], toFile: locToSave)
+
+        // load Strokes
+        let data = NSKeyedUnarchiver.unarchiveObject(withFile: locToSave) as? [Stroke]
+
+        XCTAssertNotNil(data)
+        XCTAssertEqual(data!.count, 2)
+
+        XCTAssertEqual(data!.first!.points, points0)
+        XCTAssertEqual(data!.first?.settings.color?.alpha, settings0.color?.alpha)
+        XCTAssertEqual(data!.first?.settings.color?.red, settings0.color?.red)
+        XCTAssertEqual(data!.first?.settings.color?.green, settings0.color?.green)
+        XCTAssertEqual(data!.first?.settings.color?.blue, settings0.color?.blue)
+        XCTAssertEqual(data!.first?.settings.width, settings0.width)
+
+        XCTAssertEqual(data!.last!.points, points1)
+        XCTAssertEqual(data!.last!.settings.color, settings1.color)
+        XCTAssertEqual(data!.last!.settings.width, settings1.width)
+    }
+
     /// Internal function used to simulate a touch
     fileprivate func simulateTouch() {
         var touches = Set<UITouch>()
