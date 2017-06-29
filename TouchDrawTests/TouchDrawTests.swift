@@ -127,6 +127,27 @@ class TouchDrawTests: XCTestCase, TouchDrawViewDelegate {
         XCTAssertFalse(redoIsEnabled, "Redo should not be enabled")
     }
 
+    /// Tests that importing a stack triggers clearEnabled
+    func testImportStack() {
+        let stroke = Stroke()
+        stroke.points = [CGPoint(x: 0, y: 0)]
+        touchDrawView.importStack([stroke])
+        XCTAssertTrue(clearIsEnabled, "Clear should be enabled after calling importStack")
+    }
+
+    /// Tests that importing an empty stack does not trigger clearEnabled
+    func testImportEmptyStack() {
+        touchDrawView.importStack([])
+        XCTAssertFalse(clearIsEnabled, "Clear should be not be enabled after calling importStack")
+    }
+
+    /// Tests that you can draw a Stroke with no points
+    func testEmptyStroke() {
+        let stroke = Stroke()
+        touchDrawView.importStack([stroke])
+        XCTAssert(touchDrawView.stack.count == 1)
+    }
+
     /// Internal function used to simulate a touch
     fileprivate func simulateTouch() {
         var touches = Set<UITouch>()
