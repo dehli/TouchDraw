@@ -13,4 +13,9 @@ xcode_scheme: TouchDraw
 # Specify the last iOS sdk
 xcode_sdk: iphonesimulator
 
-script: set -o pipefail && xcodebuild -workspace $TRAVIS_XCODE_WORKSPACE -scheme $TRAVIS_XCODE_SCHEME -sdk $TRAVIS_XCODE_SDK -destination 'OS=10.1,name=iPhone 6' build test | xcpretty
+install:
+  - ./install_swiftlint.sh
+
+script:
+  - swiftlint
+  - set -o pipefail && xcodebuild -workspace $TRAVIS_XCODE_WORKSPACE -scheme $TRAVIS_XCODE_SCHEME -sdk $TRAVIS_XCODE_SDK -destination 'OS=10.1,name=iPhone 6' build test | xcpretty
