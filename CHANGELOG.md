@@ -2,6 +2,7 @@
 
 - Cleaned up a lot of the library's logic
 - Added eraser functionality (`touchDrawView.setColor(nil)`)
+- Significant performance improvements!
 
 # 2.0.0
 
