@@ -89,7 +89,7 @@ open class TouchDrawView: UIView {
         }
 
         // Make sure that clear is enabled
-        if stack.count == 0 && stack.count > 0 {
+        if self.stack.count == 0 && stack.count > 0 {
             delegate?.clearEnabled?()
         }
 
@@ -160,11 +160,7 @@ open class TouchDrawView: UIView {
                 self.delegate?.redoDisabled?()
             }
 
-            if stackCount > 0 && stack.count == 0 {
-                delegate?.clearDisabled?()
-            } else if stackCount == 0 && stack.count > 0 {
-                delegate?.clearEnabled?()
-            }
+            updateClear(oldStackCount: stackCount)
         }
     }
 
@@ -183,11 +179,16 @@ open class TouchDrawView: UIView {
                 delegate?.undoDisabled?()
             }
 
-            if stackCount > 0 && stack.count == 0 {
-                delegate?.clearDisabled?()
-            } else if stackCount == 0 && stack.count > 0 {
-                delegate?.clearEnabled?()
-            }
+            updateClear(oldStackCount: stackCount)
+        }
+    }
+
+    /// Update clear after either undo or redo
+    internal func updateClear(oldStackCount: Int) {
+        if oldStackCount > 0 && stack.count == 0 {
+            delegate?.clearDisabled?()
+        } else if oldStackCount == 0 && stack.count > 0 {
+            delegate?.clearEnabled?()
         }
     }
 
