@@ -113,7 +113,7 @@ open class TouchDrawView: UIView {
     }
 
     /// Clears the drawing
-    open func clearDrawing() {
+    @objc open func clearDrawing() {
         if !touchDrawUndoManager.canUndo {
             delegate?.undoEnabled?()
         }
@@ -193,7 +193,7 @@ open class TouchDrawView: UIView {
     }
 
     /// Removes the last Stroke from stack
-    internal func popDrawing() {
+    @objc internal func popDrawing() {
         touchDrawUndoManager.registerUndo(withTarget: self,
                                           selector: #selector(pushDrawing(_:)),
                                           object: stack.popLast())
@@ -201,14 +201,14 @@ open class TouchDrawView: UIView {
     }
 
     /// Adds a new stroke to the stack
-    internal func pushDrawing(_ stroke: Stroke) {
+    @objc internal func pushDrawing(_ stroke: Stroke) {
         stack.append(stroke)
         drawStrokeWithContext(stroke)
         touchDrawUndoManager.registerUndo(withTarget: self, selector: #selector(popDrawing), object: nil)
     }
 
     /// Draws all of the strokes
-    internal func pushAll(_ strokes: [Stroke]) {
+    @objc internal func pushAll(_ strokes: [Stroke]) {
         stack = strokes
         redrawStack()
         touchDrawUndoManager.registerUndo(withTarget: self, selector: #selector(clearDrawing), object: nil)
