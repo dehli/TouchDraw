@@ -1,3 +1,7 @@
+# 2.1.1
+
+- Upgrades project to Swift 4 (thanks to @codyaweber!)
+
 # 2.1.0
 
 - Cleaned up a lot of the library's logic
