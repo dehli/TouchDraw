@@ -188,34 +188,46 @@ open class TouchDrawView: UIImageView {
 // MARK: - Touch Actions
 
 extension TouchDrawView {
-
+    
+    private func touchLocations(_ touches: Set<UITouch>) -> [CGPoint] {
+        return touches.map { touch -> CGPoint in touch.location(in: self) }
+    }
+    
+    /// This is used to include a previous point so all lines are connected
+    private func subStroke(_ stroke: Stroke, _ points: [CGPoint]) -> Stroke {
+        let points = stroke.points.suffix(points.count + 1)
+        return Stroke(points: Array(points), settings: stroke.settings)
+    }
+    
     /// Triggered when touches begin
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            let stroke = Stroke(points: [touch.location(in: self)],
-                                settings: settings)
-            stack.append(stroke)
-        }
+        let points = touchLocations(touches)
+        
+        // Since touches are beginning, we need to create a new Stroke
+        let stroke = Stroke(points: points, settings: settings)
+        stack.append(stroke)
+    
+        drawStrokeWithContext(stroke)
     }
 
     /// Triggered when touches move
     override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            let stroke = stack.last!
-            let lastPoint = stroke.points.last
-            let currentPoint = touch.location(in: self)
-            drawLineWithContext(fromPoint: lastPoint!, toPoint: currentPoint, properties: stroke.settings)
-            stroke.points.append(currentPoint)
-        }
+        let points = touchLocations(touches)
+        
+        let stroke = stack.last!
+        stroke.points.append(contentsOf: points)
+        
+        drawStrokeWithContext(subStroke(stroke, points))
     }
 
     /// Triggered whenever touches end, resulting in a newly created Stroke
     override open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let points = touchLocations(touches)
+        
         let stroke = stack.last!
-        if stroke.points.count == 1 {
-            let lastPoint = stroke.points.last!
-            drawLineWithContext(fromPoint: lastPoint, toPoint: lastPoint, properties: stroke.settings)
-        }
+        stroke.points.append(contentsOf: points)
+        
+        drawStrokeWithContext(subStroke(stroke, points))
 
         if !touchDrawUndoManager.canUndo {
             delegate?.undoEnabled?()
@@ -236,7 +248,7 @@ extension TouchDrawView {
 // MARK: - Drawing
 
 fileprivate extension TouchDrawView {
-
+    
     /// Begins the image context
     func beginImageContext() {
         UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
@@ -279,7 +291,7 @@ fileprivate extension TouchDrawView {
         }
     }
 
-    /// Draws a single Stroke (begins/ends context
+    /// Draws a single Stroke (begins/ends context)
     func drawStrokeWithContext(_ stroke: Stroke) {
         beginImageContext()
         drawCurrentImage()
@@ -308,13 +320,5 @@ fileprivate extension TouchDrawView {
         }
 
         context!.strokePath()
-    }
-
-    /// Draws a line between two points (begins/ends context)
-    func drawLineWithContext(fromPoint: CGPoint, toPoint: CGPoint, properties: StrokeSettings) {
-        beginImageContext()
-        drawCurrentImage()
-        drawLine(fromPoint: fromPoint, toPoint: toPoint, properties: properties)
-        endImageContext()
     }
 }
