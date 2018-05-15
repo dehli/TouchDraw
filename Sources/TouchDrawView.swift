@@ -269,7 +269,7 @@ fileprivate extension TouchDrawView {
 
     /// Begins the image context
     func beginImageContext() {
-        UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
+        UIGraphicsBeginImageContextWithOptions(self.imageView.frame.size, false, UIScreen.main.scale)
     }
 
     /// Ends image context and sets UIImage to what was on the context
@@ -280,7 +280,7 @@ fileprivate extension TouchDrawView {
 
     /// Draws the current image for context
     func drawCurrentImage() {
-        imageView.image?.draw(in: imageView.frame)
+        imageView.image?.draw(in: imageView.bounds)
     }
 
     /// Clears view, then draws stack
