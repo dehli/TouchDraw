@@ -1,3 +1,9 @@
+# 2.1.2
+
+- Fixed drawing issue where `touchDrawView` and `imageView` bounds
+  didn't line up (thanks to @mkoorn!)
+- Change base class to `UIImageView`
+
 # 2.1.1
 
 - Upgrades project to Swift 4 (thanks to @codyaweber!)

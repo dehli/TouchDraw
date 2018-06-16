@@ -118,7 +118,6 @@
 				EE43D46A1A14A6F200311C06 /* Frameworks */,
 				EE43D46B1A14A6F200311C06 /* Resources */,
 				92727888AFAFBE90DB06A190 /* [CP] Embed Pods Frameworks */,
-				E02A90476D5F5748EAB40ACC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -211,21 +210,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TouchDrawDemo/Pods-TouchDrawDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E02A90476D5F5748EAB40ACC /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TouchDrawDemo/Pods-TouchDrawDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
