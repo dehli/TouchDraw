@@ -34,3 +34,4 @@ Carthage/Build
 
 # Swift Package Manager
 .build/
+.DS_Store

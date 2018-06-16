@@ -27,54 +27,19 @@
 }
 
 /// A subclass of UIView which allows you to draw on the view using your fingers
-open class TouchDrawView: UIView {
+open class TouchDrawView: UIImageView {
 
     /// Should be set in whichever class is using the TouchDrawView
     open weak var delegate: TouchDrawViewDelegate?
 
     /// Used to register undo and redo actions
-    fileprivate var touchDrawUndoManager: UndoManager!
+    fileprivate let touchDrawUndoManager = UndoManager()
 
     /// Used to keep track of all the strokes
-    internal var stack: [Stroke]!
+    internal var stack: [Stroke] = []
 
     /// Used to keep track of the current StrokeSettings
-    fileprivate var settings: StrokeSettings!
-
-    fileprivate let imageView = UIImageView()
-
-    /// Initializes a TouchDrawView instance
-    override public init(frame: CGRect) {
-        super.init(frame: frame)
-        initialize(frame)
-    }
-
-    /// Initializes a TouchDrawView instance
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        initialize(CGRect.zero)
-    }
-
-    /// Adds the subviews and initializes stack
-    private func initialize(_ frame: CGRect) {
-        stack = []
-        settings = StrokeSettings()
-
-        addSubview(imageView)
-
-        touchDrawUndoManager = undoManager
-        if touchDrawUndoManager == nil {
-            touchDrawUndoManager = UndoManager()
-        }
-
-        // Initially sets the frames of the UIImageView
-        draw(frame)
-    }
-
-    /// Sets the frames of the subviews
-    override open func draw(_ rect: CGRect) {
-        imageView.frame = rect
-    }
+    fileprivate var settings = StrokeSettings()
 
     /// Imports the stack so that previously exported stack can be used
     open func importStack(_ stack: [Stroke]) {
@@ -105,8 +70,8 @@ open class TouchDrawView: UIView {
 
     /// Exports the current drawing
     open func exportDrawing() -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, UIScreen.main.scale)
-        imageView.image?.draw(in: imageView.frame)
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
+        self.image?.draw(in: frame)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image!
@@ -213,6 +178,11 @@ open class TouchDrawView: UIView {
         redrawStack()
         touchDrawUndoManager.registerUndo(withTarget: self, selector: #selector(clearDrawing), object: nil)
     }
+
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        redrawStack()
+    }
 }
 
 // MARK: - Touch Actions
@@ -269,18 +239,18 @@ fileprivate extension TouchDrawView {
 
     /// Begins the image context
     func beginImageContext() {
-        UIGraphicsBeginImageContextWithOptions(self.imageView.frame.size, false, UIScreen.main.scale)
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
     }
 
     /// Ends image context and sets UIImage to what was on the context
     func endImageContext() {
-        imageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
 
     /// Draws the current image for context
     func drawCurrentImage() {
-        imageView.image?.draw(in: imageView.bounds)
+        image?.draw(in: bounds)
     }
 
     /// Clears view, then draws stack
