@@ -35,6 +35,9 @@ open class TouchDrawView: UIImageView {
     /// Used to register undo and redo actions
     fileprivate let touchDrawUndoManager = UndoManager()
 
+    /// Used to keep track of the original image
+    internal var originalImage : UIImage?
+
     /// Used to keep track of all the strokes
     internal var stack: [Stroke] = []
 
@@ -235,6 +238,15 @@ extension TouchDrawView {
 
 // MARK: - Drawing
 
+extension TouchDrawView {
+    
+    /// Sets the input image as the original image. This image is under the strokes
+    public func setOriginalImage(image: UIImage?){
+        originalImage = image
+        redrawStack()
+    }
+}
+
 fileprivate extension TouchDrawView {
 
     /// Begins the image context
@@ -253,9 +265,10 @@ fileprivate extension TouchDrawView {
         image?.draw(in: bounds)
     }
 
-    /// Clears view, then draws stack
+    /// Clears view except for original image, then draws stack
     func redrawStack() {
         beginImageContext()
+        originalImage?.draw(in: bounds)
         for stroke in stack {
             drawStroke(stroke)
         }
