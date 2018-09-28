@@ -27,19 +27,50 @@
 }
 
 /// A subclass of UIView which allows you to draw on the view using your fingers
-open class TouchDrawView: UIImageView {
+open class TouchDrawView: UIView {
 
     /// Should be set in whichever class is using the TouchDrawView
     open weak var delegate: TouchDrawViewDelegate?
 
+    /// Drawn underneath the strokes
+    open var image: UIImage? {
+        didSet(oldImage) { redrawStack() }
+    }
+
     /// Used to register undo and redo actions
-    fileprivate let touchDrawUndoManager = UndoManager()
+    fileprivate var touchDrawUndoManager = UndoManager()
 
     /// Used to keep track of all the strokes
     internal var stack: [Stroke] = []
 
     /// Used to keep track of the current StrokeSettings
-    fileprivate var settings = StrokeSettings()
+    fileprivate let settings = StrokeSettings()
+
+    /// This is used to render a user's strokes
+    fileprivate let imageView = UIImageView()
+
+    /// Initializes a TouchDrawView instance
+    override public init(frame: CGRect) {
+        super.init(frame: frame)
+        initialize(frame)
+    }
+
+    /// Initializes a TouchDrawView instance
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initialize(CGRect.zero)
+    }
+
+    /// Adds the subviews and initializes stack
+    private func initialize(_ frame: CGRect) {
+        addSubview(imageView)
+        draw(frame)
+    }
+
+    /// Sets the frames of the subviews
+    override open func draw(_ rect: CGRect) {
+        imageView.frame = rect
+    }
 
     /// Imports the stack so that previously exported stack can be used
     open func importStack(_ stack: [Stroke]) {
@@ -70,11 +101,12 @@ open class TouchDrawView: UIImageView {
 
     /// Exports the current drawing
     open func exportDrawing() -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
-        self.image?.draw(in: frame)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, UIScreen.main.scale)
+        imageView.image?.draw(in: imageView.frame)
+
+        let imageFromContext = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return image!
+        return imageFromContext!
     }
 
     /// Clears the drawing
@@ -239,23 +271,24 @@ fileprivate extension TouchDrawView {
 
     /// Begins the image context
     func beginImageContext() {
-        UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
+        UIGraphicsBeginImageContextWithOptions(imageView.frame.size, false, UIScreen.main.scale)
     }
 
     /// Ends image context and sets UIImage to what was on the context
     func endImageContext() {
-        image = UIGraphicsGetImageFromCurrentImageContext()
+        imageView.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
 
     /// Draws the current image for context
     func drawCurrentImage() {
-        image?.draw(in: bounds)
+        imageView.image?.draw(in: imageView.bounds)
     }
 
     /// Clears view, then draws stack
     func redrawStack() {
         beginImageContext()
+        image?.draw(in: imageView.bounds)
         for stroke in stack {
             drawStroke(stroke)
         }

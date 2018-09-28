@@ -23,15 +23,11 @@ class ViewController: UIViewController, TouchDrawViewDelegate {
 
         drawView.delegate = self
         drawView.setWidth(ViewController.deltaWidth)
+        drawView.image = UIImage(named: "image.png")
 
         undoButton.isEnabled = false
         redoButton.isEnabled = false
         clearButton.isEnabled = false
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func eraserClicked(_ sender: Any) {
