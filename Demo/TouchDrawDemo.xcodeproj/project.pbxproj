@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1499231ED199365D934A6218 /* Pods_TouchDrawDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9419262A54A2526BD1ECD17D /* Pods_TouchDrawDemo.framework */; };
+		9AD1F41F215DA90C00B15066 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD1F41E215DA90C00B15066 /* image.png */; };
 		EE43D4731A14A6F200311C06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE43D4721A14A6F200311C06 /* AppDelegate.swift */; };
 		EE43D4751A14A6F200311C06 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE43D4741A14A6F200311C06 /* ViewController.swift */; };
 		EE43D4781A14A6F200311C06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE43D4761A14A6F200311C06 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* Begin PBXFileReference section */
 		5484535A4A7D30269DA6B1DD /* Pods-TouchDrawDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouchDrawDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TouchDrawDemo/Pods-TouchDrawDemo.release.xcconfig"; sourceTree = "<group>"; };
 		9419262A54A2526BD1ECD17D /* Pods_TouchDrawDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TouchDrawDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AD1F41E215DA90C00B15066 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = SOURCE_ROOT; };
 		A093867C58B2C460504D298A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A361851B2B8E807E7EFAF51F /* Pods-TouchDrawDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouchDrawDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TouchDrawDemo/Pods-TouchDrawDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		EE43D46D1A14A6F200311C06 /* TouchDrawDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchDrawDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +90,7 @@
 		EE43D46F1A14A6F200311C06 /* TouchDrawDemo */ = {
 			isa = PBXGroup;
 			children = (
+				9AD1F41E215DA90C00B15066 /* image.png */,
 				89D911C21C25988500DB6DDE /* UI */,
 				EE43D4721A14A6F200311C06 /* AppDelegate.swift */,
 				EE43D4741A14A6F200311C06 /* ViewController.swift */,
@@ -140,7 +143,7 @@
 				TargetAttributes = {
 					EE43D46C1A14A6F200311C06 = {
 						CreatedOnToolsVersion = 6.1;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -170,6 +173,7 @@
 				EE43D4781A14A6F200311C06 /* Main.storyboard in Resources */,
 				EE43D47D1A14A6F200311C06 /* LaunchScreen.xib in Resources */,
 				EE43D47A1A14A6F200311C06 /* Images.xcassets in Resources */,
+				9AD1F41F215DA90C00B15066 /* image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,8 +361,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.dehli.touchdraw;
 				PRODUCT_NAME = TouchDrawDemo;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -372,8 +375,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.dehli.touchdraw;
 				PRODUCT_NAME = TouchDrawDemo;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
