@@ -102,7 +102,7 @@ open class TouchDrawView: UIView {
     /// Exports the current drawing
     open func exportDrawing() -> UIImage {
         UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, UIScreen.main.scale)
-        imageView.image?.draw(in: imageView.frame)
+        imageView.image?.draw(in: imageView.bounds)
 
         let imageFromContext = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -271,7 +271,7 @@ fileprivate extension TouchDrawView {
 
     /// Begins the image context
     func beginImageContext() {
-        UIGraphicsBeginImageContextWithOptions(imageView.frame.size, false, UIScreen.main.scale)
+        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, UIScreen.main.scale)
     }
 
     /// Ends image context and sets UIImage to what was on the context
