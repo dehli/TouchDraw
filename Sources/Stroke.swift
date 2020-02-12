@@ -5,6 +5,9 @@
 //  Created by Christian Paul Dehli on 9/4/16.
 //
 
+import Foundation
+import UIKit
+
 /// A drawing stroke
 open class Stroke: NSObject {
 

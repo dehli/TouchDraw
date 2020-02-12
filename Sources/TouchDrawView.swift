@@ -5,6 +5,9 @@
 //  Created by Christian Paul Dehli
 //
 
+import Foundation
+import UIKit
+
 /// The protocol which the container of TouchDrawView can conform to
 @objc public protocol TouchDrawViewDelegate {
     /// triggered when undo is enabled (only if it was previously disabled)

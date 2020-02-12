@@ -5,6 +5,9 @@
 //  Created by Christian Paul Dehli on 9/4/16.
 //
 
+import Foundation
+import UIKit
+
 /// Properties to describe a stroke (color, width)
 open class StrokeSettings: NSObject {
 
