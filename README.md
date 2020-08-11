@@ -28,7 +28,7 @@ If using storyboards, you must add a `UIView` to your storyboard. Give it the `T
 
 #### Code
 
-If programmatically adding the view, you can use the `init(frame: CGRect)` method to create a new instance of `TouchDrawView`. You must make sure to write `import TouchDraw` at the top of the class.
+If programmatically adding the view, you can use the `init(frame: CGRect)` method to create a new instance of `TouchDrawView`. You must make sure to write `import TouchDraw` at the top of the class, and also set `isUserInteractionEnabled` to `true`.
 
 #### Customizing
 
