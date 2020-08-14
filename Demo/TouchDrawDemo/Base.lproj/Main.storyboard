@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JCM-se-Ixi">
-                                <rect key="frame" x="16" y="20" width="343" height="44"/>
+                                <rect key="frame" x="16" y="0.0" width="343" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="undo" id="lxp-Kj-OzZ">
                                         <connections>
@@ -38,7 +35,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="hbp-Ni-ib0"/>
                                     <barButtonItem title="Random" style="plain" id="LNS-KT-k01">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Jeh-cE-jOO">
-                                            <rect key="frame" x="122" y="7" width="98" height="30"/>
+                                            <rect key="frame" x="127" y="7" width="98" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Random"/>
                                             <connections>
@@ -60,29 +57,30 @@
                                 </items>
                             </toolbar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rLC-Uj-OO4" customClass="TouchDrawView" customModule="TouchDraw">
-                                <rect key="frame" x="16" y="64" width="343" height="603"/>
-                                <subviews>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="JSe-sH-fRf">
-                                        <rect key="frame" x="-2" y="563" width="347" height="31"/>
-                                        <connections>
-                                            <action selector="sliderChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="tvJ-XD-7Dh"/>
-                                        </connections>
-                                    </slider>
-                                </subviews>
+                                <rect key="frame" x="16" y="44" width="343" height="565"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSe-sH-fRf">
+                                <rect key="frame" x="14" y="622" width="347" height="31"/>
+                                <color key="minimumTrackTintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="maximumTrackTintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="sliderChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="tvJ-XD-7Dh"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="JSe-sH-fRf" secondAttribute="trailing" id="8md-te-JOI"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="rLC-Uj-OO4" secondAttribute="bottom" id="FBR-la-nRh"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="JSe-sH-fRf" secondAttribute="bottom" constant="15" id="CHI-5Z-Suy"/>
+                            <constraint firstItem="JSe-sH-fRf" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Fd1-lp-llF"/>
                             <constraint firstAttribute="leadingMargin" secondItem="rLC-Uj-OO4" secondAttribute="leading" id="Fg6-6l-qEe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rLC-Uj-OO4" secondAttribute="trailing" id="J5M-2G-QzX"/>
+                            <constraint firstItem="JSe-sH-fRf" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="KJt-Ac-GFR"/>
                             <constraint firstItem="JCM-se-Ixi" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="QmR-Tr-XuW"/>
                             <constraint firstItem="rLC-Uj-OO4" firstAttribute="top" secondItem="JCM-se-Ixi" secondAttribute="bottom" id="TIO-10-pgZ"/>
                             <constraint firstItem="JCM-se-Ixi" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="ZSd-Fe-POf"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="JSe-sH-fRf" secondAttribute="leading" id="nA0-77-But"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="JSe-sH-fRf" secondAttribute="bottom" constant="10" id="rUJ-AH-ryY"/>
+                            <constraint firstItem="JSe-sH-fRf" firstAttribute="top" secondItem="rLC-Uj-OO4" secondAttribute="bottom" constant="13" id="nhy-LG-GOH"/>
+                            <constraint firstItem="JSe-sH-fRf" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="rMl-HF-ktv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JCM-se-Ixi" secondAttribute="trailing" id="vDI-tv-4uy"/>
                         </constraints>
                     </view>
@@ -96,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="381" y="488"/>
+            <point key="canvasLocation" x="380" y="487.10644677661173"/>
         </scene>
     </scenes>
 </document>
