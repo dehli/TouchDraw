@@ -224,6 +224,15 @@ open class TouchDrawView: UIView {
 
 extension TouchDrawView {
 
+    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        // This prevents the drop down to dismiss gesture in modal presentations from iOS 13 on.
+        // See also: https://stackoverflow.com/questions/56718552/disable-gesture-to-pull-down-form-page-sheet-modal-presentation
+        if gestureRecognizer is UIPanGestureRecognizer {
+            return false
+        }
+        return true
+    }
+    
     /// Triggered when touches begin
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
