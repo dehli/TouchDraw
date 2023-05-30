@@ -1,3 +1,8 @@
+# 2.1.3
+
+- Update Package.swift
+- Make TouchDrawView inherit from UIView
+
 # 2.1.2
 
 - Fixed drawing issue where `touchDrawView` and `imageView` bounds
