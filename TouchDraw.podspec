@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
   s.social_media_url      = "http://twitter.com/cpdehli"
 
   s.platform              = :ios
-  s.ios.deployment_target = "8.0"
+  s.ios.deployment_target = "12.0"
 
   s.source                = { :git => "https://github.com/dehli/TouchDraw.git", :tag => "#{s.version}"}
   s.source_files          = "Sources/**/*.{swift}"
