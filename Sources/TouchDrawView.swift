@@ -290,6 +290,7 @@ fileprivate extension TouchDrawView {
 
     /// Clears view, then draws stack
     func redrawStack() {
+        if imageView.frame.size == .zero { return }
         beginImageContext()
         image?.draw(in: imageView.bounds)
         for stroke in stack {
