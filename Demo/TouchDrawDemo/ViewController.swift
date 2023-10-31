@@ -46,11 +46,11 @@ class ViewController: UIViewController, TouchDrawViewDelegate {
     }
 
     @IBAction func randomColor(_ sender: AnyObject) {
-        let r = CGFloat(arc4random() % 255) / 255
-        let g = CGFloat(arc4random() % 255) / 255
-        let b = CGFloat(arc4random() % 255) / 255
+        let red = CGFloat(arc4random() % 255) / 255
+        let green = CGFloat(arc4random() % 255) / 255
+        let blue = CGFloat(arc4random() % 255) / 255
 
-        let color = UIColor(red: r, green: g, blue: b, alpha: 1.0)
+        let color = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
         drawView.setColor(color)
         eraserButton.isEnabled = true
     }

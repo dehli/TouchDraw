@@ -1,3 +1,9 @@
+# 2.2.0
+
+- Update for Xcode 15 (thanks to @ricsantos!)
+- Fix assertion due to zero size (thanks to @ricsantos!)
+- Fix [CI](https://app.travis-ci.com/github/dehli/TouchDraw)
+
 # 2.1.3
 
 - Update Package.swift

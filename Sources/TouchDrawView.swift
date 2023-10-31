@@ -309,9 +309,9 @@ fileprivate extension TouchDrawView {
             drawLine(fromPoint: point, toPoint: point, properties: properties)
         }
 
-        for i in stride(from: 1, to: points.count, by: 1) {
-            let point0 = points[i - 1]
-            let point1 = points[i]
+        for index in stride(from: 1, to: points.count, by: 1) {
+            let point0 = points[index - 1]
+            let point1 = points[index]
             drawLine(fromPoint: point0, toPoint: point1, properties: properties)
         }
     }

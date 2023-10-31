@@ -3,14 +3,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "TouchDraw",    
+    name: "TouchDraw",
     platforms: [
       .iOS(.v10)
     ],
-    products: [        
-        .library(name: "TouchDraw", targets: ["TouchDraw"]),
+    products: [
+        .library(name: "TouchDraw", targets: ["TouchDraw"])
     ],
-    targets: [     
-        .target(name: "TouchDraw", path: "Sources"),
+    targets: [
+        .target(name: "TouchDraw", path: "Sources")
     ]
 )

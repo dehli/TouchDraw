@@ -2,7 +2,7 @@
 language: objective-c
 
 # Xcode version
-osx_image: xcode9.2
+osx_image: xcode14.2
 
 # Specify the opening file for the project
 xcode_workspace: TouchDraw.xcworkspace
@@ -18,4 +18,4 @@ install:
 
 script:
   - swiftlint
-  - set -o pipefail && xcodebuild -workspace $TRAVIS_XCODE_WORKSPACE -scheme $TRAVIS_XCODE_SCHEME -sdk $TRAVIS_XCODE_SDK -destination 'OS=10.1,name=iPhone 6' build test | xcpretty
+  - set -o pipefail && xcodebuild -workspace $TRAVIS_XCODE_WORKSPACE -scheme $TRAVIS_XCODE_SCHEME -sdk $TRAVIS_XCODE_SDK -destination 'OS=16.2,name=iPhone 14' build test | xcpretty
