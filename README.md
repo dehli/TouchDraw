@@ -11,7 +11,7 @@ The easiest way to include `TouchDraw` is by using `CocoaPods` and adding the fo
 
 ```
 use_frameworks!
-pod 'TouchDraw', '~> 2.1'
+pod 'TouchDraw', '~> 2.2'
 ```
 
 If you're not using CocoaPods, you can add the `TouchDrawView.swift` file to your project.

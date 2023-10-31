@@ -1,6 +1,6 @@
 {
   "name": "TouchDraw",
-  "version": "2.1.3",
+  "version": "2.2.0",
   "summary": "TouchDraw is a UIView you can draw on.",
   "description": "TouchDraw is a subclass of UIView that allows you to draw using touch. It exposes the following functions:\n- `exportDrawing() -> UIImage`\n- `clearDrawing()`\n- `undo()`\n- `redo()`\n- `setColor(color: UIColor?)`\n- `setWidth(width: CGFloat)`\n- `importStack(stack: [Stroke])`\n- `exportStack() -> [Stroke]`",
   "homepage": "https://github.com/dehli/TouchDraw",
@@ -17,7 +17,7 @@
   },
   "source": {
     "git": "https://github.com/dehli/TouchDraw.git",
-    "tag": "2.1.3"
+    "tag": "2.2.0"
   },
   "source_files": "Sources/**/*.{swift}"
 }
